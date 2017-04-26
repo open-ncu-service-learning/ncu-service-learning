@@ -14,9 +14,11 @@ connect.php
 mail.php
 **/bootstrap/*
 
+# other file
 *.eot
 *.svg
-
+*.ttf
+*.woff
 *.png
 *.PNG
 *.doc
@@ -37,7 +39,7 @@ mail.php
 *.rtf
 *.RTF
 
-
+# temporary
 *.tmp
 
 # Word temporary
