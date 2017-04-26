@@ -1,0 +1,91 @@
+/* ThemeMiniBlackMenu Style Sheet */
+
+.ThemeMiniBlackMenu
+{
+	cursor: default;
+	width: 960px;
+	height: 30px;
+	margin: 0 auto;
+	font-size: 16px;
+	color: #ffffff;
+	background: #252525;
+	padding: 5px;
+}
+
+.ThemeMiniBlackSubMenuTable
+{
+	font-size: 16px;
+	color: #ffffff;
+	background: #363636;
+	padding: 2px 10px;
+	cursor: default;
+	-moz-opacity: .8;
+	filter: alpha(opacity=80);
+	line-height:24px;
+}
+
+.ThemeMiniBlackSubMenu
+{
+	position: absolute;
+	visibility: hidden;
+
+	/*
+	   Netscape/Mozilla renders borders by increasing
+	   their z-index.  The following line is necessary
+	   to cover any borders underneath
+	*/
+	z-index: 100;
+}
+
+.ThemeMiniBlackSubMenuTable
+{
+	border-top:	none;
+}
+
+.ThemeMiniBlackSubMenuTable TR
+{
+	white-space: nowrap;
+}
+
+.ThemeMiniBlackMainItem,.ThemeMiniBlackMainItemHover,.ThemeMiniBlackMainItemActive,
+.ThemeMiniBlackMenuItem,.ThemeMiniBlackMenuItemHover,.ThemeMiniBlackMenuItemActive
+{
+	white-space: nowrap;
+}
+
+.ThemeMiniBlackMainItemHover,.ThemeMiniBlackMainItemActive,
+.ThemeMiniBlackMenuItemHover,.ThemeMiniBlackMenuItemActive
+{
+	color: #FDFF00;
+}
+
+.ThemeMiniBlackMenuSplit
+{
+	height: 2px;
+	margin-top:	2px;
+	margin-bottom:	2px;
+	overflow: hidden;
+	background-color: inherit;
+	border-top:	1px solid white;
+}
+
+.ThemeMiniBlackMenuVSplit
+{
+	width: 1px;
+	margin: 0 auto;
+	overflow: hidden;
+	background-color: inherit;
+	border-right: 1px solid white;
+}
+
+#gotop {
+    display: none;
+    position: fixed;
+    right: 20px;
+    bottom: 20px;    
+    padding: 10px 15px;    
+    font-size: 20px;
+    background: #777;
+    color: white;
+    cursor: pointer;
+}

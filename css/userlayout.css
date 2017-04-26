@@ -1,0 +1,43 @@
+﻿div.chart {
+	padding: 5px;
+	font-size: 16px;
+	height: 16px ! important;
+	max-height: 16px ! important;
+	min-height: 16px ! important;
+}
+
+div.chart div.item1 {
+	float: left;
+	padding: 0 0.5em;
+	font-weight: bold;
+	text-align: left;
+	white-space: nowrap;
+	border-bottom: 1px dotted #dddddd;
+	width: 20px;
+}
+
+div.chart div.item2 {
+	float: left;
+	padding: 0 0.5em;
+	text-align: left;
+	border-bottom: 1px dotted #dddddd;
+	white-space: normal;
+	width: 150px;
+}
+
+div.chart div.item3 {
+	float: left;
+	padding: 0 0.5em;
+	text-align: left;
+	border-bottom: 1px dotted #dddddd;
+	white-space: normal;
+	width: 150px;
+}
+
+div.chart div.item4 {
+	float: left;
+	padding: 0 0.5em;
+	text-align: left;
+	border-bottom: 1px dotted #dddddd;
+	white-space: normal;
+}

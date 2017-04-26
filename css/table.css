@@ -1,0 +1,44 @@
+/*  CSS Table Design
+Author: Stanislav Filev
+Theme: Stainless Steel: Stenli Style
+URL: http://www.stenli.net
+
+----------------------------------------------- */
+
+.present {
+	margin: 15px 0px;
+	border: 1px solid #8080ff;
+	background-color: #fff; 
+	color: #000;
+	/*width: 100%;*/
+}
+
+.present1 {
+	margin: 15px 0px;
+	border: 1px solid #8080ff;
+	background-color: #fff; 
+	color: #000;
+	border-collapse: collapse;
+	
+	/*width: 100%;*/
+}
+ 
+ 
+ .present td,.present th { padding:5px;}
+/*
+caption {
+	text-transform: uppercase;
+	text-align:center;  
+	font: bold 12pt Verdana;
+	color: #4F4F4F;
+	margin: 3px 0;
+}
+
+ =links
+----------------------------------------------- 
+.present a { color:maroon; text-decoration: none;}
+.present a:link {color:maroon;}
+.present a:visited{ color: maroon;}
+.present a:hover{color:chocolate;}
+
+*/
