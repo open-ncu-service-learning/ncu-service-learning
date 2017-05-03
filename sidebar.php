@@ -6,7 +6,7 @@ div {
 <!-- Sidebar -->
 			<div id="sidebar" style="width:24%; margin-left:-3%;">
 				<div id="banner" style="margin-top: 15px;">
-					
+
 					<!--<a href="http://140.115.185.138/weeklylearning/Learning/Learning_index.php" title="大一週會報名區"><img src="images/banner/ncu_banner3.png" alt="大一週會報名區" width="160" height="50px" /></a><!--大一週會報名區<br> <font color="#ff0000" size="2">請於101年9月21日前完成報名</font></a>-->
 					<a href="https://www.facebook.com/NCU.servicelearing/" title="NCU 學務處服務學習辦公室"><img src="images/banner/fb_ser.jpg" alt="NCU 學務處服務學習辦公室" width="160" /></a>
 				</div>
@@ -17,10 +17,10 @@ div {
 				<ul style="margin-top: 15px;">
 					<li><a href="personal.php" title="時數查詢">時數查詢</a></li>
 					<li><a href="personal_activity.php" title="活動紀錄">活動紀錄</a></li>
-					<li><a href="https://docs.google.com/forms/d/e/1FAIpQLScgsTss_qiCtV4pfKKwdIu983imi7zc-yxk12iSRtBv564qhQ/viewform?c=0&w=1" title="網站問題反映單">網站問題反映單</a></li>
+					<li><a href="https://docs.google.com/forms/d/e/1FAIpQLScgsTss_qiCtV4pfKKwdIu983imi7zc-yxk12iSRtBv564qhQ/viewform?c=0&w=1" title="系統bug回報">系統bug回報</a></li>
 				</ul>
-<?php	
-	}	
+<?php
+	}
 	// 活動單位
 	elseif($_SESSION['valid_token'] == "2") {
 ?>
@@ -28,12 +28,12 @@ div {
 					<li><a href="others.php" title="申請單位">申請單位</a></li>
 					<li><a href="pass_apply_activities.php" title="活動申請">活動申請</a></li>
 					<li><a href="history.php" title="申請記錄">申請記錄</a></li>
-					<li><a href="https://docs.google.com/forms/d/e/1FAIpQLScgsTss_qiCtV4pfKKwdIu983imi7zc-yxk12iSRtBv564qhQ/viewform?c=0&w=1" title="網站問題反映單">網站問題反映單</a></li>
+					<li><a href="https://docs.google.com/forms/d/e/1FAIpQLScgsTss_qiCtV4pfKKwdIu983imi7zc-yxk12iSRtBv564qhQ/viewform?c=0&w=1" title="系統bug回報">系統bug回報</a></li>
 				</ul>
-<?php	
+<?php
 	}
 	// 管理員
-	elseif($_SESSION['valid_token'] == "3") {	
+	elseif($_SESSION['valid_token'] == "3") {
 ?>
 				<ul style="margin-top: 15px;">
 
@@ -51,13 +51,13 @@ div {
 					<!--<li><a href="pass_hour_query_dep.php" title="科系時數查詢">科系時數查詢</a></li>-->
 					<li><a href="pass_main_print.php" title="列印報表">列印報表</a></li>
 					<!--<li><a href="pass_import.php" title="匯入畢審系統">匯入畢審系統</a></li>-->
-					<li><a href="https://docs.google.com/forms/d/e/1FAIpQLScgsTss_qiCtV4pfKKwdIu983imi7zc-yxk12iSRtBv564qhQ/viewform?c=0&w=1" title="網站問題反映單">網站問題反映單</a></li>
+					<li><a href="https://docs.google.com/forms/d/e/1FAIpQLScgsTss_qiCtV4pfKKwdIu983imi7zc-yxk12iSRtBv564qhQ/viewform?c=0&w=1" title="系統bug回報">系統bug回報</a></li>
 
 				</ul>
 <?php
-	}	
+	}
 
-	if($_SESSION['valid_token'] == "1" || $_SESSION['valid_token'] == "2") 
+	if($_SESSION['valid_token'] == "1" || $_SESSION['valid_token'] == "2")
 	{
 		if($_SESSION['valid_token'] == "1")
 		{
@@ -68,9 +68,9 @@ div {
 	elseif($_SESSION['valid_token'] != "3")
 	{
 ?>
-				
+
 				<div id="login">
-					<img src="images/login.jpg" style="vertical-align: middle; width: 50px; margin: 10px 0 0 -15px;" /> 
+					<img src="images/login.jpg" style="vertical-align: middle; width: 50px; margin: 10px 0 0 -15px;" />
 					由此登入
 				</div>
 				<form name="form" id="form" action="send_login.php" method="post">
@@ -81,21 +81,21 @@ div {
 				<input type="submit" value="登入" /> <input type="reset" value="取消" />
 				</form>
 
-			
+
 <?php
-	}	
+	}
 ?>
-				
+
 
 				<br />
 				<!--<div id="banner" style="margin-top: 15px;">
 				<a href="http://www.ncu.edu.tw/" title="國立中央大學"><img src="images/banner/ncu_banner.gif" alt="中央大學" /></a>
 					<a href="http://osa.ncu.edu.tw/index.php" title="學生事務處"><img src="images/banner/osa.png" alt="學生事務處" width="160" /></a>
-				
+
 				</div>-->
 				<?php/*
 				<a id="login_portal" href="login/sso.php">
-					<img src="login/Login-icon.png" style="vertical-align: middle; width: 50px; margin: 10px 0 0 -15px;" /> 
+					<img src="login/Login-icon.png" style="vertical-align: middle; width: 50px; margin: 10px 0 0 -15px;" />
 					portal登入
 				</a>
 				*/?>
