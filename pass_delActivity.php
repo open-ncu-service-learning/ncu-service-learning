@@ -26,6 +26,7 @@
 	$sql = "SELECT news_no,news_title,news_begin_time,news_end_time FROM news_activity WHERE `news_id` = '$id'";
 	$ret = mysql_query($sql) or die(mysql_error());
 	$row = mysql_fetch_assoc($ret);
+	$sub_id = substr($row['news_no'],3);
 
 	//$sql1= "UPDATE `activity` SET `act_del`=1 WHERE `act_title` = '$row[news_title]' AND `act_begin_time` = '$row[news_begin_time]' and `act_end_time` = '$row[news_end_time]'";
 	$sql1= "UPDATE `activity` SET `act_del`=1 WHERE act_id =".$sub_id;
