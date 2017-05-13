@@ -38,6 +38,7 @@ mail.php
 *.xls
 *.rtf
 *.RTF
+counts.txt
 
 # temporary
 *.tmp
