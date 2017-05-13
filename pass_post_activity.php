@@ -39,7 +39,7 @@
 		$row = mysql_fetch_assoc($ret);
 		$no = sprintf("%03d", substr($row['act_semester'],0,-3)).sprintf("%04d", $id);
 		$require = $row['act_report'].",".$row['act_engage'].",".$row['act_questionnaire'].",".$row['act_test'].",".$row['act_other'];
-		
+		echo $require;
 // 資料更新	
 		$sql = "INSERT INTO `news_activity` (
 					`news_no`, 

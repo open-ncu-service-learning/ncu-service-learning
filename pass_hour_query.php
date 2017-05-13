@@ -97,6 +97,8 @@
 		$no = $row['user_student'];
 		$name = $row['user_name'];
 		$dep = $row['user_dep'];
+		$ass_fre = $row['assembly_freshman'];
+		$ass_dep = $row['assembly_dep'];
 		
 		// 取出活動資料
 		$sql = "SELECT act_id, act_title, act_type, act_begin_time, act_service_hour, act_pass_type FROM `activity` WHERE act_del = '0' AND act_admit_student LIKE '%$stuid%' UNION
@@ -274,11 +276,11 @@
 					<table width="700" border="1" cellpadding="0" cellspacing="0">
 						<tr>
 							<td><span style="color: #0F50FF; font-size: 18pt;">已參與大一週會的次數</span></td>
-							<td aligh="center"><?=$i?></td>
+							<td aligh="center"><?=$ass_fre/*$i*/?></td>
 						</tr>
 						<tr>
 							<td><span style="color: #0F50FF; font-size: 18pt;">已參與院週會的次數</span></td>
-							<td aligh="center"><?=$j?></td>
+							<td aligh="center"><?=$ass_dep;/*$j*/?></td>
 						</tr>
 					</table>
 <?php /**/?>

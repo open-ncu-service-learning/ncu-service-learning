@@ -302,19 +302,19 @@ $(document).ready(function() {
 ?>
 
 		<div class="story">
-			<div class="chart">
-				<div class="item1">
+			<ul class="chart">
+				<li class="item1">
 					發佈時間
-				</div>
+				</li>
 
-				<div class="item2">
+				<li class="item2" width="50px">
 					類別
-				</div>
+				</li>
 
-				<div class="item3">
+				<li class="item3" width="50px">
 					標題
-				</div>
-			</div>
+				</li>
+			</ul>
 			<div style="border-bottom: 1px solid #EAEAEA;"></div>
 <?
 			do {

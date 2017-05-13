@@ -51,6 +51,8 @@
 		$cpr=$row["cpr"];
 		$career=$row["career"];
 		$basic_inter=$row["basic_inter"];
+		$ass_fre = $row['assembly_freshman'];
+		$ass_dep = $row['assembly_dep'];
 		
 		// 取出活動資料
 		$sql = "SELECT act_id, act_title, act_type, act_end_time, act_service_hour, act_pass_type FROM `activity` WHERE act_del = '0' AND act_admit_student LIKE '%$stuid%' UNION
@@ -294,7 +296,7 @@
 			</tr>
 			<tr>
 				<td><span style="color: #0F50FF; font-size: 14pt;">大一週會(次數)</span></td>
-				<td aligh="center"><?=$i?></td>
+				<td aligh="center"><?=/*$i*/$ass_fre?></td>
 				<? if($stuid>104000000 && $stuid <900000000)
 				{?>
 					<td  aligh="center">4</td>
@@ -302,7 +304,7 @@
 			</tr>
 			<tr>
 				<td><span style="color: #0F50FF; font-size: 14pt;">院週會(次數)</span></td>
-				<td aligh="center"><?=$j?></td>
+				<td aligh="center"><?=/*$j*/$ass_dep?></td>
 				<? if($stuid>104000000 && $stuid <900000000)
 				{?>
 					<td  aligh="center">2</td>
