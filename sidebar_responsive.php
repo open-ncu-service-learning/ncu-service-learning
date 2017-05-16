@@ -71,7 +71,7 @@ div {
 
 				<div id="login">
 					<img src="images/login.jpg" style="vertical-align: middle; width: 50px; margin: 10px 0 0 -15px;" />
-					由此登入
+					組織單位由此登入
 				</div>
 				<form name="form" id="form" action="send_login.php" method="post">
 				<ul class="list" style="margin-left: 0; font-size: 12pt; list-style-type: none;">
@@ -96,7 +96,7 @@ div {
 
 				<a id="login_portal" href="login/sso.php">
 					<img src="login/Login-icon.png" style="vertical-align: middle; width: 50px; margin: 10px 0 0 -15px;" />
-					portal登入
+					學生portal登入
 				</a>
 
 			</div>
