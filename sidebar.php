@@ -61,7 +61,7 @@ div {
 	{
 		if($_SESSION['valid_token'] == "1")
 		{
-			echo "若使用公共電腦，請記得<a href='https://portal.ncu.edu.tw'>前往portal登出</a>";
+			echo "若使用公共電腦，請記得<a href='https://portal.ncu.edu.tw'  target='_blank'>前往portal登出</a>";
 		}
 		echo "<div align='center'><a href=\"send_logout.php\" onClick=\"return confirm('確定登出?');\"><img src=\"images/logout.jpg\" style=\"vertical-align: middle; margin: 10px auto; border: none; width: 40px;\" /> [登出服學網]</a></div>";
 	}
