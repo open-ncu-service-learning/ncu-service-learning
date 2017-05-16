@@ -61,7 +61,7 @@ div {
 	{
 		if($_SESSION['valid_token'] == "1")
 		{
-			//echo "若使用公共電腦，請記得前往portal登出";
+			echo "若使用公共電腦，請記得<a href='https://portal.ncu.edu.tw'>前往portal登出</a>";
 		}
 		echo "<div align='center'><a href=\"send_logout.php\" onClick=\"return confirm('確定登出?');\"><img src=\"images/logout.jpg\" style=\"vertical-align: middle; margin: 10px auto; border: none; width: 40px;\" /> [登出服學網]</a></div>";
 	}
@@ -93,7 +93,7 @@ div {
 					<a href="http://osa.ncu.edu.tw/index.php" title="學生事務處"><img src="images/banner/osa.png" alt="學生事務處" width="160" /></a>
 
 				</div>-->
-<? if(!empty($_SESSION['valid_token'])){?>
+<? if($_SESSION['valid_token'] != "1" && $_SESSION['valid_token'] != "2" && $_SESSION['valid_token'] != "3"){?>
 				<a id="login_portal" href="login/sso.php">
 					<img src="login/Login-icon.png" style="vertical-align: middle; width: 50px; margin: 10px 0 0 -15px;" />
 					學生portal登入
