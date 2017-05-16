@@ -1,7 +1,7 @@
 <?php
-	session_start();	
+	session_start();
 	require_once('../conn/db.php');
-	
+
 	include_once 'config.php';
 	include_once 'MyUser.class.php';
 	include_once 'NetID.class.php';
@@ -20,17 +20,17 @@
 	echo 'isset($myuser):'.(isset($myuser)? "true":"false").'<br>';
 	echo 'isset($_GET["netid-user"]):'.(isset($_GET['netid-user'])? "true":"false").'<br>';
 	echo '$myuser->account !== $GET["netid-user"]:'.($myuser->account !== $GET['netid-user']? "true":"false").'<br>';
-	
-	if (! isset($myuser) or 
+
+	if (! isset($myuser) or
 	(isset ($_GET['netid-user']) and $myuser->account !== $GET['netid-user'])) {
 		$netid = new NetID(HOSTDOMAIN, NETIDPREFIX, $netidAllowedRoles);
 		echo '$userid:'.(isset($userid)? $userid:"not set").'<br>';
 		$rc = $netid->doLogin($userid);
 		echo 'is_object ($rc):'.(is_object ($rc)? "true":"false").'<br>';
 		echo 'get_class ($rc) == \'NetIDReturn\':'.(get_class ($rc) == 'NetIDReturn' ? "true":"false").'<br>';
-		
+
 		if (is_object ($rc) and get_class ($rc) == 'NetIDReturn') {
-			
+
 			echo '$rc->returnCode == NetIDReturn::LOGIN_OK ?'.$rc->returnCode == NetIDReturn::LOGIN_OK.'<br>';
 			if ($rc->returnCode == NetIDReturn::LOGIN_OK) {
 				$myuser = $_SESSION['my-user'] = new MyUser($rc);
@@ -50,6 +50,7 @@
 																						echo '6'.'<br>';
 				// FIXME
 				//header ('location: /pass/index.php');
+				header ('location: /personal.php');
 				echo
 						"
 							<script>
@@ -76,7 +77,7 @@
 				// header('location: canceled.php');
 				break;
 
-			case NetIDReturn::ACCOUNT_NOT_ACCEPTABLE:	
+			case NetIDReturn::ACCOUNT_NOT_ACCEPTABLE:
 				echo 'ACCOUNT_NOT_ACCEPTABLE'.'<br>';
 				//header('location: index.php?action=accountNotAcceptable');
 				break;
