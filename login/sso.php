@@ -62,30 +62,29 @@
 			}
 			else
 			{
-				//echo '沒有成功登入'.'<br>';
-				header('location: /index.php');
+				echo '沒有成功登入'.'<br>';
 			}
 			//echo '繼續執行'.'<br>';
 		}
-		//echo '$rc->returnCode:'.$rc->returnCode .'<br>';
-		/*switch ($rc->returnCode) { // FIXME
+		echo '$rc->returnCode:'.$rc->returnCode .'<br>';
+		switch ($rc->returnCode) { // FIXME
 			case NetIDReturn::LOGIN_FAILED:
-				//echo 'LOGIN_FAILED'.'<br>';
+				echo 'LOGIN_FAILED'.'<br>';
 				break;
 
 			case NetIDReturn::CANCELED_AUTHENTICATION:
-				//echo 'canceled'.'<br>';
-				 header('location: canceled.php');
+				echo 'canceled'.'<br>';
+				// header('location: canceled.php');
 				break;
 
 			case NetIDReturn::ACCOUNT_NOT_ACCEPTABLE:
-				//echo 'ACCOUNT_NOT_ACCEPTABLE'.'<br>';
-				header('location: index.php?action=accountNotAcceptable');
+				echo 'ACCOUNT_NOT_ACCEPTABLE'.'<br>';
+				//header('location: index.php?action=accountNotAcceptable');
 				break;
 
 			case NetIDReturn::ROLE_NOT_ACCEPTABLE:
-				//echo 'ROLE_NOT_ACCEPTABLE'.'<br>';
-				header('location: index.php?action=roleNotAcceptable');
+				echo 'ROLE_NOT_ACCEPTABLE'.'<br>';
+				//header('location: index.php?action=roleNotAcceptable');
 				break;
 
 			case NetIDReturn::ERROR_EXCEPTION:
@@ -94,10 +93,10 @@
 			case NetIDReturn::REDIRECT_REQUEST:
 				echo 'REDIRECT_REQUEST'.'<br>';
 				break;
-		}*/
+		}
 		return;
 	}
 
 	// FIXME
-	header('location: /index.php');
+	//header('location: /index.php');
 ?>
