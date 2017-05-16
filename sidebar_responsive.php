@@ -93,10 +93,10 @@ div {
 					<a href="http://osa.ncu.edu.tw/index.php" title="學生事務處"><img src="images/banner/osa.png" alt="學生事務處" width="160" /></a>
 
 				</div>-->
-				<?php/*
+
 				<a id="login_portal" href="login/sso.php">
 					<img src="login/Login-icon.png" style="vertical-align: middle; width: 50px; margin: 10px 0 0 -15px;" />
 					portal登入
 				</a>
-				*/?>
+
 			</div>
