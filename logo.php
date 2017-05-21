@@ -13,7 +13,7 @@
 		?>
 		<a href="index.php" title=\"首頁\" style=\"color:#ffffff;\"><img class="mySlides" src="./images/cover.jpg" style="width:100%"></a>
 		<!--<a href="http://service-learning.ncu.edu.tw/pass_news_content.php?news_id=887" title=\"志工招募\" style=\"color:#ffffff;\"><img class="mySlides" src="./images/677647504_o.jpg" style="width:100%"></a>-->
-		<a href="http://service-learning.ncu.edu.tw/pass_news_content.php?news_id=902" title=\"金銀質獎\" style=\"color:#ffffff;\"><img class="mySlides" src="./images/price.jpg" style="width:100%"></a>
+		<!--<a href="http://service-learning.ncu.edu.tw/pass_news_content.php?news_id=902" title=\"金銀質獎\" style=\"color:#ffffff;\"><img class="mySlides" src="./images/price.jpg" style="width:100%"></a>-->
 		<a href="http://service-learning.ncu.edu.tw/pass_news_content.php?news_id=907" title=\"桃園客庄\" style=\"color:#ffffff;\"><img class="mySlides" src="./images/haka.jpg" style="width:100%"></a>
 		<!--<a href="http://service-learning.ncu.edu.tw/pass_news_content.php?news_id=886" title=\"首頁\" style=\"color:#ffffff;\"><img class="mySlides" src="./images/foryouforyuoth.jpg" style="width:100%"></a>-->
 		<!--<a href="http://service-learning.ncu.edu.tw/pass_news_content.php?news_id=897" title=\"首頁\" style=\"color:#ffffff;\"><img class="mySlides" src="./images/farmer.jpg" style="width:100%"></a>-->
@@ -22,7 +22,7 @@
 			<div class="w3-right w3-padding-right w3-hover-text-khaki" onclick="plusDivs(1)">&#10095;</div>
 			<span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(1)"></span>
 			<span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(2)"></span>
-			<span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></span>
+			<!--<span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></span>-->
 			<!--<span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></span>-->
 		</div>			
 	</div>
