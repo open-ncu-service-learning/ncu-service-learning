@@ -79,6 +79,7 @@
 							<li><a href="pass_print_activity.php?semester=102" title="102學年度活動">102學年度</a></li>
 							<li><a href="pass_print_activity.php?semester=103" title="103學年度活動">103學年度</a<li>
 							<li><a href="pass_print_activity.php?semester=104" title="104學年度活動">104學年度</a></li>
+							<li><a href="pass_print_activity.php?semester=105" title="104學年度活動">105學年度</a></li>
 						<ul>
 				</div>
 				<div id="print_out_activity" style="font-size: 20px; color: #1F1F1F; line-height: 1.5;">
