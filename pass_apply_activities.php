@@ -98,7 +98,7 @@
 	});
 </script>
 							<tr>
-								<td align="right"><label for="begin_time" style="color: #AF0000;">開始時間：</label></td>
+								<td align="center"><label for="begin_time" style="color: #AF0000;">開始時間：</label></td>
 								<td>
 									<input id="begin_time" name="begin_time" type="text" size="30" style="font-size: 14pt; height: 25px;" class="date-pick" />							
 									<select name="begin_hour" id="begin_hour" style="font-size: 14pt; height: 25px;">
@@ -349,7 +349,8 @@
 							</tr>
 							<tr>
 								<td align="right"><label for="link" style="color: #AF0000;">相關網址：</label></td>
-								<td><input type="text" name="link" id="link" size="50" value="http://" style="font-size: 14pt; height: 25px;" class="textstyle titleHintBox" title="請輸入網址" /></td>
+								<td><input type="text" name="link" id="link" size="50" value="http://" style="font-size: 14pt; height: 25px;" class="textstyle titleHintBox" title="請輸入網址" /></td></br>
+								<span style="color: red;">(網址字數上限100字元，過長建議使用短網址)</span>
 							</tr>
 							<tr>
 								<td width="100" align="right"><label for="file1" style="color: #AF0000;">相關檔案：</label></td>
