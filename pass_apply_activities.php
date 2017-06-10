@@ -47,15 +47,15 @@
 					<form id="form1" name="form1" action="send_pass_apply_activities.php" method="post" enctype="multipart/form-data" onsubmit="return check_pass_apply_activitiesForm(form1)">
 						<table width="700" style="margin-top: 20px;" border="1" cellspacing="0" cellpadding="1">
 							<tr>
-								<td align="right"><label for="title" style="color: #AF0000;">活動標題：</label></td>
+								<td align="center"><label for="title" style="color: #AF0000;">活動標題：</label></td>
 								<td><input type="text" size="50" name="title" id="title" style="font-size: 14pt; height: 25px;" class="textstyle titleHintBox" title="請輸入活動標題" /></td>
 							</tr>
 							<tr>
-								<td align="right"><label for="location" style="color: #AF0000;">活動地點：</label></td>
+								<td align="center"><label for="location" style="color: #AF0000;">活動地點：</label></td>
 								<td><input type="text" size="50" name="location" id="location" style="font-size: 14pt; height: 25px;" class="textstyle titleHintBox" title="請輸入活動地點" /></td>
 							</tr>
 							<tr>
-								<td align="right"><label for="semester" style="color: #AF0000;">學期：</label></td>
+								<td align="center"><label for="semester" style="color: #AF0000;">學期：</label></td>
 								<td>
 									<input type="hidden" name="year" value="<?=($year-1911)?>" />
 									<select name="school_year" style="font-size: 14pt; height: 25px;">
