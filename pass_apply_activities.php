@@ -194,7 +194,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td align="right"><label for="end_time" style="color: #AF0000;">結束時間：</label></td>
+								<td align="center"><label for="end_time" style="color: #AF0000;">結束時間：</label></td>
 								<td>
 									<input id="end_time" name="end_time" type="text" size="30" style="font-size: 14pt; height: 25px;" class="date-pick" />
 									<select name="end_hour" id="end_hour" style="font-size: 14pt; height: 25px;">
@@ -290,7 +290,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td align="right"><label for="type" style="color: #AF0000;">活動類別：</label></td>
+								<td align="center"><label for="type" style="color: #AF0000;">活動類別：</label></td>
 								<td>
 									<input type="radio" name="type" id="type1" value="1" /> 服務學習
 									<br><input type="radio" name="type" id="type2" value="2" /> 生活知能學習
@@ -311,11 +311,11 @@
 								</td>
 							</tr>
 							<tr>
-								<td width="100" align="right"><label for="des" style="color: #AF0000;">活動描述：</label></td>
+								<td width="100" align="center"><label for="des" style="color: #AF0000;">活動描述：</label></td>
 								<td><textarea name="des" cols="50" rows="10" id="des"></textarea></td>
 							</tr>
 							<tr>
-								<td width="100" align="right"><label for="service_hour" style="color: #AF0000;">認證時數：</label></td>
+								<td width="100" align="center"><label for="service_hour" style="color: #AF0000;">認證時數：</label></td>
 								<td><!-- 將一般改成基本和高階-->
 									<input type="radio" name="service_hour_type" value="1" />
 										基本 <input type="text" name="service_hour_1" size="3" value="0" style="font-size: 14pt; height: 25px;" />小時 <br />
@@ -337,7 +337,7 @@
 							</tr>-->
 							<!-- 刪掉了認證類別  直接從認證時數去取得類別-->
 							<tr>
-								<td width="100" align="right"><label for="requirement" style="color: #AF0000;">認證要求：</label></td>
+								<td width="100" align="center"><label for="requirement" style="color: #AF0000;">認證要求：</label></td>
 								<td>
 									<input type="checkbox" name="req_report" value="1" id="r"/>心得報告<br />
 									<input type="checkbox" name="req_engage" value="1" />全程參與<br />
@@ -348,20 +348,20 @@
 								</td>
 							</tr>
 							<tr>
-								<td align="right"><label for="link" style="color: #AF0000;">相關網址：</label></td>
-								<td><input type="text" name="link" id="link" size="50" value="http://" style="font-size: 14pt; height: 25px;" class="textstyle titleHintBox" title="請輸入網址" /></td></br>
-								<span style="color: red;">(網址字數上限100字元，過長建議使用短網址)</span>
+								<td align="center"><label for="link" style="color: #AF0000;">相關網址：</label></td>
+								<td><input type="text" name="link" id="link" size="50" value="http://" style="font-size: 14pt; height: 25px;" class="textstyle titleHintBox" title="請輸入網址" /></br><span style="color: red;">(網址字數上限100字元，過長建議使用短網址)</span></td>
+								
 							</tr>
 							<tr>
-								<td width="100" align="right"><label for="file1" style="color: #AF0000;">相關檔案：</label></td>
+								<td width="100" align="center"><label for="file1" style="color: #AF0000;">相關檔案：</label></td>
 								<td><input type="file" name="file1" size="30" id="file1" /></td>
 							</tr>							
 							<tr>
-								<td align="right"><label for="person" style="color: #AF0000;">聯絡人：</label></td>
+								<td align="center"><label for="person" style="color: #AF0000;">聯絡人：</label></td>
 								<td><input type="text" name="person" id="person" style="font-size: 14pt; height: 25px;" class="textstyle titleHintBox" title="請輸入聯絡人" /></td>
 							</tr>
 							<tr>
-								<td align="right"><label for="office" style="color: #AF0000;">發佈單位：</label></td>
+								<td align="center"><label for="office" style="color: #AF0000;">發佈單位：</label></td>
 
 					
 <?php
