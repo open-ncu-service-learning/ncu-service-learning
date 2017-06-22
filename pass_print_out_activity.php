@@ -82,7 +82,7 @@
 			{
 				//$actOffice = "&nbsp";
 				$num = "&nbsp";
-			}/*
+			}
 			else
 			{
 				$actOffice = $row['act_req_office'];
@@ -92,7 +92,7 @@
 				$row1 = mysql_fetch_assoc($ret1);
 				$num= $row1['num'];
 			}			
-			*/
+			
 			
 			//活動類別
 			if($type_temp == $row['act_type'] && $dep_temp == $row['act_req_office'])
@@ -162,19 +162,19 @@
 				$high = "*";
 			}
 			
-			/*
+			
 			//認證人數
 			unset($arr1);
 			$arr1 = explode(',', $row['act_admit_student']);
 			$length = count($arr1);
-			*/
+			
 ?>
 			<tr align="center">
 				<td><?=$actOffice?></td>
 				<td><?=$type?></td>
 				<td><?=$row['act_title']?></td>
 				<td><?=$time?></td>
-				<td><?=$num?></td>
+				<!--<td><?=//$num?></td>-->
 				<td><?=$basic?></td>
 				<td><?=$high?></td>
 				<!--<td><?//=$length?></td>-->
