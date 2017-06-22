@@ -54,7 +54,7 @@
 				<td width="100">類別</td>
 				<td width="300">活動名稱</td>
 				<td width="100">活動日期</td>
-				<td width="100">活動數量</td>
+				<!--<td width="100">活動數量</td>-->
 				<td width="100">基本時數</td>
 				<td width="100">高階時數</td>
 				<td width="100">認證人數</td>
@@ -184,7 +184,7 @@
 				<td><?=$type?></td>
 				<td><?=$row['act_title']?></td>
 				<td><?=$time?></td>
-				<td><?=$num?></td>
+				<!--<td><?//=$num?></td>-->
 				<td><?=round($basic)?></td>
 				<td><?=round($high)?></td>
 				<td><?=$length?></td>
