@@ -72,7 +72,7 @@
 	$hour_s=0;
 	$hour_l=0;
 	$hour_h=0;
-	/*
+	
 	if($actNumber > 0)
 	{
  		while($row = mysql_fetch_assoc($ret))
@@ -82,7 +82,7 @@
 			{
 				//$actOffice = "&nbsp";
 				$num = "&nbsp";
-			}
+			}/*
 			else
 			{
 				$actOffice = $row['act_req_office'];
