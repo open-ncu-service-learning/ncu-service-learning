@@ -349,7 +349,9 @@
 							</tr>
 							<tr>
 								<td align="center"><label for="link" style="color: #AF0000;">相關網址：</label></td>
-								<td><input type="text" name="link" id="link" size="50" value="http://" style="font-size: 14pt; height: 25px;" class="textstyle titleHintBox" title="請輸入網址" /></br><span style="color: red;">(網址字數上限100字元，過長建議使用短網址)</span></td>
+								<td><input type="text" name="link" id="link" size="50" value="http://" style="font-size: 14pt; height: 25px;" class="textstyle titleHintBox" title="請輸入網址" /><br />
+								<span style="color: red;">(網址字數上限100字元，過長建議使用短網址)</span>
+								</td>
 								
 							</tr>
 							<tr>
