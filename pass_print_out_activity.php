@@ -54,7 +54,7 @@
 				<td width="100">類別</td>
 				<td width="300">活動名稱</td>
 				<td width="100">活動日期</td>
-				<!--<td width="100">活動數量</td>個人申請不需要-->
+				<!--<td width="100">活動數量</td>-->
 				<td width="100">基本時數</td>
 				<td width="100">高階時數</td>
 				<!--<td width="100">認證人數</td>-->
@@ -87,10 +87,10 @@
 			{
 				$actOffice = $row['act_req_office'];
 				//活動數量
-				$sql = "SELECT count(act_id) AS num FROM out_activity WHERE `act_req_office` LIKE '%$actOffice%' AND `act_begin_time` between '$ADsemester-08-01 00:00:00' and '$ADsemester_1-07-31 00:00:00' ";
+				/*$sql = "SELECT count(act_id) AS num FROM out_activity WHERE `act_req_office` LIKE '%$actOffice%' AND `act_begin_time` between '$ADsemester-08-01 00:00:00' and '$ADsemester_1-07-31 00:00:00' ";
 				$ret1 = mysql_query($sql) or die(mysql_error());
 				$row1 = mysql_fetch_assoc($ret1);
-				$num= $row1['num'];
+				$num= $row1['num'];*/
 			}			
 			
 			
@@ -140,17 +140,17 @@
 			switch($row['act_pass_type'])
 			{
 				case 1:
-					$basic = (round)$row['act_service_hour'];
+					$basic = $row['act_service_hour'];
 					$high = 0;
 					break;
 				case 2:
 					$basic = 0;
-					$high = (round)$row['act_service_hour'];
+					$high = $row['act_service_hour'];
 					break;
 				case 3:
 					$arr = explode(',', $row['act_service_hour']);
-					$basic = (round)$arr[0];
-					$high = (round)$arr[1];
+					$basic = $arr[0];
+					$high = $arr[1];
 					break;
 				default:
 					$basic = 0;
@@ -162,19 +162,19 @@
 				$high = "*";
 			}
 			
-			
+			/*
 			//認證人數
 			unset($arr1);
 			$arr1 = explode(',', $row['act_admit_student']);
 			$length = count($arr1);
-			
+			*/
 ?>
 			<tr align="center">
 				<td><?=$actOffice?></td>
 				<td><?=$type?></td>
 				<td><?=$row['act_title']?></td>
 				<td><?=$time?></td>
-				<!--<td><?=//$num?></td>-->
+				<!--<td><?//=$num?></td>-->
 				<td><?=$basic?></td>
 				<td><?=$high?></td>
 				<!--<td><?//=$length?></td>-->
