@@ -38,8 +38,8 @@
 	$person = mysql_escape_string($_POST['person']);
 	$office = mysql_escape_string($_POST['office']);
 	$phone = mysql_escape_string($_POST['phone']);
-	$des = nl2br($_POST['des']);
-	$des = mysql_escape_string($des);
+	//$des = nl2br($_POST['des']);
+	//$des = mysql_escape_string($des);
 
 	
 
@@ -66,7 +66,6 @@
 				`act_type`,
 				`act_life_sub`,
 				`act_subtype`,
-				`act_description`,
 				`act_service_hour`,
 				`act_pass_type`,
 				`act_year`,
@@ -88,7 +87,6 @@
 				'$_POST[type]',
 				'$_POST[life_sub]',
 				'0',
-				'$des', 
 				'$hour', 
 				'$_POST[service_hour_type]', 
 				'$year',

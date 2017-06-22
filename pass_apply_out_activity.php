@@ -296,10 +296,10 @@
 									</select>-->
 								</td>
 							</tr>
-							<tr>
+							<!--0622 remove <tr>
 								<td width="100" align="right"><label for="des" style="color: #AF0000;">活動描述：</label></td>
 								<td><textarea name="des" cols="50" rows="10" id="des"></textarea></td>
-							</tr>
+							</tr>-->
 							<tr>
 								<td width="100" align="right"><label for="service_hour" style="color: #AF0000;">認證時數：</label></td>
 								<td><!-- 將一般增為基本和高階-->
@@ -327,8 +327,8 @@
 								<td><input type="text" name="person" id="person" style="font-size: 14pt; height: 25px;" class="textstyle titleHintBox" title="請輸入承辦人" /></td>
 							</tr>
 							<tr>
-								<td align="right"><label for="office">活動單位：</label></td>
-								<td><input type="text" name="office" id="office" size="30" style="font-size: 14pt; height: 25px;" class="textstyle titleHintBox" title="請輸入活動單位" /></td>
+								<td align="right"><label for="office" style="color: #AF0000;">活動單位：</label></td>
+								<td><input type="text" name="office" id="office" size="30" style="font-size: 14pt; height: 25px;" class="textstyle titleHintBox" title="請輸入活動單位" required></td>
 							</tr>
 							<tr>
 								<td align="right"><label for="phone">聯絡電話：</label></td>

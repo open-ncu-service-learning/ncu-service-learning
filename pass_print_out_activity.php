@@ -54,7 +54,7 @@
 				<td width="100">類別</td>
 				<td width="300">活動名稱</td>
 				<td width="100">活動日期</td>
-				<td width="100">活動數量</td>
+				<!--<td width="100">活動數量</td>個人申請不需要-->
 				<td width="100">基本時數</td>
 				<td width="100">高階時數</td>
 				<!--<td width="100">認證人數</td>-->
@@ -72,7 +72,7 @@
 	$hour_s=0;
 	$hour_l=0;
 	$hour_h=0;
-	
+	/*
 	if($actNumber > 0)
 	{
  		while($row = mysql_fetch_assoc($ret))
@@ -92,7 +92,7 @@
 				$row1 = mysql_fetch_assoc($ret1);
 				$num= $row1['num'];
 			}			
-			
+			*/
 			
 			//活動類別
 			if($type_temp == $row['act_type'] && $dep_temp == $row['act_req_office'])
@@ -140,17 +140,17 @@
 			switch($row['act_pass_type'])
 			{
 				case 1:
-					$basic = $row['act_service_hour'];
+					$basic = (round)$row['act_service_hour'];
 					$high = 0;
 					break;
 				case 2:
 					$basic = 0;
-					$high = $row['act_service_hour'];
+					$high = (round)$row['act_service_hour'];
 					break;
 				case 3:
 					$arr = explode(',', $row['act_service_hour']);
-					$basic = $arr[0];
-					$high = $arr[1];
+					$basic = (round)$arr[0];
+					$high = (round)$arr[1];
 					break;
 				default:
 					$basic = 0;
@@ -223,7 +223,7 @@
 		$sqls = "SELECT count(act_id) AS num FROM out_activity WHERE `act_type` = 1 AND `act_begin_time` between '$ADsemester-08-01 00:00:00' and '$ADsemester_1-07-31 00:00:00' ";
 		$rets = mysql_query($sqls) or die(mysql_error());
 		$rows = mysql_fetch_assoc($rets);
-		$num_s= $rows['num'];var_dump($num_s->act_title);
+		$num_s= $rows['num'];//var_dump($num_s->act_title);
 		}
 		//it seems that這裡開始有問題
 	}
