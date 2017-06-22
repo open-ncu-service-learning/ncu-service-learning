@@ -185,8 +185,8 @@
 				<td><?=$row['act_title']?></td>
 				<td><?=$time?></td>
 				<td><?=$num?></td>
-				<td><?=$basic?></td>
-				<td><?=$high?></td>
+				<td><?=round($basic)?></td>
+				<td><?=round($high)?></td>
 				<td><?=$length?></td>
 			</tr>
 <?		
