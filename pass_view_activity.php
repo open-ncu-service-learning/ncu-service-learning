@@ -89,20 +89,23 @@
 		switch($row['act_pass_type']) {
 			case 1:
 				$hour = "基本: ".$row['act_service_hour'];
+				$serv_type = " - 基本";
 				break;
 			case 2:
 				$hour = "高階: ".$row['act_service_hour'];
+				$serv_type = " - 高階";
 				break;
 			case 3:
 				$arr = explode(',', $row['act_service_hour']);
 				$hour = "基本: $arr[0] <br />高階: $arr[1]";
+				$serv_type = "";
 				break;
 			default:
 				$hour = 0;
 		}
 		if($row['act_service_hour'] == -1)
 		{
-			$hour = "依服務時數進行認證";
+			$hour = "依服務時數進行認證".$serv_type;
 		}
 		
 		if($row['act_report'])
