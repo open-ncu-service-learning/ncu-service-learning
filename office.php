@@ -85,7 +85,7 @@
 					</div>
 <!-- 主任 -->
                     <div id="leader">
-                        <img src="images/office/leader.jpg" style="float: right; width: 175px;" />
+                        <!--<img src="images/office/leader.jpg" style="float: right; width: 175px;" /> -->
                         <h5>吳穎沺</h5>
                         <ul class="list" style="margin-top: 20px; list-style-type: none; font-size: 14pt;">
                             <li><span style="color: #7F1717;">職稱:</span> 主任</li>
