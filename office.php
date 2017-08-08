@@ -86,12 +86,12 @@
 <!-- 主任 -->
                     <div id="leader">
                         <!--<img src="images/office/leader.jpg" style="float: right; width: 175px;" />-->
-                        <h5>孫中運</h5>
+                        <h5>吳穎沺</h5>
                         <ul class="list" style="margin-top: 20px; list-style-type: none; font-size: 14pt;">
-                            <li><span style="color: #7F1717;">職稱:</span> 代理主任</li>
-                            <li><span style="color: #7F1717;">中文姓名:</span> 孫中運</li>
-                            <li><span style="color: #7F1717;">英文姓名:</span> Chang-Yung Sun</li>
-                            <li><span style="color: #7F1717;">公務信箱:</span> scy777@ncu.edu.tw</li>
+                            <li><span style="color: #7F1717;">職稱:</span> 主任</li>
+                            <li><span style="color: #7F1717;">中文姓名:</span> 吳穎沺</li>
+                            <li><span style="color: #7F1717;">英文姓名:</span> Ying-Tien Wu</li>
+                            <li><span style="color: #7F1717;">公務信箱:</span> ytwu@cl.ncu.edu.tw</li>
                             <li><span style="color: #7F1717;">分機電話:</span> 57211</li>
                         </ul>
                         <h5>執掌業務</h5>
