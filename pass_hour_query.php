@@ -174,7 +174,7 @@
 						</tr>
 <?php
 			
-/*			while($row = mysql_fetch_assoc($ret))
+			while($row = mysql_fetch_assoc($ret))
 			{
 				// 活動型態
 				$type = "";
@@ -231,7 +231,7 @@
 						break;
 					default:
 						$hour = 0;
-				}*/
+				}
 				/*計算大一週會次數
 				$tt = explode("大一週會", $row['act_title']);
 				if (count($tt)>1) {
