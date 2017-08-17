@@ -100,6 +100,41 @@
 		$ass_fre = $row['assembly_freshman'];
 		$ass_dep = $row['assembly_dep'];
 		
+		$q1=50;
+		$q2=30;
+		$q3=20;
+		
+		if($row['user_student']>105000000 && $row['user_student'] <106000000)
+		{
+			$q1=40;
+			$q2=40;
+			$q3=20;
+		}
+					
+		$totalHour=$row['user_totalHour'];
+					
+		//轉時數
+		$b1=$row['basic_service'];			$a1=$row['advan_service'];
+		$b2=$row['basic_life'];				$a2=$row['advan_life'];
+		$b3=$row['basic_art'];				$a3=$row['advan_art'];
+					
+		if($b1 > $q1){
+			$a1 += $b1 - $q1;
+			$b1 = $q1;
+		}
+		if($b2 > $q2){
+			$a2 += $b2 - $q2;
+			$b2 = $q2;
+		}
+		if($b3 > $q3){
+			$a3 += $b3 - $q3;
+			$b3 = $q3;
+		}		
+				
+		$basicHour = $b1 + $b2 +$b3;
+		$advanHour=$a1 + $a2 +$a3;
+		$serviceHour =array($b1,$a1,$b2,$a2,$b3,$a3);
+		
 		// 取出活動資料
 		$sql = "SELECT act_id, act_title, act_type, act_begin_time, act_service_hour, act_pass_type FROM `activity` WHERE act_del = '0' AND act_admit_student LIKE '%$stuid%' UNION
 				SELECT act_id, act_title, act_type, act_begin_time, act_service_hour, act_pass_type FROM `out_activity` WHERE act_del = '0' AND act_admit_student LIKE '%$stuid%'
@@ -117,15 +152,15 @@
 						</ul>
 					</div>
 <?php
-		$totalHour = 0;
+	/*	$totalHour = 0;
 		$basicHour = 0;
 		$advanHour = 0;
 		
-		$serviceHour = array(0, 0, 0, 0, 0, 0);
-		/*變數count 大一週會次數*/
-		$i=0;
-		/*變數count 院週會次數*/
-		$j=0;
+		$serviceHour = array(0, 0, 0, 0, 0, 0);*/
+		/*變數count 大一週會次數
+		$i=0;*/
+		/*變數count 院週會次數
+		$j=0;*/
 		
 		if($actNumber > 0)
 		{
@@ -138,43 +173,6 @@
 							<td width="100"><span style="color: #0F50FF; font-size: 18pt;">時數</span></td>
 						</tr>
 <?php
-
-			
-					$q1=50;
-					$q2=30;
-					$q3=20;
-					
-					if($row['user_student']>105000000 && $row['user_student'] <106000000)
-					{
-						$q1=40;
-						$q2=40;
-						$q3=20;
-					}
-					
-					$totalHour=$row['user_totalHour'];
-					
-					//轉時數
-					$b1=$row['basic_service'];			$a1=$row['advan_service'];
-					$b2=$row['basic_life'];				$a2=$row['advan_life'];
-					$b3=$row['basic_art'];				$a3=$row['advan_art'];
-					
-					if($b1 > $q1){
-						$a1 += $b1 - $q1;
-						$b1 = $q1;
-					}
-					if($b2 > $q2){
-						$a2 += $b2 - $q2;
-						$b2 = $q2;
-					}
-					if($b3 > $q3){
-						$a3 += $b3 - $q3;
-						$b3 = $q3;
-					}		
-				
-					$basicHour = $b1 + $b2 +$b3;
-					
-					$advanHour=$a1 + $a2 +$a3;
-					$serviceHour =array($b1,$a1,$b2,$a2,$b3,$a3);
 			
 /*			while($row = mysql_fetch_assoc($ret))
 			{
@@ -234,17 +232,17 @@
 					default:
 						$hour = 0;
 				}*/
-				/*計算大一週會次數*/
+				/*計算大一週會次數
 				$tt = explode("大一週會", $row['act_title']);
 				if (count($tt)>1) {
 					$i++;
-				}
-				/*計算院週會次數*/
+				}*/
+				/*計算院週會次數
 				$ss = explode("院週會", $row['act_title']);
 				if (count($ss)>1) {
 					$j++;
 				}
-				
+				*/
 ?>
 						<tr>
 							<td><?=$row['act_title']?></td>
@@ -337,21 +335,21 @@
 						</tr>
 						<tr>
 							<td align="center" style="color: #FF0022;">畢業門檻</td>
-							<td align="center" style="color: #FF0022;">50</td>
-							<td align="center" style="color: #FF0022;">30</td>
-							<td align="center" style="color: #FF0022;">20</td>
+							<td align="center" style="color: #FF0022;"><?=$q1?></td>
+							<td align="center" style="color: #FF0022;"><?=$q2?></td>
+							<td align="center" style="color: #FF0022;"><?=$q3?></td>
 						</tr>
 						<tr>
 							<td align="center">基本時數</td>
-							<td align="center"><?=$serviceHour[0]?></td>
-							<td align="center"><?=$serviceHour[2]?></td>
-							<td align="center"><?=$serviceHour[4]?></td>
+							<td align="center"><?=$b1?></td>
+							<td align="center"><?=$b2?></td>
+							<td align="center"><?=$b3?></td>
 						</tr>
 						<tr>
 							<td align="center">高階時數</td>
-							<td align="center"><?=$serviceHour[1]?></td>
-							<td align="center"><?=$serviceHour[3]?></td>
-							<td align="center"><?=$serviceHour[5]?></td>
+							<td align="center"><?=$a1?></td>
+							<td align="center"><?=$a2?></td>
+							<td align="center"><?=$a3?></td>
 						</tr>
 					</table>
 
