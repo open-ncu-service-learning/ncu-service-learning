@@ -138,7 +138,45 @@
 							<td width="100"><span style="color: #0F50FF; font-size: 18pt;">時數</span></td>
 						</tr>
 <?php
-			while($row = mysql_fetch_assoc($ret))
+
+			
+					$q1=50;
+					$q2=30;
+					$q3=20;
+					
+					if($row['user_student']>105000000 && $row['user_student'] <106000000)
+					{
+						$q1=40;
+						$q2=40;
+						$q3=20;
+					}
+					
+					$totalHour=$row['user_totalHour'];
+					
+					//轉時數
+					$b1=$row['basic_service'];			$a1=$row['advan_service'];
+					$b2=$row['basic_life'];				$a2=$row['advan_life'];
+					$b3=$row['basic_art'];				$a3=$row['advan_art'];
+					
+					if($b1 > $q1){
+						$a1 += $b1 - $q1;
+						$b1 = $q1;
+					}
+					if($b2 > $q2){
+						$a2 += $b2 - $q2;
+						$b2 = $q2;
+					}
+					if($b3 > $q3){
+						$a3 += $b3 - $q3;
+						$b3 = $q3;
+					}		
+				
+					$basicHour = $b1 + $b2 +$b3;
+					
+					$advanHour=$a1 + $a2 +$a3;
+					$serviceHour =array($b1,$a1,$b2,$a2,$b3,$a3);
+			
+/*			while($row = mysql_fetch_assoc($ret))
 			{
 				// 活動型態
 				$type = "";
@@ -195,7 +233,7 @@
 						break;
 					default:
 						$hour = 0;
-				}
+				}*/
 				/*計算大一週會次數*/
 				$tt = explode("大一週會", $row['act_title']);
 				if (count($tt)>1) {
@@ -218,7 +256,7 @@
 			}
 			
 			//判斷基本時數:100 服務學習:50 生活知能:30 人文藝術:20 超過的計算到高階
-			if($serviceHour[0] > 50){
+/*			if($serviceHour[0] > 50){
 				$serviceHour[1] += $serviceHour[0] - 50;
 				$serviceHour[0] = 50;
 			}
@@ -233,10 +271,10 @@
 			$basicHour = $serviceHour[0] + $serviceHour[2] +$serviceHour[4];
 			$advanHour = $serviceHour[1] + $serviceHour[3] +$serviceHour[5];
 			$totalHour = $basicHour + $advanHour;
-						
+*/							
 			// 判斷護照類別
 			$passportType = judgePassport($serviceHour);
-			
+			$string = "";
 			/*
 			echo $serviceHour[0];
 			echo "<br>";
@@ -248,7 +286,7 @@
 			$string = "";
 			switch($passportType) {
 				case 0:
-					$string = "";
+					$string = "尚未通過畢審門檻!";
 					break;
 				case 1:
 					$string = "<img src='images/basic.png' style='width: 150px; float: left;' />";
