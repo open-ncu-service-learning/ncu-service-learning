@@ -327,18 +327,18 @@
 				
 			if($stuid<103999999)
 				{
-					if($serviceHour[0]>=50 && $serviceHour[2]>=30 && $serviceHour[4]>=20)
+					if(ceil($serviceHour[0])>=50 && ceil($serviceHour[2])>=30 && ceil($serviceHour[4])>=20)
 					$qualified  = 1;
 				}
 			else if ($stuid<104999999)
 			{
-				if($i>=4 && $j>=2 &&$serviceHour[0]>=50 && $serviceHour[2]>=30 && $serviceHour[4]>=20)
+				if($i>=4 && $j>=2 && ceil($serviceHour[0])>=50 && ceil($serviceHour[2])>=30 && ceil($serviceHour[4])>=20)
 					$qualified  = 1;
 			}
 			else if($stuid<105999999)
 			{
 				$qualified  = 1;
-				if($i<4 || $j<2 || $serviceHour[4]<20 || $serviceHour[0]<40 || $serviceHour[2]<40 || $career<10 || $cpr<5 || $serviceHour[6]<5) 
+				if($i<4 || $j<2 || ceil($serviceHour[4])<20 || ceil($serviceHour[0])<40 || ceil($serviceHour[2])<40 || $career<10 || $cpr<5 || ceil($serviceHour[6])<5) 
 				{
 					$qualified  = 0;
 				}				
@@ -346,7 +346,7 @@
 			else if($stuid<106999999)
 			{
 				$qualified  = 1;
-				if($i<4 || $j<2 || $serviceHour[4]<20 || $serviceHour[0]<40 || $serviceHour[2]<35 || $career<10 || $cpr<5  || $serviceHour[6]<5) 
+				if($i<4 || $j<2 || ceil($serviceHour[4])<20 || ceil($serviceHour[0])<40 || ceil($serviceHour[2])<35 || $career<10 || $cpr<5  || ceil($serviceHour[6])<5) 
 				{
 					$qualified  = 0;
 				}				
