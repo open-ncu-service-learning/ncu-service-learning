@@ -43,7 +43,7 @@
   <li><a href="periodical/fifth.pdf" >第五刊</a></li>
   <li><a href="periodical/sixth.pdf" >第六刊</a></li>
   <li><a href="periodical/seventh.pdf" >第七刊</a></li>
- 
+  <li><a href="periodical/eighth.pdf" >第八刊</a></li>
   
 </ol>
 
