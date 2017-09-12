@@ -223,6 +223,9 @@
 						<tr align="middle">	
 							<button style="margin: 10px; margin-left:3%;" type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo4"><h3 style="font-family: 微軟正黑體;" >新聞報導</h3></button>
 							<div id="demo4" class="collapse">
+								<p style="margin: 10px; margin-left:6%;">
+										<a href="http://www.ncu.edu.tw/campus/article/2007"><i class="fa fa-play-circle" style="font-size:24px"></i>夢想「蘭」圖　國際志工前進斯里蘭卡 --桃園市政府青年事務局指導</a><br>
+									</p>
 							</div>
 						</tr>
 	<!--					
