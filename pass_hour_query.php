@@ -209,25 +209,25 @@
 				switch($row['act_pass_type']) {
 					case 1:
 						$hour = "基本: ".$row['act_service_hour'];
-						$totalHour += $row['act_service_hour'];
+						/*$totalHour += $row['act_service_hour'];
 						$basicHour += $row['act_service_hour'];
-						$serviceHour[$index] += $row['act_service_hour'];
+						$serviceHour[$index] += $row['act_service_hour'];*/
 						break;
 					case 2:
 						$hour = "高階: ".$row['act_service_hour'];
-						$totalHour += $row['act_service_hour'];
+					/*	$totalHour += $row['act_service_hour'];
 						$advanHour += $row['act_service_hour'];
-						$serviceHour[$index+1] += $row['act_service_hour'];
+						$serviceHour[$index+1] += $row['act_service_hour'];*/
 						break;
 					case 3:
 						$arr = explode(',', $row['act_service_hour']);
 						$hour = "基本: $arr[0] <br />高階: $arr[1]";
-						$totalHour += $arr[0];
+					/*	$totalHour += $arr[0];
 						$totalHour += $arr[1];
 						$basicHour += $arr[0];
 						$advanHour += $arr[1];
 						$serviceHour[$index] += $arr[0];
-						$serviceHour[$index+1] += $arr[1];
+						$serviceHour[$index+1] += $arr[1];*/
 						break;
 					default:
 						$hour = 0;
