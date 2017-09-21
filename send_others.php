@@ -20,7 +20,8 @@
 	<body>
 <?php
 
-	$pres = $_POST['pres'];
+	//$pres = $_POST['pres'];
+	$pres = null;
 	$email=$_POST['email'];
 	$phone=$_POST['phone'];
 	$sql = "SELECT COUNT(*) as num FROM `admin` WHERE `ad_account` = '$account' AND ad_del = '0'";
