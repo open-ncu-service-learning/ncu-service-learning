@@ -74,7 +74,45 @@
 			return 0;
 		}
 	}
+	
+	function judgePassport_3row($graduate, $advHour) {
+		// 各30%
+		$silver     = 30;
+		$gold       = 60;
 
+		if($graduate==1) {
+			if($advHour[0] >= $silver && $advHour[1] >= $silver && $advHour[2] >= $silver && $advHour[0]+$advHour[1]+$advHour[2] >= 100) {
+				if($advHour[0] >= $gold && $advHour[1] >= $gold && $advHour[2] >= $gold && $advHour[0]+$advHour[1]+$advHour[2] >= 200) {
+					return 3; // gold
+				}
+				return 2; // silver
+			}
+			return 1; // basic
+		}
+		else {
+			return 0;
+		}
+	}
+	function judgePassport_4row($graduate, $advHour) {
+		// 各25%
+		$silver     = 25;
+		$gold       = 50;
+
+		if($graduate==1) {
+			if($advHour[0] >= $silver && $advHour[1] >= $silver && $advHour[2] >= $silver && $advHour[3] >= $silver && $advHour[0]+$advHour[1]+$advHour[2]+$advHour[3] >= 100) {
+				if($advHour[0] >= $gold && $advHour[1] >= $gold && $advHour[2] >= $gold && $advHour[3] >= $gold && $advHour[0]+$advHour[1]+$advHour[2]+$advHour[3] >= 200) {
+					return 3; // gold
+				}
+				return 2; // silver
+			}
+			return 1; // basic
+		}
+		else {
+			return 0;
+		}
+	}
+	
+	
 	function judgePassport2($serviceHour) {
 		// 規定
 		$service	= 50;
@@ -113,3 +151,4 @@
 
 	}
 ?>
+

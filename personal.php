@@ -7,6 +7,7 @@
 	}
 	elseif($_SESSION['valid_token'] == "3") {
 		$stuid = $_GET['stuid'];
+		
 	}
 	else{
 		header('Location: index.php');
@@ -14,7 +15,7 @@
 	}
 	
 	require_once("conn/db.php");
-	require_once("function_lib.php");
+	require_once("ruleFunction.php");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -37,170 +38,65 @@
 			<? require_once("sidebar.php");?>
 			
 			<div id="main">
-				<div id="welcome" class="post">
-					<?php
-					// 取出個人資料
-					
+				<div id="welcome" class="post" style="font-size: 18px; color: #1F1F1F;">
+				<?php
+					// 取出個人資料					
 					$sql = "SELECT * FROM `all_user` WHERE user_student = '$stuid'";
 					$ret = mysql_query($sql, $db) or die(mysql_error());
 					$row = mysql_fetch_assoc($ret);
 					
-					$q1=50;
-					$q2=30;
-					$q3=20;
 					
-					if($row['user_student']>105000000 && $row['user_student'] <106000000)
-					{
-						$q1=40;
-						$q2=40;
-						$q3=20;
-					}
+					$no = $row['user_student'];
+					$name = $row['user_name'];
+					$dep = $row['user_dep'];
+					$ass_fre = $row['assembly_freshman'];
+					$ass_dep = $row['assembly_dep'];
+					$cpr = $row['cpr'];
+					$career = $row['career'];
+					$qualify = $row['qualified'];
 					
 					$totalHour=$row['user_totalHour'];
+								
+					$bsc_serv=$row['basic_service'];		$adv_serv=$row['advan_service'];
+					$bsc_life=$row['basic_life'];			$adv_life=$row['advan_life'];
+					$bsc_art=$row['basic_art'];				$adv_art=$row['advan_art'];
+					$bsc_inter=$row['basic_inter'];			$adv_inter=$row['advan_inter'];
 					
-					//轉時數
-					$b1=$row['basic_service'];			$a1=$row['advan_service'];
-					$b2=$row['basic_life'];				$a2=$row['advan_life'];
-					$b3=$row['basic_art'];				$a3=$row['advan_art'];
-					
-					if($b1 > $q1){
-						$a1 += $b1 - $q1;
-						$b1 = $q1;
-					}
-					if($b2 > $q2){
-						$a2 += $b2 - $q2;
-						$b2 = $q2;
-					}
-					if($b3 > $q3){
-						$a3 += $b3 - $q3;
-						$b3 = $q3;
-					}		
-				
-					$basicHour = $b1 + $b2 +$b3;
-					
-					$advanHour=$a1 + $a2 +$a3;
-					$serviceHour =array($b1,$a1,$b2,$a2,$b3,$a3);
-					// 判斷護照類別
-					$passportType = judgePassport($serviceHour);
-					$string = "";
-					switch($passportType) {
-						case 0:
-							$string = "尚未通過畢審門檻!";
-							break;
-						case 1:
-							$string = "<img src='images/basic.png' style='width: 150px; float: right;' />";
-							break;
-						case 2:
-							$string = "<img src='images/silver.png' style='width: 150px; float: right;' />";
-							break;
-						case 3:
-							$string = "<img src='images/gold.png' style='width: 150px; float: right;' />";
-							break;
-					}
-					?>
+				?>
 					<h3>時數查詢</h3>
-					<table width="700" border="0" >
-					<tr>
-					<td>
-						<div id="person" style="color: #3F3F3F; margin-top: 20px;">
-							<ul class="list" style="margin-left: 10px; list-style-type: none;">
-								<li>學號：<span style="color: #FF00B2;"><?=$row['user_student']?></span></li>
-								<li>姓名：<span style="color: #FF00B2;"><?=$row['user_name']?></span></li>
-								<li>系級：<span style="color: #FF00B2;"><?=$row['user_dep']?></span></li>
-							</ul>
-						</div>
-					</td>
-					<td>
-						<div align="right">
-							<?=$string?>
-						</div>
-					</td>
-					</tr>
-					</table>
-					<p>
-						<span style="color: #FF0022;">總時數: <?=$totalHour?></span>
-						<span style="color: #002DFF;">基本: <?=$basicHour?></span>
-						<span style="color: #FF7A0F;">高階: <?=$advanHour?></span>
-					</p>
+					<div id="person" style="color: #3F3F3F; margin-top: 20px;">
+						<ul class="list" style="margin-left: 10px; list-style-type: none;">
+							<li>學號：<span style="color: #FF00B2;"><?=$no?></span></li>
+							<li>姓名：<span style="color: #FF00B2;"><?=$name?></span></li>
+							<li>系級：<span style="color: #FF00B2;"><?=$dep?></span></li>
+						</ul>
+					</div>
+			
+				<?php 
 					
-					<table width="700" border="1" cellpadding="0" cellspacing="0">
-						<tr align="center">
-							<td width="175"><span style="color: #0F50FF; font-size: 18pt;">總時數</span></td>
-							<td width="175"><span style="color: #0F50FF; font-size: 18pt;">服務學習</span></td>
-							<td width="175"><span style="color: #0F50FF; font-size: 18pt;">生活知能</span></td>
-							<td width="175"><span style="color: #0F50FF; font-size: 18pt;">人文藝術</span></td>
-						</tr>
-						<tr>
-							<td align="center" style="color: #FF0022;">畢業門檻</td>
-							<td align="center" style="color: #FF0022;"><?=$q1?></td>
-							<td align="center" style="color: #FF0022;"><?=$q2?></td>
-							<td align="center" style="color: #FF0022;"><?=$q3?></td>
-						</tr>
-						<tr>
-							<td align="center">基本時數</td>
-							<td align="center"><?=$b1?></td>
-							<td align="center"><?=$b2?></td>
-							<td align="center"><?=$b3?></td>
-						</tr>
-						<tr>
-							<td align="center">高階時數</td>
-							<td align="center"><?=$a1?></td>
-							<td align="center"><?=$a2?></td>
-							<td align="center"><?=$a3?></td>
-						</tr>
-					</table>
-					<br /><br />
-					<?php /*大一週會次數&院週會次數table*/?>
-					<br />
-					<table width="700" border="1" cellpadding="0" cellspacing="0">
-						<tr>
-							<td><span style="color: #0F50FF; font-size: 18pt;">其他</span></td>
-							<td  aligh="center">已參加</td>
-							<? if($row['user_student']>104000000 && $row['user_student'] <900000000)
-							{?>
-								<td  aligh="center">門檻</td>
-							<?}?>
-						</tr>
-						<tr>
-							<td><span style="color: #0F50FF; font-size: 14pt;">大一週會(次數)</span></td>
-							<td aligh="center"><?=$row["assembly_freshman"]?></td>
-							<? if($row['user_student']>104000000 && $row['user_student'] <900000000)
-							{?>
-								<td  aligh="center">4</td>
-							<?}?>
-						</tr>
-						<tr>
-							<td><span style="color: #0F50FF; font-size: 14pt;">院週會(次數)</span></td>
-							<td aligh="center"><?=$row["assembly_dep"]?></td>
-							<? if($row['user_student']>104000000 && $row['user_student'] <900000000)
-							{?>
-								<td  aligh="center">2</td>
-							<?}?>
-						</tr>
-						<?
-						if($row['user_student']>105000000 && $row['user_student'] <900000000)
-							{?>
-								<tr>
-									<td><span style="color: #0F50FF; font-size: 14pt;">大一CPR(時數)</span></td>
-									<td aligh="center"><?=$row["cpr"]?></td>
-									<td  aligh="center">5</td>
-								</tr>
-								<tr>
-									<td><span style="color: #0F50FF; font-size: 14pt;">自我探索與生涯規劃(時數)</span></td>
-									<td aligh="center"><?=$row["career"]?></td>
-									<td  aligh="center">10</td>
-								</tr>
-							<?}?>
-							<? 
-							if($row['user_student']>105000000 && $row['user_student'] <106000000)
-							{?>								
-								<tr>
-									<td><span style="color: #0F50FF; font-size: 14pt;">國際視野(時數)</span></td>
-									<td aligh="center"><?=$row["basic_inter"]?></td>
-									<td  aligh="center">5</td>
-								</tr>
-							<?}?>
-					</table>
+					if($no<104000000 || $no>950000000){
+						rule103($bsc_serv, $bsc_life, $bsc_art,
+								$adv_serv, $adv_life, $adv_art, 
+								$totalHour, $qualify);
+					}
+					if($no>104000000 && $no<105000000){
+						rule104($bsc_serv, $bsc_life, $bsc_art,
+								$adv_serv, $adv_life, $adv_art,
+								$ass_fre, $ass_dep, $totalHour, $qualify);
+					}
+					if($no>105000000 && $no<106000000){
+						rule105($bsc_serv, $bsc_life, $bsc_art, $bsc_inter,
+								$adv_serv, $adv_life, $adv_art, $adv_inter,
+								$ass_fre, $ass_dep, $cpr, $career, $totalHour, $qualify);
+					}
+					if($no>106000000 && $no<107000000){
+						rule106($bsc_serv, $bsc_life, $bsc_art, $bsc_inter,
+								$adv_serv, $adv_life, $adv_art, $adv_inter, 
+								$ass_fre, $ass_dep, $cpr, $career, $totalHour, $qualify);
+					}
+					
+				?>
+
 					<br>
 					<span>此為每日更新乙次的資料庫資料，非即時資料</span>
 					<br>

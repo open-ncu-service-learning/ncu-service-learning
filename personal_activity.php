@@ -2,7 +2,7 @@
 	session_start();
 	
 	// 身分驗證
-	if($_SESSION['valid_token'] == "1"){
+/*	if($_SESSION['valid_token'] == "1"){
 		$stuid = $_SESSION['valid_student_id'];
 	}
 	elseif($_SESSION['valid_token'] == "3") {
@@ -12,7 +12,7 @@
 		header('Location: index.php');
 		exit;
 	}
-	
+*/	
 	require_once("conn/db.php");
 	require_once("function_lib.php");
 ?>
@@ -40,6 +40,7 @@
 				<div id="welcome" class="post">
 <?php
 		// 取出個人資料
+		$stuid = '104502537';
 		$sql = "SELECT * FROM `all_user` WHERE user_student = '$stuid'";
 		$ret = mysql_query($sql, $db) or die(mysql_error());
 		$row = mysql_fetch_assoc($ret);
@@ -48,12 +49,12 @@
 		$no = $row['user_student'];
 		$name = $row['user_name'];
 		$dep = $row['user_dep'];
-		$cpr=$row["cpr"];
+/*		$cpr=$row["cpr"];
 		$career=$row["career"];
 		$basic_inter=$row["basic_inter"];
 		$ass_fre = $row['assembly_freshman'];
 		$ass_dep = $row['assembly_dep'];
-		
+*/		
 		// 取出活動資料
 		$sql = "SELECT act_id, act_title, act_type, act_end_time, act_service_hour, act_pass_type FROM `activity` WHERE act_del = '0' AND act_admit_student LIKE '%$stuid%' UNION
 				SELECT act_id, act_title, act_type, act_end_time, act_service_hour, act_pass_type FROM `out_activity` WHERE act_del = '0' AND act_admit_student LIKE '%$stuid%'
@@ -71,16 +72,16 @@
 						</ul>
 					</div>
 <?php
-		$totalHour = 0;
+/*		$totalHour = 0;
 		$basicHour = 0;
 		$advanHour = 0;
 		
 		$serviceHour = array(0, 0, 0, 0, 0, 0);
-		/*變數count 大一週會次數*/
+		//變數count 大一週會次數
 		$i=0;
-		/*變數count 院週會次數*/
+		//變數count 院週會次數
 		$j=0;
-		
+*/		
 		if($actNumber > 0)
 		{
 ?>
@@ -158,16 +159,17 @@
 					default:
 						$hour = 0;
 				}
-				/*計算大一週會次數*/
+/*				//計算大一週會次數
 				$tt = explode("大一週會", $row['act_title']);
 				if (count($tt)>1) {
 					$i++;
 				}
-				/*計算院週會次數*/
+				//計算院週會次數
 				$ss = explode("院週會", $row['act_title']);
 				if (count($ss)>1) {
 					$j++;
 				}
+		*/
 ?>
 						<tr>
 							<td style="padding: 5px;"><?=$row['act_title']?></td>
@@ -178,7 +180,7 @@
 <?php
 			}
 			
-			//判斷基本時數:100 服務學習:50 生活知能:30 人文藝術:20 超過的計算到高階
+	/*		//判斷基本時數:100 服務學習:50 生活知能:30 人文藝術:20 超過的計算到高階
 			$q1=50;
 			$q2=30;
 			$q3=20;
@@ -204,8 +206,8 @@
 			$basicHour = $serviceHour[0] + $serviceHour[2] +$serviceHour[4];
 			$advanHour = $serviceHour[1] + $serviceHour[3] +$serviceHour[5];
 			$totalHour = $basicHour + $advanHour;
-?>
-			</table>
+?>*/?>
+			</table><?/*
 					<p>
 						<span style="color: #FF0022;">總時數: <?=$totalHour?></span>
 						<span style="color: #002DFF;">基本: <?=$basicHour?></span>
@@ -250,12 +252,12 @@
 				</tr>
 				</table>
 			<?}
-
+*/
 		}
 		else
 		{?>
 					<p style="color: #009AEF; font-size: 20pt;">您過去沒有任何活動記錄</p>
-		<?}
+		<?}/*
 ?>		
 		<table width="700" border="1" cellpadding="0" cellspacing="0">
 			<tr align="center">
@@ -283,7 +285,7 @@
 				<td align="center"><?=$serviceHour[5]?></td>
 			</tr>
 		</table>
-		<?php /*大一週會次數&院週會次數table*/?>
+		<?php //大一週會次數&院週會次數table?>
 		<br />
 		<table width="700" border="1" cellpadding="0" cellspacing="0">
 			<tr>
@@ -296,7 +298,7 @@
 			</tr>
 			<tr>
 				<td><span style="color: #0F50FF; font-size: 14pt;">大一週會(次數)</span></td>
-				<td aligh="center"><?=/*$i*/$ass_fre?></td>
+				<td aligh="center"><?=$ass_fre//$i?></td>
 				<? if($stuid>104000000 && $stuid <900000000)
 				{?>
 					<td  aligh="center">4</td>
@@ -304,7 +306,7 @@
 			</tr>
 			<tr>
 				<td><span style="color: #0F50FF; font-size: 14pt;">院週會(次數)</span></td>
-				<td aligh="center"><?=/*$j*/$ass_dep?></td>
+				<td aligh="center"><?=$ass_dep//$j?></td>
 				<? if($stuid>104000000 && $stuid <900000000)
 				{?>
 					<td  aligh="center">2</td>
@@ -336,7 +338,7 @@
 		</table>
 		
 <?php
- /*
+
 //大一週會次數&院週會次數table
 					<br />
 					<table width="700" border="1" cellpadding="0" cellspacing="0">
