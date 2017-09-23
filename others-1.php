@@ -45,30 +45,27 @@
 								<td align="left" width="120"><label for="name" style="color: #AF0000;"> 單位名稱：</label></td>
 								<td align="left"><span style="color: #210B61;"><?=$_SESSION['valid_office']?></span></td>
 							</tr>
-							<tr>
-								
+							
+							<tr>						
 								<td align="left" width="120"><label for="account" style="color: #AF0000;"> 單位帳號：</label></td>
 								<td align="left"><span style="color: #210B61;"><?=$_SESSION['valid_office_account']?></span></td>
 							</tr>	
-
+<!--
 							<tr>
 								<td align="left" width="120"><label for="pres" style="color: #AF0000;"> 社長名稱：</label></td>
-								<td><input id="pres" style="font-size: 14pt; height: 25px;" name="pres" type="text" value='<?=$row['user_pres']?>' /></td>
-								
-								
+								<td><input id="pres" style="font-size: 14pt; height: 25px;" name="pres" type="text" value='<?//=$row['user_pres']?>' /></td>							
 							</tr>
+							
 							<tr>
 								<td align="left" width="120"><label for="email" style="color: #AF0000;"> 電子郵件：</label></td>
-								<td><input id="email" style="font-size: 14pt; height: 25px;" name="email" type="text" value='<?=$row['user_email']?>'/></td>
-								
-								
+								<td><input id="email" style="font-size: 14pt; height: 25px;" name="email" type="text" value='<?//=$row['user_email']?>'/></td>							
 							</tr>
-							<tr>
-								
+							
+							<tr>						
 								<td align="left" width="120"><label for="phone" style="color: #AF0000;"> 連絡電話 :</label></td>
-								<td><input id="phone" style="font-size: 14pt; height: 25px;" name="phone" type="text" value='<?=$row['user_contact']?>'/></td>
+								<td><input id="phone" style="font-size: 14pt; height: 25px;" name="phone" type="text" value='<?//=$row['user_contact']?>'/></td>
 							</tr>
-						
+-->						
 						
 <!-- Submit -->					
 						

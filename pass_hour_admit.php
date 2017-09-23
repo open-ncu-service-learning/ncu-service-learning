@@ -60,15 +60,28 @@
 <?php
 	while($row = mysql_fetch_assoc($ret)) {
 		$type = "";
+		if ($row['act_pass_type']==1){
+			$typ = "-基本";
+		}
+		else if ($row['act_pass_type']==2){
+			$typ = "-高階";
+		}
+		else if ($row['act_pass_type']==3){
+			$typ = "-基本+高階";
+		}
+		else{
+			$typ = null;
+		}
+		
 		switch($row['act_type']) {
 			case 1:
-				$type = "服務學習";
+				$type = "服務學習".$typ;
 				break;
 			case 2:
-				$type = "生活知能";
+				$type = "生活知能".$typ;
 				break;
 			case 3:
-				$type = "人文藝術";
+				$type = "人文藝術".$typ;
 				break;
 			default:
 				$type = "無";

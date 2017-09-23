@@ -44,18 +44,18 @@
 						<ul class="list" style="margin-left: 10px; list-style-type: none;">
 							<li>單位名稱：<span style="color: #FF00B2;"><?=$row['user_office']?></span></li>
 							<li>單位帳號：<span style="color: #FF00B2;"><?=$row['user_account']?></span></li>
-							<li>社長名稱：<span style="color: #FF00B2;"><?=$row['user_pres']?></span></li>
-							<li>電子郵件：<span style="color: #FF00B2;"><?=$row['user_email']?></span></li>
-							<li>連絡電話：<span style="color: #FF00B2;"><?=$row['user_contact']?></span></li>
+							<!--<li>社長名稱：<span style="color: #FF00B2;"><?//=$row['user_pres']?></span></li>
+							<li>電子郵件：<span style="color: #FF00B2;"><?//=$row['user_email']?></span></li>
+							<li>連絡電話：<span style="color: #FF00B2;"><?//=$row['user_contact']?></span></li>-->
 						</ul>
 					</div>
-					<form id="form" action="others-1.php" method="post">
+<!--					<form id="form" action="others-1.php" method="post">
 						<div class="buttons">
 							<button type="submit">
 								<img src="images/tick.png" alt="" />修改資料
 							</button>
 						</div>
-					</form>
+					</form>-->
 					<form id="form" action="pass_apply_activities.php" method="post">
 						<div class="buttons">
 							<button type="submit">
