@@ -2,7 +2,7 @@
 	session_start();
 	
 	// 身分驗證
-/*	if($_SESSION['valid_token'] == "1"){
+	if($_SESSION['valid_token'] == "1"){
 		$stuid = $_SESSION['valid_student_id'];
 	}
 	elseif($_SESSION['valid_token'] == "3") {
@@ -12,7 +12,6 @@
 		header('Location: index.php');
 		exit;
 	}
-*/	
 	require_once("conn/db.php");
 	require_once("function_lib.php");
 ?>
@@ -40,7 +39,6 @@
 				<div id="welcome" class="post">
 <?php
 		// 取出個人資料
-		$stuid = '104502537';
 		$sql = "SELECT * FROM `all_user` WHERE user_student = '$stuid'";
 		$ret = mysql_query($sql, $db) or die(mysql_error());
 		$row = mysql_fetch_assoc($ret);
