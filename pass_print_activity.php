@@ -61,7 +61,7 @@
 			</tr>
 <?	
 	//活動
-	$sql = "SELECT act_id,act_title,act_begin_time,act_end_time,act_type,act_service_hour,act_pass_type,act_admit_student,act_req_office FROM `activity` WHERE `act_begin_time` between '$ADsemester-08-01 00:00:00' and '$ADsemester_1-07-31 00:00:00' AND `act_admit` = 1 ORDER BY act_req_office,act_type,act_begin_time DESC";
+	$sql = "SELECT act_id,act_title,act_begin_time,act_end_time,act_type,act_service_hour,act_pass_type,act_admit_student,act_req_office FROM `activity` WHERE `act_begin_time` between '$ADsemester-08-01 00:00:00' and '$ADsemester_1-07-31 00:00:00' AND `act_admit` = 1 AND `act_del` = 0 ORDER BY act_req_office,act_type,act_begin_time DESC";
 	$ret = mysql_query($sql) or die(mysql_error());
 	$actNumber = mysql_num_rows($ret);
 	$l_s =0;
@@ -195,24 +195,33 @@
 				{
 					case 1:
 						$l_s += $length;
-						if($row['act_service_hour']!= "-1")
-						{
-							$hour_s += $basic+$high; 
-						}
+						//if($row['act_service_hour']!= "-1")
+						//{
+						//	$hour_s += $basic+$high; 
+						//}
+						//else{
+							$hour_s += round($basic)+round($high);
+						//}
 						break;
 					case 2:
 						$l_l += $length;
-						if($row['act_service_hour']!= "-1")
-						{
-							$hour_l += $basic+$high; 
-						}
+						//if($row['act_service_hour']!= "-1")
+						//{
+						//	$hour_l += $basic+$high; 
+						//}
+						//else{
+							$hour_l += round($basic)+round($high);
+						//}
 						break;
 					case 3:
 						$l_h += $length;
-						if($row['act_service_hour']!= "-1")
-						{
-							$hour_h += $basic+$high; 
-						}
+						//if($row['act_service_hour']!= "-1")
+						//{
+						//	$hour_h += $basic+$high; 
+						//}
+						//else{
+							$hour_h += round($basic)+round($high);
+						//}
 						break;
 					default:
 						$type = "";
@@ -222,7 +231,7 @@
 		$sqlh = "SELECT COUNT( act_id ) AS num
 				FROM activity
 				WHERE  `act_type` = 3
-				AND  `act_begin_time` between '$ADsemester-08-01 00:00:00' and '$ADsemester_1-07-31 00:00:00' AND `act_admit` = 1";
+				AND  `act_begin_time` between '$ADsemester-08-01 00:00:00' and '$ADsemester_1-07-31 00:00:00' AND `act_admit` = 1 AND `act_del` = 0";
 		$reth = mysql_query($sqlh) or die(mysql_error());
 		$rowh = mysql_fetch_assoc($reth);
 		$num_h= $rowh['num'];
@@ -230,7 +239,7 @@
 		$sqll = "SELECT COUNT( act_id ) AS num
 				FROM activity
 				WHERE  `act_type` = 2
-				AND  `act_begin_time` between '$ADsemester-08-01 00:00:00' and '$ADsemester_1-07-31 00:00:00' AND `act_admit` = 1";
+				AND  `act_begin_time` between '$ADsemester-08-01 00:00:00' and '$ADsemester_1-07-31 00:00:00' AND `act_admit` = 1 AND `act_del` = 0";
 		$retl = mysql_query($sqll) or die(mysql_error());
 		$rowl = mysql_fetch_assoc($retl);
 		$num_l= $rowl['num'];
@@ -238,7 +247,7 @@
 		$sqls = "SELECT COUNT( act_id ) AS num
 				FROM activity
 				WHERE  `act_type` = 1
-				AND  `act_begin_time` between '$ADsemester-08-01 00:00:00' and '$ADsemester_1-07-31 00:00:00' AND `act_admit` = 1";
+				AND  `act_begin_time` between '$ADsemester-08-01 00:00:00' and '$ADsemester_1-07-31 00:00:00' AND `act_admit` = 1 AND `act_del` = 0";
 		$rets = mysql_query($sqls) or die(mysql_error());
 		$rows = mysql_fetch_assoc($rets);
 		$num_s= $rows['num'];
