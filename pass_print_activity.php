@@ -64,12 +64,15 @@
 	$sql = "SELECT act_id,act_title,act_begin_time,act_end_time,act_type,act_service_hour,act_pass_type,act_admit_student,act_req_office FROM `activity` WHERE `act_begin_time` between '$ADsemester-08-01 00:00:00' and '$ADsemester_1-07-31 00:00:00' AND `act_admit` = 1 AND `act_del` = 0 ORDER BY act_req_office,act_type,act_begin_time DESC";
 	$ret = mysql_query($sql) or die(mysql_error());
 	$actNumber = mysql_num_rows($ret);
-	$l_s =0;
-	$l_l =0;
-	$l_h =0;
+	$l_s=0;
+	$l_l=0;
+	$l_h=0;
 	$hour_s=0;
 	$hour_l=0;
 	$hour_h=0;
+	$lh_s=0;
+	$lh_l=0;
+	$lh_h=0;
 	
 	if($actNumber > 0)
 	{
@@ -190,38 +193,23 @@
 				<td><?=$length?></td>
 			</tr>
 <?		
-		//計算認證人數與時數
+		//計算認證人數l與時數hour與人時數lh
 		switch($row['act_type'])
 				{
 					case 1:
 						$l_s += $length;
-						//if($row['act_service_hour']!= "-1")
-						//{
-						//	$hour_s += $basic+$high; 
-						//}
-						//else{
-							$hour_s += round($basic)+round($high);
-						//}
+						$hour_s += round($basic)+round($high);
+						$lh_s += $length*(round($basic)+round($high));
 						break;
 					case 2:
 						$l_l += $length;
-						//if($row['act_service_hour']!= "-1")
-						//{
-						//	$hour_l += $basic+$high; 
-						//}
-						//else{
-							$hour_l += round($basic)+round($high);
-						//}
+						$hour_l += round($basic)+round($high);
+						$lh_l += $length*(round($basic)+round($high));
 						break;
 					case 3:
 						$l_h += $length;
-						//if($row['act_service_hour']!= "-1")
-						//{
-						//	$hour_h += $basic+$high; 
-						//}
-						//else{
-							$hour_h += round($basic)+round($high);
-						//}
+						$hour_h += round($basic)+round($high);
+						$lh_h += $length*(round($basic)+round($high));
 						break;
 					default:
 						$type = "";
@@ -268,26 +256,30 @@
 			<tr align="center">
 				<td width="100" ></td>
 				<td width="200" >活動場次</td>
-				<td width="150" >認證人數</td>
+				<td width="150" >認證人次</td>
 				<td width="150" >認證時數</td>
+				<td width="150" >人時數</td>
 			</tr>
 			<tr align="center">
 				<td width="100" >人文藝術</td>
 				<td width="200" ><?=$num_h?></td>
 				<td width="150" ><?=$l_h?></td>
 				<td width="150" ><?=$hour_h?></td>
+				<td width="150" ><?=$lh_h?></td>
 			</tr>
 			<tr align="center">
 				<td width="100" >生活知能</td>
 				<td width="200" ><?=$num_l?></td>
 				<td width="150" ><?=$l_l?></td>
 				<td width="150" ><?=$hour_l?></td>
+				<td width="150" ><?=$lh_l?></td>
 			</tr>
 			<tr align="center">
 				<td width="100" >服務學習</td>
 				<td width="200" ><?=$num_s?></td>
 				<td width="150" ><?=$l_s?></td>
 				<td width="150" ><?=$hour_s?></td>
+				<td width="150" ><?=$lh_s?></td>
 			</tr>
 		</table>
 	</body>

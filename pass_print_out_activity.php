@@ -61,7 +61,7 @@
 			</tr>
 <?	
 	//活動
-	$sql = "SELECT act_id,act_title,act_begin_time,act_end_time,act_type,act_service_hour,act_pass_type,act_req_office FROM `out_activity` WHERE `act_begin_time` between '$ADsemester-08-01 00:00:00' and '$ADsemester_1-07-31 00:00:00' ORDER BY act_req_office,act_type,act_begin_time DESC";
+	$sql = "SELECT act_id,act_title,act_begin_time,act_end_time,act_type,act_service_hour,act_pass_type,act_req_office FROM `out_activity` WHERE `act_begin_time` between '$ADsemester-08-01 00:00:00' and '$ADsemester_1-07-31 00:00:00' AND `act_del` = 0 ORDER BY act_req_office,act_type,act_begin_time DESC";
 	$ret = mysql_query($sql) or die(mysql_error());
 	$actNumber = mysql_num_rows($ret);
 	
@@ -187,21 +187,21 @@
 						
 						if($row['act_service_hour']!= "-1")
 						{
-							$hour_s += $basic+$high; 
+							$hour_s += round($basic)+round($high); 
 						}
 						break;
 					case 2:
 						
 						if($row['act_service_hour']!= "-1")
 						{
-							$hour_l += $basic+$high; 
+							$hour_l += round($basic)+round($high); 
 						}
 						break;
 					case 3:
 						
 						if($row['act_service_hour']!= "-1")
 						{
-							$hour_h += $basic+$high; 
+							$hour_h += round($basic)+round($high); 
 						}
 						break;
 					default:
@@ -210,17 +210,17 @@
 		
 		//計算活動場次
 		/*人文*/
-		$sqlh = "SELECT count(act_id) AS num FROM out_activity WHERE `act_type` = 3 AND `act_begin_time` between '$ADsemester-08-01 00:00:00' and '$ADsemester_1-07-31 00:00:00' ";
+		$sqlh = "SELECT count(act_id) AS num FROM out_activity WHERE `act_type` = 3 AND `act_begin_time` between '$ADsemester-08-01 00:00:00' and '$ADsemester_1-07-31 00:00:00' AND `act_del` = 0 ";
 		$reth = mysql_query($sqlh) or die(mysql_error());
 		$rowh = mysql_fetch_assoc($reth);
 		$num_h= $rowh['num'];
 		/*生活*/
-		$sqll = "SELECT count(act_id) AS num FROM out_activity WHERE `act_type` = 2 AND `act_begin_time` between '$ADsemester-08-01 00:00:00' and '$ADsemester_1-07-31 00:00:00' ";
+		$sqll = "SELECT count(act_id) AS num FROM out_activity WHERE `act_type` = 2 AND `act_begin_time` between '$ADsemester-08-01 00:00:00' and '$ADsemester_1-07-31 00:00:00' AND `act_del` = 0 ";
 		$retl = mysql_query($sqll) or die(mysql_error());
 		$rowl = mysql_fetch_assoc($retl);
 		$num_l= $rowl['num'];
 		/*服務*/
-		$sqls = "SELECT count(act_id) AS num FROM out_activity WHERE `act_type` = 1 AND `act_begin_time` between '$ADsemester-08-01 00:00:00' and '$ADsemester_1-07-31 00:00:00' ";
+		$sqls = "SELECT count(act_id) AS num FROM out_activity WHERE `act_type` = 1 AND `act_begin_time` between '$ADsemester-08-01 00:00:00' and '$ADsemester_1-07-31 00:00:00' AND `act_del` = 0 ";
 		$rets = mysql_query($sqls) or die(mysql_error());
 		$rows = mysql_fetch_assoc($rets);
 		$num_s= $rows['num'];//var_dump($num_s->act_title);
@@ -241,25 +241,25 @@
 			<tr align="center">
 				<td width="100" ></td>
 				<td width="200" >活動場次</td>
-				
 				<td width="150" >認證時數</td>
+				<td width="150" >人時數</td>
 			</tr>
 			<tr align="center">
 				<td width="100" >人文藝術</td>
 				<td width="200" ><?=$num_h?></td>
-				
+				<td width="150" ><?=$hour_h?></td>
 				<td width="150" ><?=$hour_h?></td>
 			</tr>
 			<tr align="center">
 				<td width="100" >生活知能</td>
 				<td width="200" ><?=$num_l?></td>
-				
+				<td width="150" ><?=$hour_l?></td>
 				<td width="150" ><?=$hour_l?></td>
 			</tr>
 			<tr align="center">
 				<td width="100" >服務學習</td>
 				<td width="200" ><?=$num_s?></td>
-				
+				<td width="150" ><?=$hour_s?></td>
 				<td width="150" ><?=$hour_s?></td>
 			</tr>
 		</table>
