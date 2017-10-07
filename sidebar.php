@@ -3,6 +3,15 @@ div {
 	font-family:Microsoft JhengHei;
 }
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+	$("#form").hide();
+    $("#login").click(function(){
+        $("#form").show();
+    });
+});
+</script>
 <!-- Sidebar -->
 			<div id="sidebar" style="width:24%; margin-left:-3%;">
 				<div id="banner" style="margin-top: 15px;">
