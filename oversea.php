@@ -214,7 +214,8 @@
 									<a href="https://youtu.be/W1mpfxYxWDg"><i class="fa fa-play-circle" style="font-size:24px"></i>2010柬埔寨暑期服務學習成果影片</a><br>
 									<a href="https://youtu.be/mHovHic5DxI"><i class="fa fa-play-circle" style="font-size:24px"></i>2013蒙古暑期服務學習成果影片</a><br>
 									<a href="https://youtu.be/EuTy0roucqg"><i class="fa fa-play-circle" style="font-size:24px"></i>2015日本暑期服務學習成果影片</a><br>
-									<a href="https://youtu.be/gHG68hJhVvA"><i class="fa fa-play-circle" style="font-size:24px"></i>2016日本暑期服務學習成果影片</a><br><br>
+									<a href="https://youtu.be/gHG68hJhVvA"><i class="fa fa-play-circle" style="font-size:24px"></i>2016日本暑期服務學習成果影片</a><br>
+									<a href="https://www.youtube.com/watch?v=2trnjcN1cvA&feature=youtu.be"><i class="fa fa-play-circle" style="font-size:24px"></i>2017斯里蘭卡國際志工成果影片</a><br><br>
 									<a href="/download/servLearn_files/achievement.pdf"><i class="fa fa-file-o" style="font-size:24px"></i>歷年服務成果</a>
 								</p>
 							</div>
@@ -224,7 +225,12 @@
 							<button style="margin: 10px; margin-left:3%;" type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo4"><h3 style="font-family: 微軟正黑體;" >新聞報導</h3></button>
 							<div id="demo4" class="collapse">
 								<p style="margin: 10px; margin-left:6%;">
-										<a href="http://www.ncu.edu.tw/campus/article/2007"><i class="fa fa-play-circle" style="font-size:24px"></i>夢想「蘭」圖　國際志工前進斯里蘭卡 --桃園市政府青年事務局指導</a><br>
+										<a href="http://www.ncu.edu.tw/campus/article/2007"><i class="fa fa-play-circle" style="font-size:24px"></i>夢想「蘭」圖　國際志工前進斯里蘭卡</a><br>
+										<a href="http://ncusec.ncu.edu.tw/news/headlines_content.php?H_ID=518"><i class="fa fa-play-circle" style="font-size:24px"></i>泰緬邊境海外服務　學子「五人行」整裝待發</a><br>
+										<a href="http://ncusec.ncu.edu.tw/news/press_content.php?P_ID=7090"><i class="fa fa-play-circle" style="font-size:24px"></i>中大志工隊　送愛到中印</a><br>
+										<a href="http://ncusec.ncu.edu.tw/news/headlines_content.php?H_ID=1213"><i class="fa fa-play-circle" style="font-size:24px"></i>返鄉、饋鄉－僑生返鄉服務計畫</a><br>
+										<a href="http://ncusec.ncu.edu.tw/news/headlines_content.php?H_ID=1400"><i class="fa fa-play-circle" style="font-size:24px"></i>中央聯蒙、古動你心－國際志工前進蒙古育幼院</a><br>
+										<a href="http://ncusec.ncu.edu.tw/news/headlines_content.php?H_ID=1719"><i class="fa fa-play-circle" style="font-size:24px"></i>日本「里山文化」服務學習　找回人與自然的和諧關係</a><br>
 									</p>
 							</div>
 						</tr>
