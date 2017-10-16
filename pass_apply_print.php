@@ -170,6 +170,9 @@ echo <<<EOD
   <tr>
     <td valign="top">8.<strong>活動認證編號:_________號</strong></td>
   </tr>
+  <tr>
+    <td valign="top">9.<strong>單位承辦申請人:<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;       </u>&nbsp;&nbsp;聯絡電話:  <u>  $row[act_req_phone]          </u></strong></td>
+  </tr>
     <td valign="top"><p><font class=ps2 size=2>註:&nbsp;&nbsp;<br>1.請於活動至少五個工作天前申請。<br>
 2.活動結束五個工作天內，請將簽到單（於服務學習網下載表格）正本擲回服務學習辦公室，以登錄時數。<br>
 3.本表單蒐集之個人資料，僅限於個人資料申請認證時數使用，保存期限五年。非經當事人同意，絕不轉做其他用途，僅限活動聯繫使用，並遵循本校個人資料保護管理制度資料保存與安全控管辦理。 <br /></font></p>
