@@ -23,7 +23,16 @@
 <?php
 	require_once("conn/db.php");
 	
-	$fileDir="download/pass_files_test/";
+	if ($_POST['key'] == "meeting1"){
+		$fileDir="download/meeting_first/";
+	}
+	else if ($_POST['key'] == "meeting2"){
+		$fileDir="download/meeting_second/";
+	}
+	else{
+		$fileDir="download/pass_files_test/";
+	}
+	
 
 	$postby = $_SESSION['valid_admin_account'];
 	$sql="DELETE FROM `pass`.`attach` WHERE `attach_id`=".$_POST['id'];
@@ -34,13 +43,25 @@
 	{
 		$filename=mb_convert_encoding($_POST['filename'],"big5","utf8");
 		if(!unlink($fileDir.$filename)){
-			header('Location:pass_attach.php');
+			if ($_POST['key'] == "meeting1" || $_POST['key'] == "meeting2"){
+				header('Location:meeting.php');
+			}else{
+				header('Location:pass_attach.php');
+			}
+			
 			exit;
 		}
 	}
 		
-
-	header('Location:post_attach.php');
+	if ($_POST['key'] == "meeting1"){
+		header('Location:meeting_sub.php?name=first');
+	}
+	else if ($_POST['key'] == "meeting2"){
+		header('meeting_sub.php?name=second');
+	}
+	else{
+		header('Location:post_attach.php');
+	}
 	exit;
 	
 

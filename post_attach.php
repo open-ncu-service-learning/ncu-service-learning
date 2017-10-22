@@ -63,7 +63,9 @@
 								<input type="radio" name="type" value=1 checked>學生學習護照</input>
 								<input type="radio" name="type" value=2>服務學習課程</input>
 								<input type="radio" name="type" value=3>學生自主團隊</input>
-								<input type="radio" name="type" value=4>獎學金</input>
+								<input type="radio" name="type" value=4>獎學金</input><br>
+								<input type="radio" name="type" value=5>服務學習執行小組會議</input>
+								<input type="radio" name="type" value=6>服務學習指導委員會</input>
 								</td>
 							</tr>
 							<tr>

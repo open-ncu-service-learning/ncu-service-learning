@@ -29,27 +29,17 @@
 
 <!-- Publish -->
 			<div id="main">
-				
 
-
-<h3>服務學習會議紀錄</h3>
-
-<ol>
-	
-  <li><a href="" >106學年度</a></li>
-  
-</ol>
-
-
-
-
-
+				<h3>服務學習會議紀錄</h3>					
+				  <li><a href="meeting_sub.php?name=first">服務學習執行小組會議</a></li>
+				  <li><a href="meeting_sub.php?name=second">服務學習指導委員會</a></li>
 			</div>
 		</div>
 		
 		<? require_once("footer.php");?>
 
 	</body>
+
 </html>
 
 

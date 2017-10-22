@@ -52,6 +52,8 @@
 					[null,	'第六刊',		'./periodical/第六刊.pdf',				'_new',		'第六刊'],
 					[null,	'第七刊',		'./periodical/第七刊.pdf',				'_new',		'第七刊'],*/
 				],
+				[null,	' | 服務學習會議',	'meeting.php',		'_self',		'服務學習會議'
+				],
 				[null,	' | Q&A',		'index.php',		'_self',		'Q&A',
 					[null,	'Q&A',		'download/pass_files/Q&A.pdf',	'_self',	'Q&A'],
 					[null,	'服務學習課程選課說明',		'download/pass_files/選課說明_for教務處選課系統_服務學習改.rtf',	'_self',	'服務學習課程選課說明'],

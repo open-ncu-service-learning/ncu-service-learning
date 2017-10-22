@@ -34,7 +34,17 @@
 
 
 	if(is_uploaded_file($_FILES['myfile']['tmp_name'])){
-		$DestDIR = "download/pass_files_test/";
+		
+		if ($_POST['type'] == 5){
+			$DestDIR = "download/meeting_first/";
+		}
+		else if ($_POST['type'] == 6){
+			$DestDIR = "download/meeting_second/";
+		}
+		else{
+			$DestDIR = "download/pass_files_test/";
+		}
+		
 
 		if(!is_dir($DestDIR) || !is_writeable($DestDIR)){
 			echo "
