@@ -59,7 +59,7 @@ $(document).ready(function(){
 					<li><a href="pass_hour_query.php" title="時數查詢">時數查詢</a></li>
 					<!--<li><a href="pass_hour_query_dep.php" title="科系時數查詢">科系時數查詢</a></li>-->
 					<li><a href="pass_main_print.php" title="列印報表">列印報表</a></li>
-					<li><a href="pass_files.php" title="上傳檔案">上傳檔案</a></li>
+					<li><a href="post_attach.php" title="上傳檔案">上傳檔案</a></li>
 					<!--<li><a href="pass_import.php" title="匯入畢審系統">匯入畢審系統</a></li>-->
 					<li><a href="https://docs.google.com/forms/d/e/1FAIpQLScgsTss_qiCtV4pfKKwdIu983imi7zc-yxk12iSRtBv564qhQ/viewform?c=0&w=1" target='_blank' title="系統bug回報">系統bug回報</a></li>
 
