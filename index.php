@@ -165,12 +165,28 @@ $(document).ready(function() {
 				<option value="pass_new_activity.php?type=1" <?php if (!(strcmp(1, $_GET['type']))) {echo "selected";} ?>>服務學習</option>
 				<option value="pass_new_activity.php?type=2" <?php if (!(strcmp(2, $_GET['type']))) {echo "selected";} ?>>生活知能</option>
 				<option value="pass_new_activity.php?type=3" <?php if (!(strcmp(3, $_GET['type']))) {echo "selected";} ?>>人文藝術</option>
+				<option value="pass_new_activity.php?type=4" <?php if (!(strcmp(4, $_GET['type']))) {echo "selected";} ?>>大一週會</option>
+				<option value="pass_new_activity.php?type=5" <?php if (!(strcmp(5, $_GET['type']))) {echo "selected";} ?>>大一CPR</option>
+				<option value="pass_new_activity.php?type=6" <?php if (!(strcmp(6, $_GET['type']))) {echo "selected";} ?>>自我探索與生涯規劃</option>
+				<option value="pass_new_activity.php?type=7" <?php if (!(strcmp(7, $_GET['type']))) {echo "selected";} ?>>國際視野</option>
+				<option value="pass_new_activity.php?type=8" <?php if (!(strcmp(8, $_GET['type']))) {echo "selected";} ?>>院週會</option>
 			</select>
 
 <?php
 	$condition = "";
 	if($_GET['type'] != NULL)
-		$condition = " news_act_type ='".$_GET['type']."' AND ";
+		if($_GET['type'] >= 1 && $_GET['type'] <= 3){
+			$condition = " news_act_type ='".$_GET['type']."' AND ";
+		}
+		else if($_GET['type'] >= 4 && $_GET['type'] <= 8){
+			if ($_GET['type'] == 8){				
+				$condition = " news_act_type = '2' AND news_life_sub = '6' AND ";
+			}
+			else{
+				$typ = $_GET['type'] - 3;
+				$condition = " news_act_type = '2' AND news_life_sub ='".$typ."' AND ";				
+			}
+		}
 	
 	//管理者:全部的活動 一般使用者:只能看到近期舉辦活動(有效筆數)
 	if($_SESSION['valid_token'] == "3")
