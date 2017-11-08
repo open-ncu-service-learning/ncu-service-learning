@@ -21,15 +21,40 @@
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<title>學生護照時數統計表</title>
-		<script LANGUAGE='JavaScript'>
+		<!--<script LANGUAGE='JavaScript'>
 			function printPage() {
 			   window.print();
 			}
+		</script> onLoad='printPage()'-->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="./FileSaver.js-master/FileSaver.min.js"></script>
+		<script>
+			$(document).ready(function(){
+				$('button').removeAttr('disabled');
+				$('#load').html('finish');
+				$('#print').click(function printPage(){
+					window.print();
+				})
+				$('#xsl').click(function () {
+					var title = "各系時數統計表";
+					var year = "<?=$_GET['semester']?>";
+					var blob = new Blob([document.getElementById('outputData').innerHTML], {
+						type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+					});
+					var strFile = year+title+".xls";
+					saveAs(blob, strFile);
+					return false;
+				});
+			})
 		</script>
 	</head>
-	<body onLoad='printPage()'>
-	
-			
+	<body>
+	<div>
+		<td><button id="print" disabled>pdf / printer</button></td>
+		<td><button id="xsl" disabled>excel</button></td>
+		<td><a id="load">loading...</a></td>
+	</div>
+	<div id="outputData">			
 <?php
 	require_once("conn/db.php");
 	
@@ -166,7 +191,7 @@
 			$totalHour[$i] = $serviceHour[$i][0]+$serviceHour[$i][1]+$serviceHour[$i][2]+$serviceHour[$i][3];
 		}
 ?>
-	<table width="1000" align="center" border="0">
+		<table width="1000" align="center" border="0">
 			<tr align="center">
 				<td><strong style="font-size: 14pt;">國立中央大學學生學習護照<span style="color: red;"><?=$dep?></span>時數統計表</strong></td>
 			</tr>
@@ -253,12 +278,12 @@
 			</tr>
 		</table>
 		<P style='page-break-after:always'></P>
-<?php
-}
-?>
+	<?php
+	}
+	?>
 		<table width="1000" align="center" border="0">
 			<tr align="center">
-				<td><strong style="font-size: 14pt;">國立中央大學<?echo $semester;?>級各院系 學生學習護照平均認證基本時數統計表</strong></td>
+				<td><strong style="font-size: 14pt;">國立中央大學<span style="color: red;" id="b"><?echo $semester;?></span>級各院系 學生學習護照平均認證基本時數統計表</strong></td>
 			</tr>
 			<tr align="right">
 				<td>統計日期: <?=$today ?></td>
@@ -532,5 +557,6 @@
 				<td><?=round($e/$len, 1)?></td>
 			</tr>
 		</table>
+	</div>
 	</body>
 </html>

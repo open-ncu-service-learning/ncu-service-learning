@@ -16,13 +16,34 @@
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<title>活動報表</title>
-		<script LANGUAGE='JavaScript'>
+		<!--<script LANGUAGE='JavaScript'>
 			function printPage() {
 			   window.print();
 			}
+		</script>-->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="./FileSaver.js-master/FileSaver.min.js"></script>
+		<script>
+			$(document).ready(function(){
+				$('button').removeAttr('disabled');
+				$('#load').html('finish');
+				$('#print').click(function printPage(){
+					window.print();
+				})
+				$('#xsl').click(function () {
+					var title = document.getElementById('a').innerHTML.split(" ");
+					var year = document.getElementById('b').innerHTML;
+					var blob = new Blob([document.getElementById('outputData').innerHTML], {
+						type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+					});
+					var strFile = year+title[4]+".xls";
+					saveAs(blob, strFile);
+					return false;
+				});
+			})
 		</script>
 	</head>
-	<body onLoad='printPage()'>
+	<body>
 	
 <?php
 	require_once("conn/db.php");
@@ -40,9 +61,15 @@
 	else
 		$index = 2;
 ?>
-<table width="1000" align="center" border="0">
+	<div>
+		<td><button id="print" disabled>pdf / printer</button></td>
+		<td><button id="xsl" disabled>excel</button></td>
+		<td><a id="load">loading...</a></td>
+	</div>
+	<div id="outputData">
+		<table width="1000" align="center" border="0">
 			<tr align="center">
-				<td><strong style="font-size: 14pt;">國立中央大學學生學習護照<span style="color: red;"><?=$semester?></span>年度 個人申請活動時數統計表</strong></td>
+				<td><strong style="font-size: 14pt;" id="a">國立中央大學學生學習護照<span style="color: red;" id="b"><?=$semester?></span>年度 個人申請活動時數統計表</strong></td>
 			</tr>
 			<tr align="right">
 				<td>統計日期: <?=$today ?></td>
@@ -228,8 +255,8 @@
 		//it seems that這裡開始有問題
 	}
 ?>
-	</table>
-	<table width="1000" align="center" border="0">
+		</table>
+		<table width="1000" align="center" border="0">
 			<tr align="center">
 				<td><strong style="font-size: 14pt;">國立中央大學學生學習護照<span style="color: red;"><?=$semester?></span>年度 依類別統計表</strong></td>
 			</tr>
@@ -263,5 +290,6 @@
 				<td width="150" ><?=$hour_s?></td>
 			</tr>
 		</table>
-	</body>
+	</div>
+</body>
 </html>

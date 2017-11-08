@@ -21,15 +21,41 @@
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<title>學生護照預警系統統計表</title>
-		<script LANGUAGE='JavaScript'>
+		<!--<script LANGUAGE='JavaScript'>
 			function printPage() {
 			   window.print();
 			}
+		</script> onLoad='printPage()'-->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="./FileSaver.js-master/FileSaver.min.js"></script>
+		<script>
+			$(document).ready(function(){
+				$('button').removeAttr('disabled');
+				$('#load').html('finish');
+				$('#print').click(function printPage(){
+					window.print();
+				})
+				$('#xsl').click(function () {
+					var title = "預警系統時數統計表";
+					var year = "<?=$_GET['semester']?>";
+					var blob = new Blob([document.getElementById('outputData').innerHTML], {
+						type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+					});
+					var strFile = year+title+".xls";
+					saveAs(blob, strFile);
+					return false;
+				});
+			})
 		</script>
 	</head>
-	<body onLoad='printPage()'>
+	<body>
 	
-			
+	<div>
+		<td><button id="print" disabled>pdf / printer</button></td>
+		<td><button id="xsl" disabled>excel</button></td>
+		<td><a id="load">loading...</a></td>
+	</div>
+	<div id="outputData">			
 <?php
 	require_once("conn/db.php");
 	
@@ -232,5 +258,6 @@
 	
 }
 ?>
+	</div>
 	</body>
 </html>
