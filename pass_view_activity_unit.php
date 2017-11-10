@@ -15,7 +15,7 @@
 	$id = (int)$_GET['id'];
 	
 	require_once("conn/db.php");
-	$sql = "SELECT * FROM `activity` WHERE `act_del` = '0' AND `act_id` = '$id'";
+	$sql = "SELECT * FROM `activity` LEFT JOIN `news_activity` ON activity.act_title=news_activity.news_title WHERE `act_del` = '0' AND `act_id` = '$id'";
 	$ret = mysql_query($sql) or die(mysql_error());
 	$row = mysql_fetch_assoc($ret);
 ?>
@@ -111,8 +111,12 @@
 					<div class="story">
 						<table style="table-layout:fixed" width="600" style="margin-top: 20px;" border="1" cellspacing="0" cellpadding="1">
 							<tr>
-								<td width="120"><span class="highlight">活動名稱</span></td>
-								<td width="480"><?=$row['act_title']?></td>
+								<td width="120"><span class="highlight">活動編號</span></td>
+								<td width="480"><?=$row['news_no']?></td>
+							</tr>
+							<tr>
+								<td><span class="highlight">活動名稱</span></td>
+								<td><?=$row['act_title']?></td>
 							</tr>
 							<tr>
 								<td><span class="highlight">活動地點</span></td>
@@ -142,10 +146,10 @@
 								<td><span class="highlight">核定認證時數</span></td>
 								<td><?=$hour?></td>
 							</tr>
-							<tr>
+							<!--<tr>
 								<td><span class="highlight">認證貼紙張數</span></td>
-								<td><?=$row['act_sticker_number']?></td>
-							</tr>	
+								<td><?//=$row['act_sticker_number']?></td>
+							</tr>-->	
 							<tr>
 								<td><span class="highlight">認證要求</span></td>
 								<td><?=$req?></td>

@@ -97,7 +97,7 @@
 		}
 
 		// 取出學生
-		$sql = "SELECT user_student,user_name FROM all_user WHERE user_dep_id = $ncu[$k] AND SUBSTR(user_student,1,$str) =$semester  AND user_status = 0 ORDER BY user_student ASC";
+		$sql = "SELECT user_student,user_name FROM all_user WHERE user_dep_id = $ncu[$k] AND SUBSTR(user_student,1,$str) =$semester AND user_del=0 ORDER BY user_student ASC";
 		
 		if($ret = mysql_query($sql))
 		{
@@ -112,7 +112,6 @@
 		}
 		$i = 0;
 		$length = count($stuid);
-		
 		//$length = 1;
 		for($i; $i < $length; $i++)
 		{
