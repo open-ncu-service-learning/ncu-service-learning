@@ -17,6 +17,7 @@ $(document).ready(function(){
 				<div id="banner" style="margin-top: 15px;">
 
 					<!--<a href="http://140.115.185.138/weeklylearning/Learning/Learning_index.php" title="大一週會報名區"><img src="images/banner/ncu_banner3.png" alt="大一週會報名區" width="160" height="50px" /></a><!--大一週會報名區<br> <font color="#ff0000" size="2">請於101年9月21日前完成報名</font></a>-->
+					<a href="https://goo.gl/forms/RzpC5Q3tIaWfUnC52" title="東南亞國際志工團隊報名">東南亞國際志工團隊報名</a>
 					<a href="https://www.facebook.com/NCU.servicelearing/" title="NCU 學務處服務學習辦公室"><img src="images/banner/fb_ser.jpg" alt="NCU 學務處服務學習辦公室" width="160" /></a>
 				</div>
 <?php
