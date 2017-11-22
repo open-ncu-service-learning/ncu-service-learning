@@ -406,7 +406,7 @@ $(document).ready(function() {
 <!-- 20150326 更換成影片清單 -->
 		<div class="video_class"><!--類別分層-->   
 					<div class="item-wrap">
-					<iframe title="YouTube video player" width="700" height="400" style="padding:20px 0px;" src="//www.youtube.com/embed/tk17cXrnJQ0" frameborder="0" allowfullscreen></iframe>
+					<iframe title="YouTube video player" width="700" height="400" style="padding:20px 0px;" src="//www.youtube.com/embed/WqTEmA2bMI0" frameborder="0" allowfullscreen></iframe>
 					<!--影片說明在這裡-->
 					</div>	
 		</div>	
