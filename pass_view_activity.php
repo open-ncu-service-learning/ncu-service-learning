@@ -159,17 +159,17 @@
 								<td><span class="highlight">核定認證時數</span></td>
 								<td><?=$hour?></td>
 							</tr>
-							<tr>
+							<!--<tr>
 								<td><span class="highlight">認證貼紙張數</span></td>
 								<td>
 								<?php
-									if($row['act_sticker_number'])
-										echo $row['act_sticker_number'];
-									else
-										echo "無";
+									//if($row['act_sticker_number'])
+									//	echo $row['act_sticker_number'];
+									//else
+									//	echo "無";
 								?>
 								</td>
-							</tr>	
+							</tr>-->	
 							<tr>
 								<td><span class="highlight">認證要求</span></td>
 								<td>
