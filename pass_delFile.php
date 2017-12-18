@@ -16,15 +16,20 @@
 	require_once("conn/db.php");
 	
 	$id = (int)$_GET['news_id'];
+	$idcol = $_GET['idcol']
 	$file = $_GET['file'];
 	$table = $_GET['table'];
 	
 // 檔案位置刪除	
-	$sql = "UPDATE `pass`.`$table` SET `$file`= '' WHERE `news_id` = '$id'";
+	$sql = "UPDATE `pass`.`$table` SET `$file`= '' WHERE `$idcol` = '$id'";
 	$ret = mysql_query($sql, $db) or die(mysql_error());
 	
 	if($table == "news")
 		$location = "pass_updateNews.php?news_id=$id";
+	else if($table == "out_activity")
+		$location = "pass_out_updateActivity.php?id=$id";
+	else if($table == "activity")
+		$location = "pass_updateActivitynotNews.php?act_id=$id";
 	else
 		$location = "pass_updateActivity.php?news_id=$id";
 

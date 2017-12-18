@@ -126,6 +126,9 @@
 						<?php echo $row['act_title']; ?>
 					</h3>
 					<div class="story">
+						<?php
+							echo "<a href='pass_updateActivitynotNews.php?act_id=$row[act_id]'"." onClick=\"return confirm('確定修改?');\" style=\"color: #D57100;\"> 修改活動</a> \t";
+						?>
 						<table style="table-layout:fixed" width="600" style="margin-top: 20px;" border="1" cellspacing="0" cellpadding="1">
 							<tr>
 								<td width="120"><span class="highlight">活動名稱</span></td>
