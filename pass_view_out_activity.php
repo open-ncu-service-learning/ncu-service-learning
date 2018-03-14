@@ -16,10 +16,14 @@
 	
 	$id = (int)$_GET['act_id'];
 	
-	$dir = "download/pass_activities/";
+	$dir = "download/pass_out_activities/";
 	$sql = "SELECT * FROM `out_activity` WHERE `act_del` = '0' AND `act_id` = '$id'";
 	$ret = mysql_query($sql) or die(mysql_error());
 	$row = mysql_fetch_assoc($ret);
+	$stuid = $row['act_admit_student'];
+	$sql = "SELECT * FROM `all_user` WHERE `user_del` = '0' AND `user_student` = '$stuid'";
+	$ret = mysql_query($sql) or die(mysql_error());
+	$usrrow = mysql_fetch_assoc($ret);
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -51,35 +55,27 @@
 
 		// 活動型態
 		$type = "";
-		$life_sub = "";
+		$sub = "";
 		switch($row['act_type']) {
 			case 1:
 				$type = "服務學習";
+				if($row['act_sub']!="0")
+					$sub = "-".$row['act_sub'];
 				break;
 			case 2:
 				$type = "生活知能";
-				if ($row['act_life_sub'] == 1){
-				$life_sub = " - 大一週會";
-				}
-				else if ($row['act_life_sub'] == 2){
-					$life_sub = " - 大一CPR";
-				}
-				else if ($row['act_life_sub'] == 3){
-					$life_sub = " - 自我探索與生涯規劃";
-				}
-				else if ($row['act_life_sub'] == 4){
-					$life_sub = " - 國際視野";
-				}
-
-				else if ($row['act_life_sub'] == 6){
-					$life_sub = " - 院週會";
-				}
-				else{
-					$life_sub = " - 一般";
-				}
+				if($row['act_sub']!="0")
+					$sub = "-".$row['act_sub'];
 				break;
 			case 3:
 				$type = "人文藝術";
+				if($row['act_sub']!="0")
+					$sub = "-".$row['act_sub'];
+				break;
+			case 4:
+				$type = "國際視野";
+				if($row['act_sub']!="0")
+					$sub = "-".$row['act_sub'];
 				break;
 			default:
 				$type = "無";
@@ -106,11 +102,12 @@
 						<?php echo $row['act_title']; ?>
 					</h3>
 					<div class="story">
+
+						<?php
+							echo "<a href='pass_updateOutActivity.php?id=$row[act_id]'"." onClick=\"return confirm('確定修改?');\" style=\"color: #D57100;\"> 修改活動</a> \t";
+						?>
+
 						<table style="table-layout:fixed" width="600" style="margin-top: 20px;" border="1" cellspacing="0" cellpadding="1">
-							<tr height="30">
-								<td width="120" align="left"><span class="highlight">活動編號</span></td>
-								<td width="480"><?=$row['act_no']?></td>
-							</tr>
 							<tr height="30">
 								<td width="120" align="left"><span class="highlight">活動名稱</span></td>
 								<td width="480"><?=$row['act_title']?></td>
@@ -137,23 +134,31 @@
 							</tr>
 							<tr height="30">
 								<td align="left"><span class="highlight">活動類別</span></td>
-								<td><?=$type.$life_sub?></td>
+								<td><?=$type.$sub?></td>
 							</tr>
 							<tr height="30">
 								<td align="left"><span class="highlight">核定認證時數</span></td>
 								<td><?=$hour?></td>
 							</tr>
-							<tr height="30">
+							<!--<tr height="30">
 								<td width="120" align="left"><span class="highlight">活動內容</span></td>
-								<td width="480" style= "word-wrap: break-word; word-break: break-all; overflow: hidden; width: 480px;"><?php echo nl2br($row['act_description']); ?></td>
-							</tr>
+								<td width="480" style= "word-wrap: break-word; word-break: break-all; overflow: hidden; width: 480px;"><?php// echo nl2br($row['act_description']); ?></td>
+							</tr>-->
 							<tr height="30">
-								<td align="left"><span class="highlight">服務方式</span></td>
-								<td><?$service=($row['act_service_type'] == NULL)?"無":$row['act_service_type']; echo $service;?></td>
+								<td width="120" align="left"><span class="highlight">學習反思</span></td>
+								<td width="480" style= "word-wrap: break-word; word-break: break-all; overflow: hidden; width: 480px;"><?php echo nl2br($row['act_reflection']); ?></td>
 							</tr>
-							<tr height="30">
-								<td align="left"><span class="highlight">學習分類</span></td>
-								<td><?$learn=($row['act_learn_type'] == NULL)?"無":$row['act_learn_type']; echo $learn;?></td>
+							<tr>
+								<td><span class="highlight">附加檔案</span></td>
+								<td>
+								<?php
+									if($row['act_file'])
+										//echo $row['act_file'];
+										echo "<a href='".$dir.$row['act_file']."' style='color: #ED00FF;'>".substr($row['act_file'],10)."</a>";
+									else
+										echo "無";
+								?>
+								</td>
 							</tr>
 							<tr height="30">
 								<td align="left"><span class="highlight">聯絡人</span></td>
@@ -167,16 +172,35 @@
 								<td align="left"><span class="highlight">聯絡信箱</span></td>
 								<td><?$email=($row['act_req_email'] == NULL)?"無":$row['act_req_email']; echo $email;?></td>
 							</tr>
+							<tr height="30">
+								<td align="left"><span class="highlight">申請人學號</span></td>
+								<td><?=$stuid;?></td>
+							</tr>
+							<tr height="30">
+								<td align="left"><span class="highlight">申請人姓名</span></td>
+								<td><?=$usrrow['user_name'];?></td>
+							</tr>
+							<!--<tr height="30">
+								<td align="left"><span class="highlight">聯絡電話</span></td>
+								<td><?//$phone=($row['act_req_phone'] == NULL)?"無":$row['act_req_phone']; echo $phone;?></td>
+							</tr>-->
+							<tr height="30">
+								<td align="left"><span class="highlight">申請人信箱</span></td>
+								<td><?=$usrrow['user_email'];?></td>
+							</tr>
 						</table>
 					</div>
 				</div>
 				
-<?php
-	$reject = "<a href=\"pass_del_out_activity.php?id=$id\" onClick=\"return confirm('確定拒絕?');\"><img src=\"images/icon/reject.png\" style=\"border: none; width: 150px;\"/></a>";
-?>
 				<table width="600" style="margin-top: 20px;" border="0" cellspacing="0" cellpadding="0">
 					<tr align="center">
-						<td><?=$reject?></td>
+						<?php
+							echo "<td><a href='pass_del_out_activity.php?id=$id'"." onClick=\"return confirm('確定拒絕?');\"><img src=\"images/icon/reject.png\" style=\"border: none; width: 150px;\" alt=\"拒絕\"/></a></td>";
+							if($row['act_admit'] == 0)
+								echo "<td><a href='pass_admit_out_activity.php?id=$row[act_id]'"." onClick=\"return confirm('確定核可?');\"><img src=\"images/icon/admit.png\" style=\"border: none; width: 150px;\" alt=\"核可\"/></a></td>";
+							else
+								echo "<td>已核可</td>";
+						?>
 					</tr>
 				</table>
 	            <div class="buttons" style="margin: 10px;">

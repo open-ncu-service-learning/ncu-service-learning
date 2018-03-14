@@ -54,9 +54,10 @@
 						<tr align="center">
 							<td width="350" height="30"><span style="color: #7F0000;">活動名稱</span></td>
 							<td width="100"><span style="color: #7F0000;">活動日期</span></td>
-							<td width="100"><span style="color: #7F0000;">活動型態</span></td>
+							<td width="80"><span style="color: #7F0000;">活動型態</span></td>
 							<td width="100"><span style="color: #7F0000;">申請時間</span></td>
-							<td width="50"><span style="color: #7F0000;">刪除</span></td>
+							<td width="30"><span style="color: #7F0000;">刪除</span></td>
+							<td width="30"><span style="color: #7F0000;">核可</span></td>
 						</tr>					
 <?php
 	while($row = mysql_fetch_assoc($ret)) {
@@ -71,12 +72,22 @@
 			case 3:
 				$type = "人文藝術";
 				break;
+			case 4:
+				$type = "國際視野";
+				break;
 			default:
 				$type = "無";
 		}
 		
 		// 刪除
-		$delete = "<a href=\"pass_del_out_activity.php?id=$row[act_id]\" onClick=\"return confirm('確定刪除?');\"><img src=\"images/cross.png\" style=\"border: none;\"></a>";	
+		$delete = "<a href=\"pass_del_out_activity.php?id=$row[act_id]\" onClick=\"return confirm('確定刪除?');\"><img src=\"images/cross.png\" style=\"border: none;\" alt= \"刪\"></a>";	
+		if($row['act_admit']==0){
+			$admit = "X";
+		}
+		else {
+			$admit = "O";
+		}
+		
 ?>
 						<tr>
 							<td height="30">
@@ -88,6 +99,7 @@
 							<td align="center"><?=$type?></td>
 							<td align="center"><?=substr($row['act_time'], 0, 10)?></td>
 							<td align="center"><?=$delete?></td>
+							<td align="center"><?=$admit?></td>
 						</tr>
 <?php
 	}

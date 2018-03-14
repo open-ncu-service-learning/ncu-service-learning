@@ -16,23 +16,31 @@
 	require_once("conn/db.php");
 	
 	$id = (int)$_GET['news_id'];
-	$idcol = $_GET['idcol']
+	//$idcol = $_GET['idcol']
 	$file = $_GET['file'];
 	$table = $_GET['table'];
 	
 // 檔案位置刪除	
-	$sql = "UPDATE `pass`.`$table` SET `$file`= '' WHERE `$idcol` = '$id'";
-	$ret = mysql_query($sql, $db) or die(mysql_error());
 	
-	if($table == "news")
+	
+	if($table == "news"){
+		$sql = "UPDATE `pass`.`$table` SET `$file`= '' WHERE `news_id` = '$id'";
 		$location = "pass_updateNews.php?news_id=$id";
-	else if($table == "out_activity")
-		$location = "pass_out_updateActivity.php?id=$id";
-	else if($table == "activity")
+	}
+	else if($table == "out_activity"){
+		$sql = "UPDATE `pass`.`$table` SET `$file`= '' WHERE `act_id` = '$id'";
+		$location = "pass_updateOutActivity.php?id=$id";
+	}
+	else if($table == "activity"){
+		$sql = "UPDATE `pass`.`$table` SET `$file`= '' WHERE `act_id` = '$id'";
 		$location = "pass_updateActivitynotNews.php?act_id=$id";
-	else
+	}	
+	else{
+		$sql = "UPDATE `pass`.`$table` SET `$file`= '' WHERE `news_id` = '$id'";
 		$location = "pass_updateActivity.php?news_id=$id";
-
+	}
+		
+	$ret = mysql_query($sql, $db) or die(mysql_error());
 	if($ret)
 	{
 		echo

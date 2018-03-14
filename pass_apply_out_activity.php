@@ -1,12 +1,19 @@
 <?php
 	session_start();
-	
+
 	// 身分驗證
-	if($_SESSION['valid_token'] != "3") {
+	if($_SESSION['valid_token'] == "1"){
+		$stuid = $_SESSION['valid_student_id'];
+	}	
+	else if($_SESSION['valid_token'] == "3") {
+		
+	}
+	else{
 		header('Location: index.php');
 		exit;
 	}
-	
+
+	require_once("conn/db.php");
 	$year = date("Y");
 	$month = date("m");
 ?>
@@ -42,19 +49,37 @@
 <!-- Publish -->
 			<div id="main">
 				<div id="welcome" style="font-size: 20px; color: #1F1F1F; line-height: 1.5;">
+					<?php
+						$sql = "SELECT * FROM `all_user` WHERE user_student = '$stuid'";
+						$ret = mysql_query($sql, $db) or die(mysql_error());
+						$row = mysql_fetch_assoc($ret);
+						$no = $row['user_student'];
+						$name = $row['user_name'];
+						$dep = $row['user_dep'];
+					?>
+					
 					<h3 style="margin-top: 10px;">活動申請(個人)</h3>
-					<form id="form1" name="form1" action="send_pass_apply_out_activity.php" method="post" onsubmit="return check_pass_apply_out_activityForm(form1)">
+					<?if($_SESSION['valid_token'] == "1"){?>
+						<div id="person" style="color: #3F3F3F; margin-top: 20px;">				
+							<ul class="list" style="margin-left: 10px; list-style-type: none;">
+								<li>學號：<span style="color: #FF00B2;"><?=$no?></span></li>
+								<li>姓名：<span style="color: #FF00B2;"><?=$name?></span></li>
+								<li>系級：<span style="color: #FF00B2;"><?=$dep?></span></li>
+							</ul>
+						</div>
+					<?}?>
+					<form id="form1" name="form1" action="send_pass_apply_out_activity.php" method="post" enctype="multipart/form-data" onsubmit="return check_pass_apply_out_activityForm(form1)" >
 						<table width="700" style="margin-top: 20px;" border="1" cellspacing="0" cellpadding="1">
 							<tr>
-								<td align="right"><label for="title" style="color: #AF0000;">活動標題：</label></td>
+								<td align="center" width="120"><label for="title" style="color: #AF0000;">活動標題：</label></td>
 								<td><input type="text" size="50" name="title" id="title" style="font-size: 14pt; height: 25px;" class="textstyle titleHintBox" title="請輸入活動標題" /></td>
 							</tr>
 							<tr>
-								<td align="right"><label for="location" style="color: #AF0000;">活動地點：</label></td>
+								<td align="center"><label for="location" style="color: #AF0000;">活動地點：</label></td>
 								<td><input type="text" size="50" name="location" id="location" style="font-size: 14pt; height: 25px;" class="textstyle titleHintBox" title="請輸入活動地點" /></td>
 							</tr>
 							<tr>
-								<td align="right"><label for="semester" style="color: #AF0000;">學期：</label></td>
+								<td align="center"><label for="semester" style="color: #AF0000;">學期：</label></td>
 								<td>
 									<input type="hidden" name="year" value="<?=$year?>" />
 									<select name="school_year" style="font-size: 14pt; height: 25px;">
@@ -96,7 +121,7 @@
 	});
 </script>
 							<tr>
-								<td align="right"><label for="begin_time" style="color: #AF0000;">開始時間：</label></td>
+								<td align="center"><label for="begin_time" style="color: #AF0000;">開始時間：</label></td>
 								<td>
 									<input id="begin_time" name="begin_time" type="text" size="30" style="font-size: 14pt; height: 25px;" class="date-pick" />							
 									<select name="begin_hour" id="begin_hour" style="font-size: 14pt; height: 25px;">
@@ -186,7 +211,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td align="right"><label for="end_time" style="color: #AF0000;">結束時間：</label></td>
+								<td align="center"><label for="end_time" style="color: #AF0000;">結束時間：</label></td>
 								<td>
 									<input id="end_time" name="end_time" type="text" size="30" style="font-size: 14pt; height: 25px;" class="date-pick" />
 									<select name="end_hour" id="end_hour" style="font-size: 14pt; height: 25px;">
@@ -276,32 +301,57 @@
 								</td>
 							</tr>
 							<tr>
-								<td align="right"><label for="type" style="color: #AF0000;">活動類別：</label></td>
+								<td align="center"><label for="type" style="color: #AF0000;">活動類別：</label></td>
 								<td>
 									<input type="radio" name="type" id="type1" value="1" checked /> 服務學習
+									<select name="service_type" id="service_type" style="font-size: 14pt; height: 25px;">
+										<option value="愛校服務(校內行政)" selected="selected">愛校服務(校內行政)</option>
+										<option value="環境清潔或淨灘、淨山">環境清潔或淨灘、淨山</option>
+										<option value="課業輔導">課業輔導</option>
+										<option value="科普相關">科普相關</option>
+										<option value="醫療衛教">醫療衛教</option>
+										<option value="弱勢關懷與服務(老人或弱勢族群)">弱勢關懷與服務(老人或弱勢族群)</option>
+										<option value="人文服務或藝文導覽">人文服務或藝文導覽</option>
+										<option value="其它">其它</option>
+									</select>
+								
 									<br><input type="radio" name="type" id="type2" value="2" /> 生活知能學習
-									<select name="life_sub" id="type2">
-										<!--<option value="0">請選擇子項目</option>-->
-										<option value="5">一般</option>
-										<!--<option value="1">大一週會</option>
-										<option value="6">院週會</option>
-										<option value="2">大一CPR</option>
-										<option value="3">自我探索與生涯規劃</option>-->
-										<option value="4">國際視野</option>
+									<select name="life_type" id="life_type" style="font-size: 14pt; height: 25px;">
+										<option value="社課" selected="selected">社課</option>
+										<option value="專題講座">專題講座</option>
+										<option value="培訓課程">培訓課程</option>
+										<option value="參訪交流">參訪交流</option>
+										<option value="活動展覽">活動展覽</option>
+										<option value="研討">研討</option>
+										<option value="其它">其它</option>
 									</select>
 									<br><input type="radio" name="type" id="type3" value="3" /> 人文藝術學習
-									<!--<br><input type="radio" name="type" id="type2" value="2" /> 國際視野
-									<select name="life_sub" id="type2" style="visibility: hidden;">
-										<option value="4">國際視野</option>
-									</select>-->
+									<select name="art_type" id="art_type" style="font-size: 14pt; height: 25px;">
+										<option value="社課" selected="selected">社課</option>
+										<option value="設計講座">設計講座</option>
+										<option value="藝文講座">藝文講座</option>
+										<option value="人文講座">人文講座</option>
+										<option value="藝文演出或欣賞">藝文演出或欣賞</option>
+										<option value="藝文校外學習">藝文校外學習</option>
+										<option value="讀書會">讀書會</option>
+										<option value="影片欣賞暨座談">影片欣賞暨座談</option>
+										<option value="其它">其它</option>
+									</select>
+									<br><input type="radio" name="type" id="type4" value="4" /> 國際視野學習
+									<select name="inter_type" id="inter_type" style="font-size: 14pt; height: 25px;">
+										<option value="國際志工" selected="selected">國際志工</option>
+										<option value="國際移地學習">國際移地學習</option>
+										<option value="國際學術交流">國際學術交流</option>
+										<option value="校園國際化活動">校園國際化活動</option>
+										<option value="兩岸交流學習、境外交換學習">兩岸交流學習、境外交換學習</option>
+										<option value="國際訪賓接待">國際訪賓接待</option>
+										<option value="其它">其它</option>
+									</select>
 								</td>
 							</tr>
-							<!--0622 remove <tr>
-								<td width="100" align="right"><label for="des" style="color: #AF0000;">活動描述：</label></td>
-								<td><textarea name="des" cols="50" rows="10" id="des"></textarea></td>
-							</tr>-->
+
 							<tr>
-								<td width="100" align="right"><label for="service_hour" style="color: #AF0000;">認證時數：</label></td>
+								<td width="100" align="center"><label for="service_hour" style="color: #AF0000;">認證時數：</label></td>
 								<td><!-- 將一般增為基本和高階-->
 									<input type="radio" name="service_hour_type" value="1" checked />
 										基本 <input type="text" name="service_hour_1" size="3" style="font-size: 14pt; height: 25px;" value="0" />小時 <br />
@@ -312,56 +362,41 @@
 										高階 <input type="text" name="service_hour_high" size="3" style="font-size: 14pt; height: 25px;" value="0" />小時 <br />
 								</td>
 							</tr>
-							<!-- 刪掉認證類別 直接從認證時數去取得類別
+							<!--<tr>
+								<td width="100" align="center"><label for="des" style="color: #AF0000;">活動描述：</label></td>
+								<td><textarea name="des" cols="50" rows="10" id="des"></textarea></td>
+							</tr>-->
 							<tr>
-								<td align="right"><label for="pass_type" style="color: #AF0000;">認證類別：</label></td>
-								<td>
-									<input type="radio" name="pass_type" id="pass_type1" value="1" checked /> 基本
-									<input type="radio" name="pass_type" id="pass_type2" value="2" /> 高階
-									<input type="radio" name="pass_type" id="pass_type3" value="3" /> 基本+高階
-								</td>
-							</tr>
-							-->
-							<tr>
-								<td align="right"><label for="person">承辦人：</label></td>
-								<td><input type="text" name="person" id="person" style="font-size: 14pt; height: 25px;" class="textstyle titleHintBox" title="請輸入承辦人" /></td>
-							</tr>
-							<tr>
-								<td align="right"><label for="office" style="color: #AF0000;">活動單位：</label></td>
+								<td align="center"><label for="office" style="color: #AF0000;">活動單位：</label></td>
 								<td><input type="text" name="office" id="office" size="30" style="font-size: 14pt; height: 25px;" class="textstyle titleHintBox" title="請輸入活動單位" required></td>
 							</tr>
 							<tr>
-								<td align="right"><label for="phone">聯絡電話：</label></td>
+								<td align="center"><label for="person">承辦人：</label></td>
+								<td><input type="text" name="person" id="person" style="font-size: 14pt; height: 25px;" class="textstyle titleHintBox" title="請輸入承辦人" /></td>
+							</tr>
+							<tr>
+								<td align="center"><label for="phone">聯絡電話：</label></td>
 								<td><input type="text" name="phone" id="phone" size="30" style="font-size: 14pt; height: 25px;" class="textstyle titleHintBox" title="請輸入聯絡電話" /></td>
 							</tr>
 							<tr>
-								<td align="right"><label for="service_type">服務方式：</label></td>
-								<td>
-									<select name="service_type" id="service_type" style="font-size: 14pt; height: 25px;">
-										<option value="老殘照顧" selected="selected">老殘照顧</option>
-										<option value="勞務工作">勞務工作</option>
-										<option value="廁所清潔">廁所清潔</option>
-										<option value="偏遠山區">偏遠山區</option>
-										<option value="兒童教育">兒童教育</option>
-										<option value="醫病照顧">醫病照顧</option>
-										<option value="室外解說">室外解說</option>
-										<option value="治安協助">治安協助</option>
-										<option value="老辦公室行政">辦公室行政</option>
-										<option value="其它">其它</option>
-									</select>
-								</td>
+								<td width="100" align="center"><label for="ref" style="color: #AF0000;">學習反思<br>(300字以上)：</label></td>
+								<td><textarea name="ref" cols="50" rows="10" id="ref" onkeyup="wordsTotal()"></textarea><br>字數統計：<span id="display">0</span></td>
 							</tr>
+							<script type="text/javascript">
+							 
+							  function wordsTotal() {
+							   
+								var total = document.getElementById('ref').value.length;
+								 
+								document.getElementById('display').innerHTML = total;
+
+							  }
+							 
+							</script>
+
 							<tr>
-								<td align="right"><label for="learn_type">學習分類：</label></td>
-								<td>
-									<select name="learn_type" id="learn_type" style="font-size: 14pt; height: 25px;">
-										<option value="表演藝術演出欣賞(音樂、舞蹈、戲劇…)" selected="selected">表演藝術演出欣賞(音樂、舞蹈、戲劇…)</option>
-										<option value="藝文展覽欣賞(書畫、美術、雕塑…)">藝文展覽欣賞(書畫、美術、雕塑…)</option>
-										<option value="藝文教育、講座、研習">藝文教育、講座、研習</option>
-										<option value="文史博物館參觀">文史博物館參觀</option>
-										<option value="其它">其它</option>
-									</select>
-								</td>
+								<td width="100" align="center"><label for="file1" style="color: #AF0000;">相關檔案：</label></td>
+								<td><input type="file" name="file1" size="30" id="file1" /></td>
 							</tr>							
 						</table>
 						<br />

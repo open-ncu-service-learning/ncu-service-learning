@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 	session_start();
 	
 	// 身分驗證
@@ -11,15 +11,15 @@
 	
 	$year = date("Y");
 	
-	if(!is_numeric($_GET['act_id'])) {
+	if(!is_numeric($_GET['id'])) {
 		header('Location: index.php');
 		exit;
 	}
 	
-	$id = (int)$_GET['act_id'];
+	$id = (int)$_GET['id'];
 	
-	$dir = "download/pass_activities/";
-	$sql = "SELECT * FROM activity WHERE act_del = '0' AND act_id = '$id'";
+	$dir = "download/pass_out_activities/";
+	$sql = "SELECT * FROM out_activity WHERE act_del = '0' AND act_id = '$id'";
 	$ret = mysql_query($sql) or die(mysql_error());
 	$row = mysql_fetch_assoc($ret);
 ?>
@@ -55,8 +55,8 @@
 <!-- Publish -->
 			<div id="main">
 				<div id="welcome" style="font-size: 20px; color: #1F1F1F; line-height: 1.5;">
-					<h3 style="margin-top: 10px;">修改活動申請(校內)</h3>
-					<form id="form1" name="form1" action="update_pass_post_activity_notNews.php" method="post" enctype="multipart/form-data" onsubmit="return check_pass_apply_activitiesForm(form1)">
+					<h3 style="margin-top: 10px;">修改活動(個人)</h3>
+					<form id="form1" name="form1" action="update_pass_post_out_activity.php" method="post" enctype="multipart/form-data" onsubmit="return check_pass_apply_out_activityForm(form1)">
 						<table width="700" style="margin-top: 20px;" border="1" cellspacing="0" cellpadding="1">
 							<tr>
 								<td align="right"><label for="title" style="color: #AF0000;">活動標題：</label></td>
@@ -97,7 +97,7 @@
 									});
 								</script>
 							<tr>
-								<td align="right"><label for="begin_time" style="color: #AF0000;">活動日期：開始時間：</label></td>
+								<td align="right"><label for="begin_time" style="color: #AF0000;">開始時間：</label></td>
 								<td>
 									<input id="begin_time" name="begin_time" type="text" size="30" style="font-size: 14pt; height: 25px;" class="date-pick" value="<? echo substr($row['act_begin_time'], 0, 10); ?>" />
 									<select name="begin_hour" id="begin_hour" style="font-size: 14pt; height: 25px;">
@@ -187,7 +187,7 @@
 								</td>	
 							</tr>
 							<tr>
-								<td align="right"><label for="end_time" style="color: #AF0000;">活動時間：</label></td>
+								<td align="right"><label for="end_time" style="color: #AF0000;">結束時間：</label></td>
 								<td>
 									<input id="end_time" name="end_time" type="text" size="30" style="font-size: 14pt; height: 25px;" class="date-pick" value="<? echo substr($row['act_end_time'], 0, 10); ?>" />
 									<select name="end_hour" id="end_hour" style="font-size: 14pt; height: 25px;">
@@ -280,23 +280,54 @@
 								<td align="right"><label for="type" style="color: #AF0000;">活動類別：</label></td>
 								<td>
 									<input type="radio" name="type" id="type1" value="1" <?if($row['act_type'] == 1) echo "checked"; ?>/> 服務學習
-									<br><input type="radio" name="type" id="type2" value="2" <?if($row['act_type'] == 2) echo "checked"; ?>/> 生活知能
-									<select name="life_sub" id="type2">
-										<!--<option value="0"></option>-->
-										<option value="5"<?if($row['act_life_sub'] == 5 && $row['act_type'] == 2) echo "selected=\"selected\""; ?>/>一般</option>
-										<option value="1"<?if($row['act_life_sub'] == 1 && $row['act_type'] == 2) echo "selected=\"selected\""; ?>/>大一週會</option>
-										<option value="6"<?if($row['act_life_sub'] == 6 && $row['act_type'] == 2) echo "selected=\"selected\""; ?>/>院週會</option>
-										<option value="2"<?if($row['act_life_sub'] == 2 && $row['act_type'] == 2) echo "selected=\"selected\""; ?>/>大一CPR</option>
-										<option value="3"<?if($row['act_life_sub'] == 3 && $row['act_type'] == 2) echo "selected=\"selected\""; ?>/>自我探索與生涯規劃</option>
-										<option value="4"<?if($row['act_life_sub'] == 4 && $row['act_type'] == 2) echo "selected=\"selected\""; ?>/>國際視野</option>
+									<select name="service_type" id="type1">
+										<option value="愛校服務(校內行政)"<?if($row['act_sub'] == "愛校服務(校內行政)" && $row['act_type'] == 1) echo "selected=\"selected\""; ?>/>愛校服務(校內行政)</option>
+										<option value="環境清潔或淨灘、淨山"<?if($row['act_sub'] == "環境清潔或淨灘、淨山" && $row['act_type'] == 1) echo "selected=\"selected\""; ?>/>環境清潔或淨灘、淨山</option>
+										<option value="課業輔導"<?if($row['act_sub'] == "課業輔導" && $row['act_type'] == 1) echo "selected=\"selected\""; ?>/>課業輔導</option>
+										<option value="科普相關"<?if($row['act_sub'] == "科普相關" && $row['act_type'] == 1) echo "selected=\"selected\""; ?>/>科普相關</option>
+										<option value="醫療衛教"<?if($row['act_sub'] == "醫療衛教" && $row['act_type'] == 1) echo "selected=\"selected\""; ?>/>醫療衛教</option>
+										<option value="弱勢關懷與服務(老人或弱勢族群)"<?if($row['act_sub'] == "弱勢關懷與服務(老人或弱勢族群)" && $row['act_type'] == 1) echo "selected=\"selected\""; ?>/>弱勢關懷與服務(老人或弱勢族群)</option>
+										<option value="人文服務或藝文導覽"<?if($row['act_sub'] == "人文服務或藝文導覽" && $row['act_type'] == 1) echo "selected=\"selected\""; ?>/>人文服務或藝文導覽</option>
+										<option value="其它"<?if($row['act_sub'] == "其它" && $row['act_type'] == 1) echo "selected=\"selected\""; ?>/>其它</option>
 									</select>
-									<br><input type="radio" name="type" id="type3" value="3" <?if($row['act_type'] == 3) echo "checked"; ?> /> 人文藝術
+									<br><input type="radio" name="type" id="type2" value="2" <?if($row['act_type'] == 2) echo "checked"; ?>/> 生活知能學習
+									<select name="life_type" id="type2">
+										<option value="社課"<?if($row['act_sub'] == "社課" && $row['act_type'] == 2) echo "selected=\"selected\""; ?>/>社課</option>
+										<option value="專題講座"<?if($row['act_sub'] == "專題講座" && $row['act_type'] == 2) echo "selected=\"selected\""; ?>/>專題講座</option>
+										<option value="培訓課程"<?if($row['act_sub'] == "培訓課程" && $row['act_type'] == 2) echo "selected=\"selected\""; ?>/>培訓課程</option>
+										<option value="參訪交流"<?if($row['act_sub'] == "參訪交流" && $row['act_type'] == 2) echo "selected=\"selected\""; ?>/>參訪交流</option>
+										<option value="活動展覽"<?if($row['act_sub'] == "活動展覽" && $row['act_type'] == 2) echo "selected=\"selected\""; ?>/>活動展覽</option>
+										<option value="研討"<?if($row['act_sub'] == "研討" && $row['act_type'] == 2) echo "selected=\"selected\""; ?>/>研討</option>
+										<option value="其它"<?if($row['act_sub'] == "其它" && $row['act_type'] == 2) echo "selected=\"selected\""; ?>/>其它</option>
+									</select>
+									<br><input type="radio" name="type" id="type3" value="3" <?if($row['act_type'] == 3) echo "checked"; ?> /> 人文藝術學習
+									<select name="art_type" id="art_type" style="font-size: 14pt; height: 25px;">
+										<option value="社課"<?if($row['act_sub'] == "社課" && $row['act_type'] == 3) echo "selected=\"selected\""; ?>/>社課</option>
+										<option value="設計講座"<?if($row['act_sub'] == "設計講座" && $row['act_type'] == 3) echo "selected=\"selected\""; ?>/>設計講座</option>
+										<option value="藝文講座"<?if($row['act_sub'] == "藝文講座" && $row['act_type'] == 3) echo "selected=\"selected\""; ?>/>藝文講座</option>
+										<option value="人文講座"<?if($row['act_sub'] == "人文講座" && $row['act_type'] == 3) echo "selected=\"selected\""; ?>/>人文講座</option>
+										<option value="藝文演出或欣賞"<?if($row['act_sub'] == "藝文演出或欣賞" && $row['act_type'] == 3) echo "selected=\"selected\""; ?>/>藝文演出或欣賞</option>
+										<option value="藝文校外學習"<?if($row['act_sub'] == "藝文校外學習" && $row['act_type'] == 3) echo "selected=\"selected\""; ?>/>藝文校外學習</option>
+										<option value="讀書會"<?if($row['act_sub'] == "讀書會" && $row['act_type'] == 3) echo "selected=\"selected\""; ?>/>讀書會</option>
+										<option value="影片欣賞暨座談"<?if($row['act_sub'] == "影片欣賞暨座談" && $row['act_type'] == 3) echo "selected=\"selected\""; ?>/>影片欣賞暨座談</option>
+										<option value="其它"<?if($row['act_sub'] == "其它" && $row['act_type'] == 3) echo "selected=\"selected\""; ?>/>其它</option>
+									</select>
+									<br><input type="radio" name="type" id="type4" value="4" <?if($row['act_type'] == 4) echo "checked"; ?>/> 國際視野學習
+									<select name="inter_type" id="inter_type" style="font-size: 14pt; height: 25px;">
+										<option value="國際志工"<?if($row['act_sub'] == "國際志工" && $row['act_type'] == 4) echo "selected=\"selected\""; ?>/>國際志工</option>
+										<option value="國際移地學習"<?if($row['act_sub'] == "國際移地學習" && $row['act_type'] == 4) echo "selected=\"selected\""; ?>/>國際移地學習</option>
+										<option value="國際學術交流"<?if($row['act_sub'] == "國際學術交流" && $row['act_type'] == 4) echo "selected=\"selected\""; ?>/>國際學術交流</option>
+										<option value="校園國際化活動"<?if($row['act_sub'] == "校園國際化活動" && $row['act_type'] == 4) echo "selected=\"selected\""; ?>/>校園國際化活動</option>
+										<option value="兩岸交流學習、境外交換學習"<?if($row['act_sub'] == "兩岸交流學習、境外交換學習" && $row['act_type'] == 4) echo "selected=\"selected\""; ?>/>兩岸交流學習、境外交換學習</option>
+										<option value="國際訪賓接待"<?if($row['act_sub'] == "國際訪賓接待" && $row['act_type'] == 4) echo "selected=\"selected\""; ?>/>國際訪賓接待</option>
+										<option value="其它"<?if($row['act_sub'] == "其它" && $row['act_type'] == 4) echo "selected=\"selected\""; ?>/>其它</option>
+									</select>
 								</td>
 							</tr>
-							<tr>
+							<!--<tr>
 								<td width="100" align="right"><label for="des" style="color: #AF0000;">活動描述：</label></td>
-								<td><textarea name="des" cols="50" rows="10" id="des"><?=str_replace("<br />",chr(13).chr(10),$row['act_description'])?></textarea></td>
-							</tr>
+								<td><textarea name="des" cols="50" rows="10" id="des"><?//=str_replace("<br />",chr(13).chr(10),$row['act_description'])?></textarea></td>
+							</tr>-->
 							<tr>
 								<td width="100" align="right"><label for="service_hour" style="color: #AF0000;">認證時數：</label></td>
 								<td>
@@ -304,19 +335,18 @@
 										基本 <input type="text" name="service_hour_1" style="font-size: 14pt; height: 25px;" size="5" value="<?if($row['act_pass_type'] == 1 && $row['act_service_hour'] != -1) echo $row['act_service_hour']?>" />小時 <br />
 									<input type="radio" name="service_hour_type" value="2" <?if($row['act_pass_type'] == 2 && $row['act_service_hour'] != -1) echo "checked"; ?> />
 										高階 <input type="text" name="service_hour" style="font-size: 14pt; height: 25px;" size="5" value="<?if($row['act_pass_type'] == 2 && $row['act_service_hour'] != -1) echo $row['act_service_hour']?>" />小時 <br />
-									<input type="radio" name="service_hour_type" value="3" <?if($row['act_pass_type'] == 3 && $row['act_service_hour'] != -1) echo "checked"; ?> />	
+									<input type="radio" name="service_hour_type" value="3" <?if($row['act_pass_type'] == 3 && $row['act_service_hour'] != -1) echo "checked"; ?> />
 									<?
 										if($row['act_pass_type'] == 3)
 											list($low, $high) = split('[,]', $row['act_service_hour']);
 									?>
 										基本 <input type="text" name="service_hour_low" style="font-size: 14pt; height: 25px;" size="5" value="<?=$low?>" />小時 + 
 										高階 <input type="text" name="service_hour_high" style="font-size: 14pt; height: 25px;" size="5" value="<?=$high?>" />小時 <br />
-									<input type="radio" name="service_hour_type" value="4" <?if($row['act_service_hour'] == -1) echo "checked"; ?> />
-										依實際時數 (基本)<br />
-									<input type="radio" name="service_hour_type" value="5" <?if($row['act_service_hour'] == -1) echo "checked"; ?> />
-										依實際時數 (高階)<br />
-									<span style="color: red;">(若勾選依實際時數認證即不需填寫時數欄位)</span>
 								</td>
+							</tr>
+							<tr>
+								<td width="100" align="right"><label for="ref" style="color: #AF0000;">學習反思：</label></td>
+								<td><textarea name="ref" cols="50" rows="10" id="ref"><?=str_replace("<br />",chr(13).chr(10),$row['act_reflection'])?></textarea></td>
 							</tr>
 							<!--<tr>
 								<td width="100" align="right"><label for="sticker" style="color: #AF0000;">認證貼紙：</label></td>
@@ -331,29 +361,29 @@
 									<input type="radio" name="pass_type" id="pass_type3" value="3" <?//if($row['news_pass_type'] == 3) echo "checked"; ?>/> 基本+高階
 								</td>
 							</tr>
-							-->
+							
 							<tr>
 								<td width="100" align="right"><label for="requirement" style="color: #AF0000;">認證要求：</label></td>
 								<td>
 								<?//list($report, $engage,$questionnaire,$test,$other_option) = split('[,]', $row['news_requirement']);?>
-									<input type="checkbox" name="req_report" id="req_report" value="1" <?if($row['act_report'] == 1) echo "checked";?>/>心得報告<br />
-									<input type="checkbox" name="req_engage" id="req_engage" value="1" <?if($row['act_engage'] == 1) echo "checked";?>/>全程參與<br />
-									<input type="checkbox" name="req_questionnaire" id="req_questionnaire" value="1" <?if($row['act_questionnaire'] == 1) echo "checked";?> />問卷回饋<br />
-									<input type="checkbox" name="req_test" id="req_test" value="1" <?if($row['act_test'] == 1) echo "checked";?>/>考試<br />								
-									<input type="checkbox" name="req_other_option" id="req_other_option" value="1" <?if($row['act_other'] !=0) echo "checked";?>/>其他
-									<input type="text" name="req_other" id="req_other" style="font-size: 14pt; height: 25px;" size="30" value=<?=$row['act_other']?> />
+									<input type="checkbox" name="req_report" id="req_report" value="1" <?//if($report == 1) echo "checked";?>/>心得報告<br />
+									<input type="checkbox" name="req_engage" id="req_engage" value="1" <?//if($engage == 1) echo "checked";?>/>全程參與<br />
+									<input type="checkbox" name="req_questionnaire" id="req_questionnaire" value="1" <?//if($questionnaire == 1) echo "checked";?> />問卷回饋<br />
+									<input type="checkbox" name="req_test" id="req_test" value="1" <?//if($test == 1) echo "checked";?>/>考試<br />								
+									<input type="checkbox" name="req_other_option" id="req_other_option" value="1" <?//if($other_option !=0) echo "checked";?>/>其他
+									<input type="text" name="req_other" id="req_other" style="font-size: 14pt; height: 25px;" size="30" value=<?//=$other_option?> />
 								</td>
 							</tr>
 							<tr>
 								<td align="right"><label for="link" style="color: #AF0000;">相關網址：</label></td>
-								<td><input type="text" name="link" id="link" size="50" style="font-size: 14pt; height: 25px;" value="<?=$row['act_link']?>" class="textstyle titleHintBox" title="請輸入網址" /></td>
-							</tr>
+								<td><input type="text" name="link" id="link" size="50" style="font-size: 14pt; height: 25px;" value="<?=$row['news_link']?>" class="textstyle titleHintBox" title="請輸入網址" /></td>
+							</tr>-->
 							<?if($row['act_file'] != NULL){?>
 							<tr>
 								<td width="100" align="right"><label for="file1" style="color: #AF0000;">相關檔案：</label></td>
 								<td>
 								<?php
-									echo "<a href='pass_delFile.php?news_id=$row[act_id]&file=act_file&table=activity'"." onClick=\"return confirm('確定刪除?');\" style=\"color: #D57100;\">(刪除檔案)</a>";
+									echo "<a href='pass_delFile.php?news_id=$row[act_id]&file=act_file&table=out_activity'"." onClick=\"return confirm('確定刪除?');\" style=\"color: #D57100;\">(刪除檔案)</a>";
 								?>
 								</td>
 							</tr>
@@ -363,22 +393,23 @@
 								<td><input type="file" name="file1" size="30" id="file1" /></td>
 							</tr>
 							<?}?>
+							<!--
 							<tr>
 								<td align="right"><label for="person" style="color: #AF0000;">聯絡人：</label></td>
-								<td><input type="text" name="person" id="person" style="font-size: 14pt; height: 25px;" class="textstyle titleHintBox" title="請輸入聯絡人" value="<?=$row['act_req_person']?>" /></td>
+								<td><input type="text" name="person" id="person" style="font-size: 14pt; height: 25px;" class="textstyle titleHintBox" title="請輸入聯絡人" value="<?//=$row['news_person']?>" /></td>
 							</tr>
 							<tr>
 								<td align="right"><label for="office" style="color: #AF0000;">發佈單位：</label></td>
-								<td><input type="text" name="office" id="office" size="30" style="font-size: 14pt; height: 25px;" class="textstyle titleHintBox" title="請輸入發佈單位" value="<?=$row['act_req_office']?>" /></td>
+								<td><input type="text" name="office" id="office" size="30" style="font-size: 14pt; height: 25px;" class="textstyle titleHintBox" title="請輸入發佈單位" value="<?//=$row['news_office']?>" /></td>
 							</tr>
 							<tr>
 								<td align="right"><label for="phone" style="color: #AF0000;">聯絡電話：</label></td>
-								<td><input type="text" name="phone" id="phone" size="30" style="font-size: 14pt; height: 25px;" class="textstyle titleHintBox" title="請輸入聯絡電話" value="<?=$row['act_req_phone']?>" /></td>
+								<td><input type="text" name="phone" id="phone" size="30" style="font-size: 14pt; height: 25px;" class="textstyle titleHintBox" title="請輸入聯絡電話" value="<?//=$row['news_phone']?>" /></td>
 							</tr>
 							<tr>
 								<td align="right"><label for="email" style="color: #AF0000;">聯絡信箱：</label></td>
-								<td><input type="text" name="email" id="email" size="30" style="font-size: 14pt; height: 25px;" class="textstyle titleHintBox" title="請輸入聯絡信箱" value="<?=$row['act_req_email']?>" /></td>
-							</tr>
+								<td><input type="text" name="email" id="email" size="30" style="font-size: 14pt; height: 25px;" class="textstyle titleHintBox" title="請輸入聯絡信箱" value="<?//=$row['news_email']?>" /></td>
+							</tr>-->
 							<input type="hidden" name="act_id" id="act_id" value="<?=$id?>" />
 						</table>
 						

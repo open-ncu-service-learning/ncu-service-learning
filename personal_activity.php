@@ -54,8 +54,8 @@
 		$ass_dep = $row['assembly_dep'];
 */		
 		// 取出活動資料
-		$sql = "SELECT act_id, act_title, act_type, act_end_time, act_service_hour, act_pass_type FROM `activity` WHERE act_del = '0' AND act_admit_student LIKE '%$stuid%' UNION
-				SELECT act_id, act_title, act_type, act_end_time, act_service_hour, act_pass_type FROM `out_activity` WHERE act_del = '0' AND act_admit_student LIKE '%$stuid%'
+		$sql = "SELECT act_id, act_title, act_type, act_end_time, act_service_hour, act_pass_type FROM `activity` WHERE act_del = '0' AND act_admit = '1' AND act_admit_student LIKE '%$stuid%' UNION
+				SELECT act_id, act_title, act_type, act_end_time, act_service_hour, act_pass_type FROM `out_activity` WHERE act_del = '0' AND act_admit = '1' AND act_admit_student LIKE '%$stuid%'
 				ORDER BY `act_type`,`act_end_time` DESC
 			";
 		$ret = mysql_query($sql, $db) or die(mysql_error());

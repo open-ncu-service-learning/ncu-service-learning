@@ -291,19 +291,19 @@
 		// 核可
 		if($row['act_admit'] == 0)
 		{
-			$admit = "<a href=\"pass_admit_activity.php?id=$id&amp;view=1&amp;value=1\" style=\"color: #0066CC;\" onClick=\"return confirm('確定核可?');\"><img src=\"images/icon/admit.png\" style=\"border: none; width: 150px;\"/></a>";			
-			$reject = "<a href=\"pass_admit_activity.php?id=$id&amp;view=1&amp;value=2\" style=\"color: #0066CC;\" onClick=\"return confirm('確定拒絕?');\"><img src=\"images/icon/reject.png\" style=\"border: none; width: 150px;\"/></a>";			
+			$admit = "<a href=\"pass_admit_activity.php?id=$id&amp;view=1&amp;value=1\" style=\"color: #0066CC;\" onClick=\"return confirm('確定核可?');\"><img src=\"images/icon/admit.png\" style=\"border: none; width: 150px;\" alt=\"核可\" /></a>";			
+			$reject = "<a href=\"pass_admit_activity.php?id=$id&amp;view=1&amp;value=2\" style=\"color: #0066CC;\" onClick=\"return confirm('確定拒絕?');\"><img src=\"images/icon/reject.png\" style=\"border: none; width: 150px;\" alt=\"拒絕\" /></a>";			
 		}
 		elseif($row['act_admit'] == 1)
-			$admit = "<img src=\"images/icon/admitted.png\" style=\"border: none; width: 150px;\">";
+			$admit = "<img src=\"images/icon/admitted.png\" style=\"border: none; width: 150px;\" alt=\"已核可\">";
 		elseif($row['act_admit'] == 2)
-			$admit = "<img src=\"images/icon/rejected.png\" style=\"border: none; width: 150px;\">";
+			$admit = "<img src=\"images/icon/rejected.png\" style=\"border: none; width: 150px;\" alt=\"已拒絕\">";
 			
 		// 公告
 		if($row['act_post'] == 0)
-			$post = "<a href=\"pass_post_activity.php?id=$id&amp;view=1\" style=\"color: #0066CC;\" onClick=\"return confirm('確定公告?');\"><img src=\"images/icon/publish.png\" style=\"border: none; width: 150px;\"/></a>";			
+			$post = "<a href=\"pass_post_activity.php?id=$id&amp;view=1\" style=\"color: #0066CC;\" onClick=\"return confirm('確定公告?');\"><img src=\"images/icon/publish.png\" style=\"border: none; width: 150px;\" alt=\"公告\"/></a>";			
 		elseif($row['act_post'] == 1)
-			$post = "<img src=\"images/icon/published.png\" style=\"border: none; width: 150px;\">";
+			$post = "<img src=\"images/icon/published.png\" style=\"border: none; width: 150px;\" alt=\"已公告\" >";
 ?>
 				<table width="540" style="margin-top: 20px;" border="0" cellspacing="0" cellpadding="0">
 					<tr>

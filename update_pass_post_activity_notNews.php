@@ -33,7 +33,7 @@
 			$$var = time()."$i." . $filetype;
 			
 			if(move_uploaded_file($_FILES[$var]['tmp_name'], $dir.$$var)) {
-				$str_act .= ", act_file = '".$$var."'";
+				$str_act .= ", `act_file` = '".$$var."'";
 			} else {
 				echo
 				"
@@ -150,8 +150,8 @@
 					`act_description`      = '$des',
 					`act_service_hour`     = '$hour',
 					`act_pass_type`        = '$_POST[service_hour_type]',
-					`act_semester`         = '$semester',
-					`act_file`			   = '$str_act',
+					`act_semester`         = '$semester'
+					$str_act,
 					`act_link`             = '$_POST[link]',
 					`act_req_person`       = '$_POST[person]',
 					`act_req_office`       = '$_POST[office]',

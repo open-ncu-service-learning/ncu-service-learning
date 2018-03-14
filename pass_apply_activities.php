@@ -325,9 +325,9 @@
 										基本 <input type="text" name="service_hour_low" size="3" value="0" style="font-size: 14pt; height: 25px;" />小時 + 
 										高階 <input type="text" name="service_hour_high" size="3" value="0" style="font-size: 14pt; height: 25px;" />小時 <br />
 									<input type="radio" name="service_hour_type" value="4" />
-										依服務時數 (基本)<br />
+										依實際時數 (基本)<br />
 									<input type="radio" name="service_hour_type" value="5" />
-										依服務時數 (高階)<br />
+										依實際時數 (高階)<br />
 									<span style="color: red;">(若勾選依服務時數認證即不需填寫時數欄位)</span>
 								</td>
 							</tr>

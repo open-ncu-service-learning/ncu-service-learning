@@ -116,7 +116,7 @@ echo <<<EOD
     <td valign="top">7.認證要求：	<u>	$req</u> </td>
   </tr>
   <tr>
-    <td height="50" valign="top">8.單位承辦申請人:<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;       </u>&nbsp;&nbsp;聯絡電話:  <u>  $row[act_req_phone]          </u></td>
+    <td height="50" valign="top">8.單位承辦申請人:<u>  $row[act_req_person]     </u>&nbsp;&nbsp;聯絡電話:  <u>  $row[act_req_phone]          </u></td>
   </tr>
 
   <tr>

@@ -21,12 +21,14 @@ $(document).ready(function(){
 					<a href="https://www.facebook.com/NCU.servicelearing/" title="NCU 學務處服務學習辦公室"><img src="images/banner/fb_ser.jpg" alt="NCU 學務處服務學習辦公室" width="160" /></a>
 				</div>
 <?php
+
 	// 學生
 	if($_SESSION['valid_token'] == "1") {
 ?>
 				<ul style="margin-top: 15px;">
 					<li><a href="personal.php" title="時數查詢">時數查詢</a></li>
 					<li><a href="personal_activity.php" title="活動紀錄">活動紀錄</a></li>
+					<li><a href="pass_apply_out_activity.php" title="活動申請">活動申請</a></li>
 					<li><a href="https://docs.google.com/forms/d/e/1FAIpQLScgsTss_qiCtV4pfKKwdIu983imi7zc-yxk12iSRtBv564qhQ/viewform?c=0&w=1" title="系統bug回報">系統bug回報</a></li>
 				</ul>
 <?php
@@ -50,13 +52,14 @@ $(document).ready(function(){
 					<li><a href="pass_admin.php" title="網站管理員">網站管理員</a></li>
 					<li><a href="pass_post_news.php" title="新增公告">新增公告</a></li>
 					<li><a href="pass_approver.php" title="工作查詢">工作查詢</a></li>
-					<li><a href="pass_apply_activities.php" title="活動申請">活動申請</a></li>
-					<li><a href="pass_activities_manage.php" title="活動管理">活動管理</a></li>
+					<li><a href="pass_apply_activities.php" title="活動申請">活動申請 (團體)</a></li>
+					<li><a href="pass_apply_out_activity.php" title="活動申請">活動申請 (個人)</a></li>
+					<li><a href="pass_activities_manage.php" title="活動管理">活動管理 (團體)</a></li>
+					<li><a href="pass_out_activities_manage.php" title="活動管理">活動管理 (個人)</a></li>
 					<li><a href="pass_hour_admit.php" title="時數核可">時數核可</a></li>
 					<li><a href="pass_service_hour_admit.php" title="時數核可">依服務時數核可</a></li>
-					<li><a href="pass_apply_out_activity.php" title="活動申請">活動申請(個人)</a></li>
-					<li><a href="pass_out_activities_manage.php" title="活動管理">活動管理(個人)</a></li>
-					<li><a href="pass_out_hour_admit.php" title="時數核可">時數核可(個人)</a></li>
+
+					<!--<li><a href="pass_out_hour_admit.php" title="時數核可">時數核可(個人)</a></li>-->
 					<li><a href="pass_hour_query.php" title="時數查詢">時數查詢</a></li>
 					<!--<li><a href="pass_hour_query_dep.php" title="科系時數查詢">科系時數查詢</a></li>-->
 					<li><a href="pass_main_print.php" title="列印報表">列印報表</a></li>
