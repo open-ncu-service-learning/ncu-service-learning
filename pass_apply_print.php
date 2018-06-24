@@ -52,6 +52,18 @@ font-size-adjust:inherit;
 			break;
 		case 2:
 			$type = "生活知能";
+			if($row['act_life_sub']==1)
+				$lifesub = "大一週會";
+			else if($row['act_life_sub']==6)
+				$lifesub = "院週會";
+			else if($row['act_life_sub']==2)
+				$lifesub = "大一CPR";
+			else if($row['act_life_sub']==3)
+				$lifesub = "自我探索與生涯規劃";
+			else if($row['act_life_sub']==5)
+				$lifesub = "一般";
+			else if($row['act_life_sub']==4)
+				$lifesub = "國際視野";
 			break;
 		case 3:
 			$type = "人文藝術";
@@ -110,7 +122,7 @@ echo <<<EOD
 	<u></u></td>
   </tr>
   <tr>
-    <td valign="top">6.活動類型：<u> $type </u> </td>
+    <td valign="top">6.活動類型：<u> $type </u> &nbsp;&nbsp;<u>$lifesub</u></td>
   </tr>
   <tr>
     <td valign="top">7.認證要求：	<u>	$req</u> </td>

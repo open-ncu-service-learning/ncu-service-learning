@@ -56,7 +56,7 @@
 	$oldList = $row['act_admit_student'];
 
 	// 取出認證時數
-	switch($row['act_pass_type'])
+/*	switch($row['act_pass_type'])
 	{
 		case 1:
 			$service_hour = $row['act_service_hour'];	
@@ -115,7 +115,7 @@
 								`basic_art` = `basic_art`+".$service_hour."
 							WHERE
 								`user_student` = '%s'";
-			}/*
+			}*//*
 			$service_hour = $row['act_service_hour'];			
 			$sqlStr = "UPDATE `all_user`
 							SET
@@ -123,7 +123,7 @@
 								`user_basicHour` = `user_basicHour`+".$service_hour."
 							WHERE
 								`user_student` = '%s'";*/
-			break;
+/*			break;
 			
 		case 2:
 			$service_hour = $row['act_service_hour'];			
@@ -190,7 +190,7 @@
 								`user_advanHour` = `user_advanHour`+".$service_hour."
 							WHERE
 								`user_student` = '%s'";*/
-			break;
+/*			break;
 			
 		case 3:
 			$service_hour = explode(",", $row['act_service_hour']);
@@ -271,8 +271,8 @@
 								`user_advanHour` = `user_advanHour`+".$service_hour[1]."
 							WHERE
 								`user_student` = '%s'";*/
-			break;
-	}
+/*			break;
+	}*/
 	
 	// 若本次有新增
 	if($peopleStr)
@@ -288,11 +288,11 @@
 		$ret = mysql_query($sql, $db) or die(mysql_error());
 		
 		// 寫入時數
-		foreach($people as $student)
+	/*	foreach($people as $student)
 		{
 			$sql = sprintf($sqlStr, $student);
 			$ret = mysql_query($sql, $db) or die(mysql_error());
-		}
+		}*/
 	}
 	else	// 維持舊名單
 		$newList = $oldList;

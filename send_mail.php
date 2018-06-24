@@ -38,13 +38,14 @@ echo "<h2>費時 $timediff 秒</h2>";
 
 function send_to_all_recipient($db,$mail,$subject,$recipient,$content,$record){
 	// 取出資料
+	$year = date("Y");
 	if (in_array("grade_3_warning", $recipient)) {
 		echo "grade_3_warning";
 		$sql = 
 			"SELECT user_student,user_name,user_dep,user_email ".
 			"FROM `all_user` ".
 			"WHERE ".
-				"`user_class` LIKE '3%' AND ".
+				"`user_student` LIKE ".($year-1914)."'%' AND ".
 				"`qualified` = 0 AND ".
 				"`user_del` = 0 ".
 			"ORDER BY `user_dep_id` DESC ";
@@ -63,7 +64,7 @@ function send_to_all_recipient($db,$mail,$subject,$recipient,$content,$record){
 			"SELECT user_student,user_name,user_dep,user_email ".
 			"FROM `all_user` ".
 			"WHERE ".
-				"`user_class` LIKE '4%' AND ".
+				"`user_student` LIKE ".($year-1915)."'%' AND ".
 				"`qualified` = 0 AND ".
 				"`user_del` = 0 ".
 			"ORDER BY `user_dep_id` DESC ";
@@ -76,6 +77,25 @@ function send_to_all_recipient($db,$mail,$subject,$recipient,$content,$record){
 			mail_handler($db,$mail,$subject,$recipient,$content,$record,$row);
 		}
 	}
+}
+
+function alertlist_to_dep(){
+	$sql_grade3 = 
+			"SELECT user_student,user_name,user_dep,user_email ".
+			"FROM `all_user` ".
+			"WHERE ".
+				"`user_student` LIKE ".($year-1914)."'%' AND ".
+				"`qualified` = 0 AND ".
+				"`user_del` = 0 ".
+			"ORDER BY `user_dep_id` DESC ";
+	$sql_grade4 = 
+			"SELECT user_student,user_name,user_dep,user_email ".
+			"FROM `all_user` ".
+			"WHERE ".
+				"`user_student` LIKE ".($year-1915)."'%' AND ".
+				"`qualified` = 0 AND ".
+				"`user_del` = 0 ".
+			"ORDER BY `user_dep_id` DESC ";
 }
 
 function mail_handler($db,$mail,$subject,$recipient,$content,$record,$row){

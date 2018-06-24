@@ -23,7 +23,16 @@
 	require_once("pass_paging.php");
 	
 	// 取出資料
-	$sql = "SELECT * FROM `out_activity` WHERE act_del = '0' AND SUBSTR(act_begin_time, 1, 4) >= '$year' ORDER BY `act_id` DESC LIMIT $offset, $rowsPerPage";
+	$order = $_GET['orderby'];
+	if($order == "applydate"){
+		//申請日期
+		$sql = "SELECT * FROM `out_activity` WHERE act_del = '0' AND SUBSTR(act_begin_time, 1, 4) >= '$year' ORDER BY `act_id` DESC LIMIT $offset, $rowsPerPage";
+	}
+	else{
+		//活動日期
+		$sql = "SELECT * FROM `out_activity` WHERE act_del = '0' AND SUBSTR(act_begin_time, 1, 4) >= '$year' ORDER BY `act_begin_time` DESC LIMIT $offset, $rowsPerPage";
+	}
+	//$sql = "SELECT * FROM `out_activity` WHERE act_del = '0' AND SUBSTR(act_begin_time, 1, 4) >= '$year' ORDER BY `act_id` DESC LIMIT $offset, $rowsPerPage";
 	$ret = mysql_query($sql, $db) or die(mysql_error());
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -50,6 +59,17 @@
 			<div id="main">
 				<div id="welcome" class="post">
 					<h3>活動管理(個人)</h3>
+					<select onchange="location.href='pass_out_activities_manage.php?orderby='+this.value">
+						<optgroup label="排序依">
+							<?if($order == "applydate"){
+								echo "<option value=\"applydate\">申請日期</option><option value=\"actdate\">活動日期</option>";
+							}
+							else{
+								echo "<option value=\"actdate\">活動日期</option><option value=\"applydate\">申請日期</option>";
+							}
+							?>
+						</optgroup>
+					</select>
 					<table width="700" style="margin-top: 20px;" border="1" cellspacing="0" cellpadding="1">
 						<tr align="center">
 							<td width="350" height="30"><span style="color: #7F0000;">活動名稱</span></td>
@@ -57,7 +77,7 @@
 							<td width="80"><span style="color: #7F0000;">活動型態</span></td>
 							<td width="100"><span style="color: #7F0000;">申請時間</span></td>
 							<td width="30"><span style="color: #7F0000;">刪除</span></td>
-							<td width="30"><span style="color: #7F0000;">核可</span></td>
+							<td width="30"><span style="color: #7F0000;">已核發時數</span></td>
 						</tr>					
 <?php
 	while($row = mysql_fetch_assoc($ret)) {

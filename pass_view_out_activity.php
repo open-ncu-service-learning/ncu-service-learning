@@ -20,10 +20,11 @@
 	$sql = "SELECT * FROM `out_activity` WHERE `act_del` = '0' AND `act_id` = '$id'";
 	$ret = mysql_query($sql) or die(mysql_error());
 	$row = mysql_fetch_assoc($ret);
-	$stuid = $row['act_admit_student'];
-	$sql = "SELECT * FROM `all_user` WHERE `user_del` = '0' AND `user_student` = '$stuid'";
-	$ret = mysql_query($sql) or die(mysql_error());
-	$usrrow = mysql_fetch_assoc($ret);
+	//$stuid = $row['act_admit_student'];
+	
+	//$sql = "SELECT * FROM `all_user` WHERE `user_del` = '0' AND `user_student` = '$stuid'";
+	//$ret = mysql_query($sql) or die(mysql_error());
+	//$usrrow = mysql_fetch_assoc($ret);
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -66,6 +67,8 @@
 				$type = "生活知能";
 				if($row['act_sub']!="0")
 					$sub = "-".$row['act_sub'];
+				if($row['act_life_sub']==3)
+					$sub = $sub."&nbsp&nbsp&nbsp※自我探索與生涯規劃";
 				break;
 			case 3:
 				$type = "人文藝術";
@@ -104,7 +107,10 @@
 					<div class="story">
 
 						<?php
-							echo "<a href='pass_updateOutActivity.php?id=$row[act_id]'"." onClick=\"return confirm('確定修改?');\" style=\"color: #D57100;\"> 修改活動</a> \t";
+							if($row['act_admit']=='0'){
+								echo "<a href='pass_updateOutActivity.php?id=$row[act_id]'"." onClick=\"return confirm('確定修改?');\" style=\"color: #D57100;\"> 修改活動</a> \t";
+								echo "<a href='pass_out_hour_admit_student.php?id=$row[act_id]'"." onClick=\"return confirm('填寫申請人?');\" style=\"color: #D57100;\"> 填寫申請人</a> \t";
+							}
 						?>
 
 						<table style="table-layout:fixed" width="600" style="margin-top: 20px;" border="1" cellspacing="0" cellpadding="1">
@@ -173,22 +179,61 @@
 								<td><?$email=($row['act_req_email'] == NULL)?"無":$row['act_req_email']; echo $email;?></td>
 							</tr>
 							<tr height="30">
-								<td align="left"><span class="highlight">申請人學號</span></td>
-								<td><?=$stuid;?></td>
-							</tr>
-							<tr height="30">
-								<td align="left"><span class="highlight">申請人姓名</span></td>
-								<td><?=$usrrow['user_name'];?></td>
-							</tr>
-							<!--<tr height="30">
-								<td align="left"><span class="highlight">聯絡電話</span></td>
-								<td><?//$phone=($row['act_req_phone'] == NULL)?"無":$row['act_req_phone']; echo $phone;?></td>
-							</tr>-->
-							<tr height="30">
-								<td align="left"><span class="highlight">申請人信箱</span></td>
-								<td><?=$usrrow['user_email'];?></td>
+								<td align="left"><span class="highlight">核發人員</span></td>
+								<td>
+								<?php
+									if($row['act_approver']){
+										$account= $row['act_approver'];
+										$sql = "SELECT * FROM `admin` WHERE `ad_account` = '$account'";
+										$ret = mysql_query($sql) or die(mysql_error());
+										if ($approver = mysql_fetch_assoc($ret))
+											{
+												echo $approver['ad_account'];
+												echo ' ';
+												echo $approver['ad_username'];
+											}
+										}
+									else
+										echo "無";
+								?>
+								</td>
 							</tr>
 						</table>
+						<br>
+<?php
+	if($row['act_admit_student'] != "")
+	{
+		$list = explode(",", $row['act_admit_student']);
+		$number = sizeof($list);
+?>
+						<table style="table-layout:fixed" width="600" style="margin-top: 20px;" border="1" cellspacing="0" cellpadding="1">
+							<tr height="30">
+								<td align="left" width="120"><span class="highlight">申請人學號</span></td>
+								<td align="left" width="120"><span class="highlight">申請人姓名</span></td>
+								<td align="left" width="360"><span class="highlight">申請人信箱</span></td>
+							</tr>
+					
+<?php
+		foreach($list as $stuid)
+		{
+			$sql = "SELECT * FROM `all_user` WHERE `user_del` = '0' AND `user_student` = '$stuid'";
+			$ret = mysql_query($sql, $db) or die(mysql_error());
+			$usrrow = mysql_fetch_assoc($ret);
+		
+?>				
+							<tr height="30">							
+								<td align="left"><?=$usrrow['user_student']?></td>
+								<td align="left"><?=$usrrow['user_name']?>
+								<td align="left"><?=$usrrow['user_email']?></td>													
+							</tr>						
+					
+<?php
+		}
+?>
+						</table>
+<?php		
+	}
+?>	
 					</div>
 				</div>
 				
@@ -197,9 +242,10 @@
 						<?php
 							echo "<td><a href='pass_del_out_activity.php?id=$id'"." onClick=\"return confirm('確定拒絕?');\"><img src=\"images/icon/reject.png\" style=\"border: none; width: 150px;\" alt=\"拒絕\"/></a></td>";
 							if($row['act_admit'] == 0)
-								echo "<td><a href='pass_admit_out_activity.php?id=$row[act_id]'"." onClick=\"return confirm('確定核可?');\"><img src=\"images/icon/admit.png\" style=\"border: none; width: 150px;\" alt=\"核可\"/></a></td>";
+								//echo "<td><a href='pass_admit_out_activity.php?id=$row[act_id]'"." onClick=\"return confirm('確定核可?');\"><img src=\"images/icon/admit.png\" style=\"border: none; width: 150px;\" alt=\"核可\"/></a></td>";
+								echo "<td><a href='pass_admit_out_activity.php?id=$row[act_id]'"." onClick=\"return confirm('確定發出時數?(發出時數後不能再對活動做更改)');\" style=\"color: red\">核發時數<br>(發出時數後不能再對活動做更改)</a></td>";
 							else
-								echo "<td>已核可</td>";
+								echo "<td>已核發時數</td>";
 						?>
 					</tr>
 				</table>

@@ -290,7 +290,7 @@
 										<option value="人文服務或藝文導覽"<?if($row['act_sub'] == "人文服務或藝文導覽" && $row['act_type'] == 1) echo "selected=\"selected\""; ?>/>人文服務或藝文導覽</option>
 										<option value="其它"<?if($row['act_sub'] == "其它" && $row['act_type'] == 1) echo "selected=\"selected\""; ?>/>其它</option>
 									</select>
-									<br><input type="radio" name="type" id="type2" value="2" <?if($row['act_type'] == 2) echo "checked"; ?>/> 生活知能學習
+									<br><input type="radio" name="type" id="type2" value="2" <?if($row['act_type'] == 2) echo "checked"; ?>/>生活知能學習
 									<select name="life_type" id="type2">
 										<option value="社課"<?if($row['act_sub'] == "社課" && $row['act_type'] == 2) echo "selected=\"selected\""; ?>/>社課</option>
 										<option value="專題講座"<?if($row['act_sub'] == "專題講座" && $row['act_type'] == 2) echo "selected=\"selected\""; ?>/>專題講座</option>
@@ -300,6 +300,7 @@
 										<option value="研討"<?if($row['act_sub'] == "研討" && $row['act_type'] == 2) echo "selected=\"selected\""; ?>/>研討</option>
 										<option value="其它"<?if($row['act_sub'] == "其它" && $row['act_type'] == 2) echo "selected=\"selected\""; ?>/>其它</option>
 									</select>
+									&nbsp&nbsp&nbsp <input type="checkbox" name="life_sub_3" id="life_sub_3" value="true" <?if($row['act_life_sub'] == 3) echo "checked" ?>/>自我探索與生涯規劃
 									<br><input type="radio" name="type" id="type3" value="3" <?if($row['act_type'] == 3) echo "checked"; ?> /> 人文藝術學習
 									<select name="art_type" id="art_type" style="font-size: 14pt; height: 25px;">
 										<option value="社課"<?if($row['act_sub'] == "社課" && $row['act_type'] == 3) echo "selected=\"selected\""; ?>/>社課</option>

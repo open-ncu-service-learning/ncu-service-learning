@@ -19,10 +19,35 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta HTTP-equiv="Content-Type" content="text/html; charset=GBK">
+		<meta HTTP-equiv="pragma" content="no-cache">
 		<title>學生護照統計表</title>
-		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="./FileSaver.js-master/FileSaver.min.js"></script>
+		<script>
+			$(document).ready(function(){
+				$('button').removeAttr('disabled');
+				$('#xsl').click(function () {
+					var title = "學生護照統計表";
+					var year = "<?=$_GET['semester']?>";
+					var blob = new Blob([document.getElementById('outputData').innerHTML], {
+						type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+					});
+					var strFile = year+title+".xls";
+					saveAs(blob, strFile);
+					return false;
+				});
+			})
+		</script>
 	</head>
 	<body>
+	<div id="outputData">
+		<?php
+			require_once("conn/db.php");
+			
+			// 時間
+			$year = date("Y")-1911;
+			$today = $year.date("md");?>
 		<table width="1000" align="center" border="0">
 			<tr align="center">
 				<td><strong style="font-size: 14pt;">國立中央大學學生學習護照</strong></td>
@@ -31,12 +56,12 @@
 				<td>統計日期: <?=$today ?></td>
 			</tr>
 		</table>
-		<table width="2000" border="1" align="center" cellpadding="0" cellspacing="0" bordercolor="#000000">
+		<table width="2000" border="1" align="center" cellpadding="0" cellspacing="0" bordercolor="#000000" id="table1">
 			<tr align="center">
 				<td width="40" rowspan="1">類別碼</td>
 				<td width="40" rowspan="1">類別</td>
 				<td width="100" rowspan="1">學號</td>
-				<td width="100" rowspan="1""><p>姓名</p></td>
+				<td width="100" rowspan="1"><p>姓名</p></td>
 				<td width="100" rowspan="1">科系</td>
 				<td width="100" rowspan="1">基本_服務學習</td>
 				<td width="100" rowspan="1">高階_服務學習</td>
@@ -46,13 +71,8 @@
 				<td width="100" rowspan="1">高階_人文藝術</td>
 				<td width="60" rowspan="1">總時數</td>
 			</tr>	
-<?php
-	require_once("conn/db.php");
-	
-	// 時間
-	$year = date("Y")-1911;
-	$today = $year.date("md");
-	
+
+<?	
 	//年度
 	
 	$semester = $_GET['semester'];
@@ -241,5 +261,10 @@
 				
 }
 ?>
+	</table>
+	</div>
+	<form name="f1"> 
+		<button id="xsl" disabled>excel</button>
+	</form>
 	</body>
 </html>

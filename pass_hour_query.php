@@ -116,8 +116,8 @@
 		
 		
 		// 取出活動資料
-		$sql = "SELECT act_id, act_title, act_type, act_begin_time, act_service_hour, act_pass_type FROM `activity` WHERE act_del = '0' AND act_admit_student LIKE '%$stuid%' UNION
-				SELECT act_id, act_title, act_type, act_begin_time, act_service_hour, act_pass_type FROM `out_activity` WHERE act_del = '0' AND act_admit_student LIKE '%$stuid%'
+		$sql = "SELECT act_id, act_title, act_type, act_life_sub, act_begin_time, act_service_hour, act_pass_type FROM `activity` WHERE act_del = '0' AND act_admit_student LIKE '%$stuid%' UNION
+				SELECT act_id, act_title, act_type, act_life_sub, act_begin_time, act_service_hour, act_pass_type FROM `out_activity` WHERE act_del = '0' AND act_admit = '1' AND act_admit_student LIKE '%$stuid%'
 				ORDER BY `act_type`,`act_begin_time` DESC
 			";
 		$ret = mysql_query($sql) or die(mysql_error());
@@ -151,15 +151,21 @@
 				switch($row['act_type']) {
 					case 1:
 						$type = "服務學習";
-						$index = 0;
+						//$index = 0;
 						break;
 					case 2:
 						$type = "生活知能";
-						$index = 2;
+						if($stuid>106000000 && $stuid<951001029 && $row['act_life_sub'] == 4){
+							$type = "國際視野";
+						}
+						//$index = 2;
 						break;
 					case 3:
 						$type = "人文藝術";
-						$index = 4;
+						//$index = 4;
+						break;
+					case 4:
+						$type = "國際視野";
 						break;
 					default:
 						$type = "無";

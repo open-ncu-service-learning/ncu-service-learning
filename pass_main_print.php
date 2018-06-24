@@ -52,6 +52,7 @@
 							<li><a href="pass_print_em.php?semester=103" title="103學年度">103學年度</a></li>
 							<li><a href="pass_print_em.php?semester=104" title="104學年度">104學年度</a></li>
 							<li><a href="pass_print_em.php?semester=105" title="105學年度">105學年度</a></li>
+							<li><a href="pass_print_em.php?semester=106" title="106學年度">106學年度</a></li>
 						<ul>
 					
 				</div>
@@ -67,6 +68,7 @@
 							<li><a href="pass_print.php?semester=103" title="103學年度">103學年度</a></li>
 							<li><a href="pass_print.php?semester=104" title="104學年度">104學年度</a></li>
 							<li><a href="pass_print.php?semester=105" title="105學年度">105學年度</a></li>
+							<li><a href="pass_print.php?semester=106" title="106學年度">106學年度</a></li>
 						<ul>
 					
 				</div>
@@ -79,9 +81,10 @@
 							<li><a href="pass_print_activity.php?semester=100" title="100學年度活動">100學年度</a></li>
 							<li><a href="pass_print_activity.php?semester=101" title="101學年度活動">101學年度</a></li>
 							<li><a href="pass_print_activity.php?semester=102" title="102學年度活動">102學年度</a></li>
-							<li><a href="pass_print_activity.php?semester=103" title="103學年度活動">103學年度</a<li>
+							<li><a href="pass_print_activity.php?semester=103" title="103學年度活動">103學年度</a></li>
 							<li><a href="pass_print_activity.php?semester=104" title="104學年度活動">104學年度</a></li>
-							<li><a href="pass_print_activity.php?semester=105" title="104學年度活動">105學年度</a></li>
+							<li><a href="pass_print_activity.php?semester=105" title="105學年度活動">105學年度</a></li>
+							<li><a href="pass_print_activity.php?semester=106" title="106學年度活動">106學年度</a></li>
 						<ul>
 				</div>
 				<div id="print_out_activity" style="font-size: 20px; color: #1F1F1F; line-height: 1.5;">
@@ -96,6 +99,7 @@
 							<li><a href="pass_print_out_activity.php?semester=103" title="103學年度活動">103學年度</a></li>
 							<li><a href="pass_print_out_activity.php?semester=104" title="104學年度活動">104學年度</a></li>
 							<li><a href="pass_print_out_activity.php?semester=105" title="105學年度活動">105學年度</a></li>
+							<li><a href="pass_print_out_activity.php?semester=106" title="106學年度活動">106學年度</a></li>
 						<ul>
 				</div>
 				<!--<div id="print_onlineApply" style="font-size: 20px; color: #1F1F1F; line-height: 1.5;">
@@ -105,6 +109,107 @@
 						<ul>
 				</div>
 				-->
+				<div id="print_out_activity" style="font-size: 20px; color: #1F1F1F; line-height: 1.5;">
+					<h3 style="margin-top: 10px;">各系活動統計表</h3>
+						<ul style="margin-top: 15px;">
+							<li>103學年度</li>
+								<a href="pass_print_dep_act.php?semester=103&dep=101" title="103101">中國文學系</a>
+								<a href="pass_print_dep_act.php?semester=103&dep=102" title="103102">英美語文系</a>
+								<a href="pass_print_dep_act.php?semester=103&dep=103" title="103103">法國語文系</a></br>
+								<a href="pass_print_dep_act.php?semester=103&dep=202" title="103202">物理學系</a>
+								<a href="pass_print_dep_act.php?semester=103&dep=201" title="103201">數學系</a>
+								<a href="pass_print_dep_act.php?semester=103&dep=203" title="103203">化學系</a>
+								<a href="pass_print_dep_act.php?semester=103&dep=206" title="103206">光電科學與工程學系</a>
+								<a href="pass_print_dep_act.php?semester=103&dep=208" title="103208">理學院學士班</a></br>
+								<a href="pass_print_dep_act.php?semester=103&dep=304" title="103304">化學工程與材料工程學系</a>
+								<a href="pass_print_dep_act.php?semester=103&dep=302" title="103302">土木工程學系</a>
+								<a href="pass_print_dep_act.php?semester=103&dep=303" title="103303">機械工程學系</a></br>
+								<a href="pass_print_dep_act.php?semester=103&dep=401" title="103401">企業管理學系</a>
+								<a href="pass_print_dep_act.php?semester=103&dep=403" title="103403">資訊管理學系</a>
+								<a href="pass_print_dep_act.php?semester=103&dep=408" title="103408">財務金融學系</a>
+								<a href="pass_print_dep_act.php?semester=103&dep=409" title="103409">經濟學系</a></br>
+								<a href="pass_print_dep_act.php?semester=103&dep=501" title="103501">電機工程學系</a>
+								<a href="pass_print_dep_act.php?semester=103&dep=502" title="103502">資訊工程學系</a>
+								<a href="pass_print_dep_act.php?semester=103&dep=503" title="103503">通訊工程學系</a></br>
+								<a href="pass_print_dep_act.php?semester=103&dep=602" title="103602">地球科學學系</a>
+								<a href="pass_print_dep_act.php?semester=103&dep=601" title="103601">大氣科學學系</a></br>
+								<a href="pass_print_dep_act.php?semester=103&dep=707" title="103707">客家語文暨社會科學學系</a></br>
+								<a href="pass_print_dep_act.php?semester=103&dep=801" title="103801">生命科學系</a>
+								<a href="pass_print_dep_act.php?semester=103&dep=802" title="103802">生醫科學與工程學系</a></br>
+							<li>104學年度</li>
+								<a href="pass_print_dep_act.php?semester=104&dep=101" title="104101">中國文學系</a>
+								<a href="pass_print_dep_act.php?semester=104&dep=102" title="104102">英美語文系</a>
+								<a href="pass_print_dep_act.php?semester=104&dep=103" title="104103">法國語文系</a></br>
+								<a href="pass_print_dep_act.php?semester=104&dep=202" title="104202">物理學系</a>
+								<a href="pass_print_dep_act.php?semester=104&dep=201" title="104201">數學系</a>
+								<a href="pass_print_dep_act.php?semester=104&dep=203" title="104203">化學系</a>
+								<a href="pass_print_dep_act.php?semester=104&dep=206" title="104206">光電科學與工程學系</a>
+								<a href="pass_print_dep_act.php?semester=104&dep=208" title="104208">理學院學士班</a></br>
+								<a href="pass_print_dep_act.php?semester=104&dep=304" title="104304">化學工程與材料工程學系</a>
+								<a href="pass_print_dep_act.php?semester=104&dep=302" title="104302">土木工程學系</a>
+								<a href="pass_print_dep_act.php?semester=104&dep=303" title="104303">機械工程學系</a></br>
+								<a href="pass_print_dep_act.php?semester=104&dep=401" title="104401">企業管理學系</a>
+								<a href="pass_print_dep_act.php?semester=104&dep=403" title="104403">資訊管理學系</a>
+								<a href="pass_print_dep_act.php?semester=104&dep=408" title="104408">財務金融學系</a>
+								<a href="pass_print_dep_act.php?semester=104&dep=409" title="104409">經濟學系</a></br>
+								<a href="pass_print_dep_act.php?semester=104&dep=501" title="104501">電機工程學系</a>
+								<a href="pass_print_dep_act.php?semester=104&dep=502" title="104502">資訊工程學系</a>
+								<a href="pass_print_dep_act.php?semester=104&dep=503" title="104503">通訊工程學系</a></br>
+								<a href="pass_print_dep_act.php?semester=104&dep=602" title="104602">地球科學學系</a>
+								<a href="pass_print_dep_act.php?semester=104&dep=601" title="104601">大氣科學學系</a></br>
+								<a href="pass_print_dep_act.php?semester=104&dep=707" title="104707">客家語文暨社會科學學系</a></br>
+								<a href="pass_print_dep_act.php?semester=104&dep=801" title="104801">生命科學系</a>
+								<a href="pass_print_dep_act.php?semester=104&dep=802" title="104802">生醫科學與工程學系</a></br>
+							<li>105學年度</li>
+								<a href="pass_print_dep_act.php?semester=105&dep=101" title="105101">中國文學系</a>
+								<a href="pass_print_dep_act.php?semester=105&dep=102" title="105102">英美語文系</a>
+								<a href="pass_print_dep_act.php?semester=105&dep=103" title="105103">法國語文系</a></br>
+								<a href="pass_print_dep_act.php?semester=105&dep=202" title="105202">物理學系</a>
+								<a href="pass_print_dep_act.php?semester=105&dep=201" title="105201">數學系</a>
+								<a href="pass_print_dep_act.php?semester=105&dep=203" title="105203">化學系</a>
+								<a href="pass_print_dep_act.php?semester=105&dep=206" title="105206">光電科學與工程學系</a>
+								<a href="pass_print_dep_act.php?semester=105&dep=208" title="105208">理學院學士班</a></br>
+								<a href="pass_print_dep_act.php?semester=105&dep=304" title="105304">化學工程與材料工程學系</a>
+								<a href="pass_print_dep_act.php?semester=105&dep=302" title="105302">土木工程學系</a>
+								<a href="pass_print_dep_act.php?semester=105&dep=303" title="105303">機械工程學系</a></br>
+								<a href="pass_print_dep_act.php?semester=105&dep=401" title="105401">企業管理學系</a>
+								<a href="pass_print_dep_act.php?semester=105&dep=403" title="105403">資訊管理學系</a>
+								<a href="pass_print_dep_act.php?semester=105&dep=408" title="105408">財務金融學系</a>
+								<a href="pass_print_dep_act.php?semester=105&dep=409" title="105409">經濟學系</a></br>
+								<a href="pass_print_dep_act.php?semester=105&dep=501" title="105501">電機工程學系</a>
+								<a href="pass_print_dep_act.php?semester=105&dep=502" title="105502">資訊工程學系</a>
+								<a href="pass_print_dep_act.php?semester=105&dep=503" title="105503">通訊工程學系</a></br>
+								<a href="pass_print_dep_act.php?semester=105&dep=602" title="105602">地球科學學系</a>
+								<a href="pass_print_dep_act.php?semester=105&dep=601" title="105601">大氣科學學系</a></br>
+								<a href="pass_print_dep_act.php?semester=105&dep=707" title="105707">客家語文暨社會科學學系</a></br>
+								<a href="pass_print_dep_act.php?semester=105&dep=801" title="105801">生命科學系</a>
+								<a href="pass_print_dep_act.php?semester=105&dep=802" title="105802">生醫科學與工程學系</a></br>
+							<li>106學年度</li>
+								<a href="pass_print_dep_act.php?semester=106&dep=101" title="106101">中國文學系</a>
+								<a href="pass_print_dep_act.php?semester=106&dep=102" title="106102">英美語文系</a>
+								<a href="pass_print_dep_act.php?semester=106&dep=103" title="106103">法國語文系</a></br>
+								<a href="pass_print_dep_act.php?semester=106&dep=202" title="106202">物理學系</a>
+								<a href="pass_print_dep_act.php?semester=106&dep=201" title="106201">數學系</a>
+								<a href="pass_print_dep_act.php?semester=106&dep=203" title="106203">化學系</a>
+								<a href="pass_print_dep_act.php?semester=106&dep=206" title="106206">光電科學與工程學系</a>
+								<a href="pass_print_dep_act.php?semester=106&dep=208" title="106208">理學院學士班</a></br>
+								<a href="pass_print_dep_act.php?semester=106&dep=304" title="106304">化學工程與材料工程學系</a>
+								<a href="pass_print_dep_act.php?semester=106&dep=302" title="106302">土木工程學系</a>
+								<a href="pass_print_dep_act.php?semester=106&dep=303" title="106303">機械工程學系</a></br>
+								<a href="pass_print_dep_act.php?semester=106&dep=401" title="106401">企業管理學系</a>
+								<a href="pass_print_dep_act.php?semester=106&dep=403" title="106403">資訊管理學系</a>
+								<a href="pass_print_dep_act.php?semester=106&dep=408" title="106408">財務金融學系</a>
+								<a href="pass_print_dep_act.php?semester=106&dep=409" title="106409">經濟學系</a></br>
+								<a href="pass_print_dep_act.php?semester=106&dep=501" title="106501">電機工程學系</a>
+								<a href="pass_print_dep_act.php?semester=106&dep=502" title="106502">資訊工程學系</a>
+								<a href="pass_print_dep_act.php?semester=106&dep=503" title="106503">通訊工程學系</a></br>
+								<a href="pass_print_dep_act.php?semester=106&dep=602" title="106602">地球科學學系</a>
+								<a href="pass_print_dep_act.php?semester=106&dep=601" title="106601">大氣科學學系</a></br>
+								<a href="pass_print_dep_act.php?semester=106&dep=707" title="106707">客家語文暨社會科學學系</a></br>
+								<a href="pass_print_dep_act.php?semester=106&dep=801" title="106801">生命科學系</a>
+								<a href="pass_print_dep_act.php?semester=106&dep=802" title="106802">生醫科學與工程學系</a></br>
+						<ul>
+				</div>
 			</div>
 		</div>
 		</div>

@@ -16,7 +16,7 @@ $(document).ready(function(){
 			<div id="sidebar" style="width:24%; margin-left:-3%;">
 				<div id="banner" style="margin-top: 15px;">
 
-					<!--<a href="http://140.115.185.138/weeklylearning/Learning/Learning_index.php" title="大一週會報名區"><img src="images/banner/ncu_banner3.png" alt="大一週會報名區" width="160" height="50px" /></a><!--大一週會報名區<br> <font color="#ff0000" size="2">請於101年9月21日前完成報名</font></a>-->
+					<a href="http://140.115.185.138/weeklylearning/Learning/Learning_index.php" title="大一週會報名區"><img src="images/banner/ncu_banner3.png" alt="大一週會報名區" width="160" height="50px" /><br><!--</a>大一週會報名區<br> <font color="#ff0000" size="2">請於101年9月21日前完成報名</font></a>-->
 					<a href="https://goo.gl/forms/RzpC5Q3tIaWfUnC52" title="東南亞國際志工團隊報名">東南亞國際志工團隊報名<br></a>
 					<a href="https://www.facebook.com/NCU.servicelearing/" title="NCU 學務處服務學習辦公室"><img src="images/banner/fb_ser.jpg" alt="NCU 學務處服務學習辦公室" width="160" /></a>
 				</div>
@@ -28,7 +28,7 @@ $(document).ready(function(){
 				<ul style="margin-top: 15px;">
 					<li><a href="personal.php" title="時數查詢">時數查詢</a></li>
 					<li><a href="personal_activity.php" title="活動紀錄">活動紀錄</a></li>
-					<li><a href="pass_apply_out_activity.php" title="活動申請">活動申請</a></li>
+					<!--<li><a href="pass_apply_out_activity.php" title="活動申請">活動申請</a></li>-->
 					<li><a href="https://docs.google.com/forms/d/e/1FAIpQLScgsTss_qiCtV4pfKKwdIu983imi7zc-yxk12iSRtBv564qhQ/viewform?c=0&w=1" title="系統bug回報">系統bug回報</a></li>
 				</ul>
 <?php

@@ -13,14 +13,16 @@
 		?>
 		<a href="index.php" title=\"首頁\" style=\"color:#ffffff;\"><img class="mySlides" src="./images/cover.jpg" style="width:100%"></a>
 		<!--<a href="http://service-learning.ncu.edu.tw/pass_news_content.php?news_id=947" title=\"服務學習績優\" style=\"color:#ffffff;\"><img class="mySlides" src="./images/servicelearn.jpg" style="width:100%"></a>-->
-		<a href="https://www.youtube.com/watch?v=WqTEmA2bMI0" title=\"東南亞國際志工\" style=\"color:#ffffff;\"><img class="mySlides" src="./images/vietnam.jpg" style="width:100%"></a>
-
+		<a href="https://www.youtube.com/watch?v=WqTEmA2bMI0" title=\"東南亞國際志工\" style=\"color:#ffffff;\"><img class="mySlides" src="./images/vietnam2.jpg" style="width:100%"></a>
+		<a href="http://service-learning.ncu.edu.tw/pass_news_content.php?news_id=993" title=\"香港中文大學暑期志工交流\" style=\"color:#ffffff;\"><img class="mySlides" src="./images/CUHK.jpg" style="width:100%"></a>
+		<!--<a href="http://service-learning.ncu.edu.tw/pass_news_content.php?news_id=1000" title=\"服務學習金銀質獎\" style=\"color:#ffffff;\"><img class="mySlides" src="./images/price106.jpg" style="width:100%"></a>-->
 		<div class="w3-center w3-section w3-large w3-text-white w3-display-bottommiddle" style="width:100%">
 			<div class="w3-left w3-padding-left w3-hover-text-khaki" onclick="plusDivs(-1)">&#10094;</div>
 			<div class="w3-right w3-padding-right w3-hover-text-khaki" onclick="plusDivs(1)">&#10095;</div>
 			<span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(1)"></span>
 			<span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(2)"></span>
-			<!--<span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></span>-->
+			<span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></span>
+			<!--<span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(4)"></span>-->
 		</div>			
 	</div>
 	<style>

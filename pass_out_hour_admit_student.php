@@ -178,13 +178,15 @@
 <!-- Archives -->
 			<div id="main">
 				<div id="welcome" class="post">
-					<a href="pass_out_hour_admit.php" style="float: right; color: red">> 返回時數核可</a>
-					<h3>時數核可(校外)</h3>
+					<a href="pass_view_out_activity.php?act_id=<?=$act_id?>" style="float: right; color: red">> 返回活動</a>
+					<!--<a href="pass_out_hour_admit.php" style="float: right; color: red">> 返回時數核可</a>-->
+					<h3>增加申請人</h3>
+					<label style="color: red; font-size: 15pt;">！不會發時數給申請人！</label>
 					<ul style="margin-top: 20px; font-size: 14pt;">
 						<li>活動名稱：<?=$row['act_title']?></li>
 						<li>活動時間：<?=$row['act_begin_time']." ~ ".$row['act_end_time']?></li>
 						<li>活動地點：<?=$row['act_location']?></li>
-						<li>活動型態：<?=$type.$life_sub?></li>
+						<li>活動型態：<?=$type//.$life_sub?></li>
 						<li>護照型態：<?=$pass?></li>
 						<li>認證時數：<?=$hour?></li>
 					</ul>

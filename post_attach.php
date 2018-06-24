@@ -111,6 +111,7 @@
 <tr><h5 style="color:#F88017">學生學習護照</h5></tr>
 <?php	
 		$i = 1;
+		echo "<label style='color:#FF0000'>※ 學生學習護照活動認證申請表(團體) → 請有帳密單位使用線上申請</label>";
 		while($row=mysql_fetch_array($result)){		
 		if($row['attach_classify'] == 1){		
 ?>

@@ -23,8 +23,18 @@
 	require_once("pass_paging.php");
 	
 	// 取出資料
+	$order = $_GET['orderby'];
+	if($order == "applydate"){
+		//申請日期
+		$sql = "SELECT * FROM `activity` WHERE act_del = '0' AND act_year  >= 99 AND `act_admit` != 2 ORDER BY `act_id` DESC LIMIT $offset, $rowsPerPage";
+	}
+	else{
+		//活動日期
+		$sql = "SELECT * FROM `activity` WHERE act_del = '0' AND act_year  >= 99 AND `act_admit` != 2 ORDER BY `act_begin_time` DESC LIMIT $offset, $rowsPerPage";
+
+	}
 	//$sql = "SELECT * FROM `activity` WHERE act_del = '0' AND act_begin_time >= CURDATE() ORDER BY `act_end_time` ASC LIMIT $offset, $rowsPerPage";
-	$sql = "SELECT * FROM `activity` WHERE act_del = '0' AND act_year  >= 99 AND `act_admit` != 2 ORDER BY `act_begin_time` DESC LIMIT $offset, $rowsPerPage";
+	//$sql = "SELECT * FROM `activity` WHERE act_del = '0' AND act_year  >= 99 AND `act_admit` != 2 ORDER BY `act_begin_time` DESC LIMIT $offset, $rowsPerPage";
 	$ret = mysql_query($sql, $db) or die(mysql_error());
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -51,6 +61,17 @@
 			<div id="main">
 				<div id="welcome" class="post">
 					<h3>活動管理(校內)</h3>
+					<select onchange="location.href='pass_activities_manage.php?orderby='+this.value">
+						<optgroup label="排序依">
+							<?if($order == "applydate"){
+								echo "<option value=\"applydate\">申請日期</option><option value=\"actdate\">活動日期</option>";
+							}
+							else{
+								echo "<option value=\"actdate\">活動日期</option><option value=\"applydate\">申請日期</option>";
+							}
+							?>
+						</optgroup>
+					</select>
 					<table width="680" style="margin-top: 20px;" border="1" cellspacing="0" cellpadding="1">
 						<tr align="center">
 							<td width="320" height="30"><span style="color: #7F0000;">活動名稱</span></td>

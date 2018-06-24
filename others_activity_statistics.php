@@ -16,34 +16,13 @@
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<title>活動報表</title>
-		<!--<script LANGUAGE='JavaScript'>
+		<script LANGUAGE='JavaScript'>
 			function printPage() {
 			   window.print();
 			}
-		</script>-->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<script src="./FileSaver.js-master/FileSaver.min.js"></script>
-		<script>
-			$(document).ready(function(){
-				$('button').removeAttr('disabled');
-				$('#load').html('finish');
-				$('#print').click(function printPage(){
-					window.print();
-				})
-				$('#xsl').click(function () {
-					var title = document.getElementById('a').innerHTML.split(" ");
-					var year = document.getElementById('b').innerHTML;
-					var blob = new Blob([document.getElementById('outputData').innerHTML], {
-						type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
-					});
-					var strFile = year+title[4]+".xls";
-					saveAs(blob, strFile);
-					return false;
-				});
-			})
 		</script>
 	</head>
-	<body>
+	<body onLoad='printPage()'>
 	
 <?php
 	require_once("conn/db.php");
@@ -61,15 +40,9 @@
 	else
 		$index = 2;
 ?>
-	<div>
-		<td><button id="print" disabled>pdf / printer</button></td>
-		<td><button id="xsl" disabled>excel</button></td>
-		<td><a id="load">loading...</a></td>
-	</div>
-	<div id="outputData">
-		<table width="1000" align="center" border="0">
+<table width="1000" align="center" border="0">
 			<tr align="center">
-				<td><strong style="font-size: 14pt;" id="a">國立中央大學學生學習護照<span style="color: red;" id="b"><?=$semester?></span>年度 個人申請活動時數統計表</strong></td>
+				<td><strong style="font-size: 14pt;">國立中央大學學生學習護照<span style="color: red;"><?=$semester?></span>年度 活動時數統計表</strong></td>
 			</tr>
 			<tr align="right">
 				<td>統計日期: <?=$today ?></td>
@@ -84,25 +57,23 @@
 				<!--<td width="100">活動數量</td>-->
 				<td width="100">基本時數</td>
 				<td width="100">高階時數</td>
-				<!--<td width="100">認證人數</td>-->
+				<td width="100">認證人數</td>
 			</tr>
 <?	
 	//活動
-	$sql = "SELECT act_id,act_title,act_begin_time,act_end_time,act_type,act_service_hour,act_pass_type,act_req_office FROM `out_activity` WHERE `act_begin_time` between '$ADsemester-08-01 00:00:00' and '$ADsemester_1-07-31 00:00:00' AND `act_del` = 0 AND `act_admit` = '1' ORDER BY act_req_office,act_type,act_begin_time DESC";
+	$sql = "SELECT act_id,act_title,act_begin_time,act_end_time,act_type,act_service_hour,act_pass_type,act_admit_student,act_req_office FROM `activity` WHERE `act_begin_time` between '$ADsemester-08-01 00:00:00' and '$ADsemester_1-07-31 00:00:00' AND `act_admit` = 1 ORDER BY act_req_office,act_type,act_begin_time DESC";
 	$ret = mysql_query($sql) or die(mysql_error());
 	$actNumber = mysql_num_rows($ret);
-	
-	//依類別統計參數
-	$num_h=0;
-	$num_s=0;
-	$num_l=0;
+	$l_s =0;
+	$l_l =0;
+	$l_h =0;
 	$hour_s=0;
 	$hour_l=0;
 	$hour_h=0;
 	
 	if($actNumber > 0)
 	{
- 		while($row = mysql_fetch_assoc($ret))
+		while($row = mysql_fetch_assoc($ret))
 		{	
 			//活動單位
 			if($dep_temp == $row['act_req_office'])
@@ -114,10 +85,10 @@
 			{
 				$actOffice = $row['act_req_office'];
 				//活動數量
-				/*$sql = "SELECT count(act_id) AS num FROM out_activity WHERE `act_req_office` LIKE '%$actOffice%' AND `act_begin_time` between '$ADsemester-08-01 00:00:00' and '$ADsemester_1-07-31 00:00:00' ";
+				$sql = "SELECT count(act_id) AS num FROM activity WHERE `act_req_office` LIKE '$actOffice' AND `act_begin_time` between '$ADsemester-08-01 00:00:00' and '$ADsemester_1-07-31 00:00:00' AND `act_admit` = 1";
 				$ret1 = mysql_query($sql) or die(mysql_error());
 				$row1 = mysql_fetch_assoc($ret1);
-				$num= $row1['num'];*/
+				$num= $row1['num'];
 			}			
 			
 			
@@ -156,10 +127,10 @@
 				
 			// 時數與護照型態
 			if($row['act_service_hour']== "-1") {
-				$sql = "SELECT count(ser_stu_id) as num FROM `service_activity` WHERE `ser_act_id` = '$row[act_id]' AND `ser_del` = '0'";
+				$sql = "SELECT count(ser_stu_id) as c FROM `service_activity` WHERE `ser_act_id` = '$row[act_id]' AND `ser_del` = '0'";
 				$ret2 = mysql_query($sql) or die(mysql_error());
 				$row2 = mysql_fetch_assoc($ret2);
-				$length= $row1['num'];
+				$service_length= $row2['c'];
 			}	
 				
 			//活動時數
@@ -184,17 +155,29 @@
 					$high = 0;
 			}
 			
-			if($row['act_service_hour']== "-1") {
-				$basic = "*";
-				$high = "*";
-			}
 			
-			/*
+			
 			//認證人數
 			unset($arr1);
 			$arr1 = explode(',', $row['act_admit_student']);
 			$length = count($arr1);
-			*/
+			
+			
+			if($row['act_service_hour']== "-1") {
+				
+				$service_hour=0;
+				$sql = "SELECT SUM( `ser_hour` ) as amount
+						FROM  `service_activity` 
+						WHERE  `ser_act_id` ='$row[act_id]' AND `ser_del` = '0'";
+				$ret1 = mysql_query($sql) or die(mysql_error());
+				$row1 = mysql_fetch_assoc($ret1);
+				$service_hour = $row1['amount'];
+				$basic = $service_hour/$length ;//依時數認證全部人的總時數/人數(即平均)
+				$high = 0;
+			}
+			
+			
+			
 ?>
 			<tr align="center">
 				<td><?=$actOffice?></td>
@@ -204,59 +187,67 @@
 				<!--<td><?//=$num?></td>-->
 				<td><?=round($basic)?></td>
 				<td><?=round($high)?></td>
-				<!--<td><?//=$length?></td>-->
+				<td><?=$length?></td>
 			</tr>
-<?	
-		//計算認證時數
+<?		
+		//計算認證人數與時數
 		switch($row['act_type'])
 				{
 					case 1:
-						
+						$l_s += $length;
 						if($row['act_service_hour']!= "-1")
 						{
-							$hour_s += round($basic)+round($high); 
+							$hour_s += $basic+$high; 
 						}
 						break;
 					case 2:
-						
+						$l_l += $length;
 						if($row['act_service_hour']!= "-1")
 						{
-							$hour_l += round($basic)+round($high); 
+							$hour_l += $basic+$high; 
 						}
 						break;
 					case 3:
-						
+						$l_h += $length;
 						if($row['act_service_hour']!= "-1")
 						{
-							$hour_h += round($basic)+round($high); 
+							$hour_h += $basic+$high; 
 						}
 						break;
 					default:
 						$type = "";
 				}
-		
 		//計算活動場次
 		/*人文*/
-		$sqlh = "SELECT count(act_id) AS num FROM out_activity WHERE `act_type` = 3 AND `act_begin_time` between '$ADsemester-08-01 00:00:00' and '$ADsemester_1-07-31 00:00:00' AND `act_del` = 0 AND `act_admit` = '1'";
+		$sqlh = "SELECT COUNT( act_id ) AS num
+				FROM activity
+				WHERE  `act_type` = 3
+				AND  `act_begin_time` between '$ADsemester-08-01 00:00:00' and '$ADsemester_1-07-31 00:00:00' AND `act_admit` = 1";
 		$reth = mysql_query($sqlh) or die(mysql_error());
 		$rowh = mysql_fetch_assoc($reth);
 		$num_h= $rowh['num'];
 		/*生活*/
-		$sqll = "SELECT count(act_id) AS num FROM out_activity WHERE `act_type` = 2 AND `act_begin_time` between '$ADsemester-08-01 00:00:00' and '$ADsemester_1-07-31 00:00:00' AND `act_del` = 0 AND `act_admit` = '1'";
+		$sqll = "SELECT COUNT( act_id ) AS num
+				FROM activity
+				WHERE  `act_type` = 2
+				AND  `act_begin_time` between '$ADsemester-08-01 00:00:00' and '$ADsemester_1-07-31 00:00:00' AND `act_admit` = 1";
 		$retl = mysql_query($sqll) or die(mysql_error());
 		$rowl = mysql_fetch_assoc($retl);
 		$num_l= $rowl['num'];
 		/*服務*/
-		$sqls = "SELECT count(act_id) AS num FROM out_activity WHERE `act_type` = 1 AND `act_begin_time` between '$ADsemester-08-01 00:00:00' and '$ADsemester_1-07-31 00:00:00' AND `act_del` = 0 AND `act_admit` = '1'";
+		$sqls = "SELECT COUNT( act_id ) AS num
+				FROM activity
+				WHERE  `act_type` = 1
+				AND  `act_begin_time` between '$ADsemester-08-01 00:00:00' and '$ADsemester_1-07-31 00:00:00' AND `act_admit` = 1";
 		$rets = mysql_query($sqls) or die(mysql_error());
 		$rows = mysql_fetch_assoc($rets);
-		$num_s= $rows['num'];//var_dump($num_s->act_title);
+		$num_s= $rows['num'];
 		}
-		//it seems that這裡開始有問題
 	}
 ?>
-		</table>
-		<table width="1000" align="center" border="0">
+	</table>
+	
+	<table width="1000" align="center" border="0">
 			<tr align="center">
 				<td><strong style="font-size: 14pt;">國立中央大學學生學習護照<span style="color: red;"><?=$semester?></span>年度 依類別統計表</strong></td>
 			</tr>
@@ -268,28 +259,27 @@
 			<tr align="center">
 				<td width="100" ></td>
 				<td width="200" >活動場次</td>
+				<td width="150" >認證人數</td>
 				<td width="150" >認證時數</td>
-				<td width="150" >人時數</td>
 			</tr>
 			<tr align="center">
 				<td width="100" >人文藝術</td>
 				<td width="200" ><?=$num_h?></td>
-				<td width="150" ><?=$hour_h?></td>
+				<td width="150" ><?=$l_h?></td>
 				<td width="150" ><?=$hour_h?></td>
 			</tr>
 			<tr align="center">
 				<td width="100" >生活知能</td>
 				<td width="200" ><?=$num_l?></td>
-				<td width="150" ><?=$hour_l?></td>
+				<td width="150" ><?=$l_l?></td>
 				<td width="150" ><?=$hour_l?></td>
 			</tr>
 			<tr align="center">
 				<td width="100" >服務學習</td>
 				<td width="200" ><?=$num_s?></td>
-				<td width="150" ><?=$hour_s?></td>
+				<td width="150" ><?=$l_s?></td>
 				<td width="150" ><?=$hour_s?></td>
 			</tr>
 		</table>
-	</div>
-</body>
+	</body>
 </html>

@@ -32,11 +32,12 @@
 		<script src="js/jquery-1.2.3.min.js" type="text/javascript"></script>
 		<script src="js/jquery.dimensions.min.js" type="text/javascript"></script>		
 		<script src="js/jquery.inputHintBox.js" type="text/javascript"></script>
-		<script src="js/checkForm.js" type="text/javascript"></script>
+		<script src="js/checkForm.js"></script>
 		<script src="js/date.js" type="text/javascript" ></script>
 		<script src="js/jquery.datePicker.js" type="text/javascript" ></script>
 		<script src="ckeditor/ckeditor.js" type="text/javascript"></script>
 		<link href="css/bg.css" rel="stylesheet" type="text/css" />
+		<script src="js/TEST.js"></script>
 	</head>
 	<body>
 		<? require_once("logo.php");?>
@@ -59,6 +60,7 @@
 					?>
 					
 					<h3 style="margin-top: 10px;">活動申請(個人)</h3>
+					<?echo "<script>tester();</script>";?>
 					<?if($_SESSION['valid_token'] == "1"){?>
 						<div id="person" style="color: #3F3F3F; margin-top: 20px;">				
 							<ul class="list" style="margin-left: 10px; list-style-type: none;">
@@ -123,7 +125,7 @@
 							<tr>
 								<td align="center"><label for="begin_time" style="color: #AF0000;">開始時間：</label></td>
 								<td>
-									<input id="begin_time" name="begin_time" type="text" size="30" style="font-size: 14pt; height: 25px;" class="date-pick" />							
+									<input id="begin_time" name="begin_time" type="text" placeholder="201Y-MM-DD" size="30" style="font-size: 14pt; height: 25px;" class="date-pick" />							
 									<select name="begin_hour" id="begin_hour" style="font-size: 14pt; height: 25px;">
 										<option value="05">05</option>
 										<option value="06">06</option>
@@ -213,7 +215,7 @@
 							<tr>
 								<td align="center"><label for="end_time" style="color: #AF0000;">結束時間：</label></td>
 								<td>
-									<input id="end_time" name="end_time" type="text" size="30" style="font-size: 14pt; height: 25px;" class="date-pick" />
+									<input id="end_time" name="end_time" type="text" placeholder="201Y-MM-DD" size="30" style="font-size: 14pt; height: 25px;" class="date-pick" />
 									<select name="end_hour" id="end_hour" style="font-size: 14pt; height: 25px;">
 										<option value="05">05</option>
 										<option value="06">06</option>
@@ -325,6 +327,7 @@
 										<option value="研討">研討</option>
 										<option value="其它">其它</option>
 									</select>
+									&nbsp&nbsp&nbsp <input type="checkbox" name="life_sub_3" id="life_sub_3" value="true"/>自我探索與生涯規劃
 									<br><input type="radio" name="type" id="type3" value="3" /> 人文藝術學習
 									<select name="art_type" id="art_type" style="font-size: 14pt; height: 25px;">
 										<option value="社課" selected="selected">社課</option>
@@ -368,14 +371,14 @@
 							</tr>-->
 							<tr>
 								<td align="center"><label for="office" style="color: #AF0000;">活動單位：</label></td>
-								<td><input type="text" name="office" id="office" size="30" style="font-size: 14pt; height: 25px;" class="textstyle titleHintBox" title="請輸入活動單位" required></td>
+								<td><input type="text" name="office" id="office" size="30" style="font-size: 14pt; height: 25px;" class="textstyle titleHintBox" title="請輸入活動單位"></td>
 							</tr>
 							<tr>
-								<td align="center"><label for="person">承辦人：</label></td>
+								<td align="center"><label for="person" style="color: #AF0000;">承辦人：</label></td>
 								<td><input type="text" name="person" id="person" style="font-size: 14pt; height: 25px;" class="textstyle titleHintBox" title="請輸入承辦人" /></td>
 							</tr>
 							<tr>
-								<td align="center"><label for="phone">聯絡電話：</label></td>
+								<td align="center"><label for="phone" style="color: #AF0000;">聯絡電話：</label></td>
 								<td><input type="text" name="phone" id="phone" size="30" style="font-size: 14pt; height: 25px;" class="textstyle titleHintBox" title="請輸入聯絡電話" /></td>
 							</tr>
 							<tr>
@@ -395,12 +398,12 @@
 							</script>
 
 							<tr>
-								<td width="100" align="center"><label for="file1" style="color: #AF0000;">相關檔案：</label></td>
+								<td width="100" align="center"><label for="file1" style="color: #AF0000;">相關證明檔案：</label></td>
 								<td><input type="file" name="file1" size="30" id="file1" /></td>
 							</tr>							
 						</table>
 						<br />
-						<span style="color: #0F93FF;">《紅色的部分一定要填寫，其他可選填》</span>
+						<span style="color: #0F93FF;"></span>
 
 <!-- Shiny_box -->
 						<div id="shiny_box" class="shiny_box" style="display:none;">
@@ -408,11 +411,11 @@
 							<div class="shiny_box_body"></div>
 							<span class="bl"></span><span class="br"></span>
 						</div>
-						<script type="text/javascript">
+						<!--<script type="text/javascript">
 							$().ready(function(){
 								$('.titleHintBox').inputHintBox({div:$('#shiny_box'),div_sub:'.shiny_box_body',source:'attr',attr:'title',incrementLeft:5});
 							});
-						</script>
+						</script>-->
 
 <!-- Submit -->					
 						<table width="100%">

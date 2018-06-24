@@ -10,28 +10,38 @@
 	require_once("conn/db.php");
 	require_once("function_lib.php");
 
-	if($_POST['adminID'] != NULL || $_POST['actName'] != NULL || $_POST['actDate'] != NULL)
+	if($_POST['ncu_userID'] != NULL || $_POST['actName'] != NULL || $_POST['actDate'] != NULL)
 	{
 		// user_student
 		// user_name 	
 		// user_dep
 		$msg="<table width=\"680\" style=\"margin-top: 20px; font-size: 16pt;\" border=\"1\" cellspacing=\"0\" cellpadding=\"1\">";
 		$sql = "";
-		if($_POST['adminID'] != NULL){
-			$sql="SELECT * FROM `admin` WHERE ad_account='".$_POST['adminID']."' && ad_del !=1";
+		if($_POST['ncu_userID'] != NULL){
+			$sql="SELECT * FROM `ncu_user` WHERE user_account='".$_POST['ncu_userID']."' && user_del !=1";
 			$ret = mysql_query($sql, $db) or die(mysql_error());
 			while($row=mysql_fetch_assoc($ret)){
-				$msg.="<tr><label style=\"font-size: 14pt; height: 25px;\">Name : ".$row['ad_username']."</label></tr><br></br>";
-				$msg.="<tr><label style=\"font-size: 14pt; height: 25px;\">Account : ".$row['ad_account']."</label></tr>";
+				$msg.="<tr><label style=\"font-size: 14pt; height: 25px;\">Name : ".$row['user_office']."</label></tr><br></br>";
+				$msg.="<tr><label style=\"font-size: 14pt; height: 25px;\">Account : ".$row['user_account']."</label></tr>";
 			}
-			$sql = "SELECT * FROM `activity` WHERE act_approver='".$_POST['adminID']."' ORDER BY `act_id` DESC";	
+			$sql = "SELECT * FROM `activity` WHERE act_req_account='".$_POST['ncu_userID']."' ORDER BY `act_id` DESC";	
 			$ret_search = mysql_query($sql, $db) or die(mysql_error());
 			$numRows = mysql_num_rows($ret_search);
 			if($numRows!=0){
-				
+				$msg.="<tr><td align=\"center\"  width=100px>No.</a></td>";
+				$msg.="<td align=\"center\" width=380px>活動名稱</a></td>";
+				$msg.="<td align=\"center\"  width=320px>活動地點</a></td>";
+				$msg.="<td align=\"center\" width=150px>開始時間</a></td>";
+				$msg.="<td align=\"center\" width=150px>結束時間</a></td>";
+				$msg.="<td align=\"center\" width=600px>發佈單位</a></td></tr>";
 				while($rows=mysql_fetch_assoc($ret_search)){
-					$msg.="<tr><td align=\"center\" ><a href=\"pass_view_activity.php?act_id=$rows[act_id]\" style=\"color: #0066CC;\">".$rows['act_title']."</a></td></tr>";
-							
+					//$msg.="<tr><td align=\"center\" ><a href=\"pass_view_activity.php?act_id=$rows[act_id]\" style=\"color: #0066CC;\">".$rows['act_title']."</a></td></tr>";
+					$msg.="<tr><td align=\"center\" >".$rows['act_id']."</a></td>";
+					$msg.="<td align=\"center\" ><a href=\"pass_view_activity.php?act_id=$rows[act_id]\" style=\"color: #0066CC;\">".$rows['act_title']."</a></td>";
+					$msg.="<td align=\"center\" >".$rows['act_location']."</a></td>";
+					$msg.="<td align=\"center\" >".$rows['act_begin_time']."</a></td>";
+					$msg.="<td align=\"center\" >".$rows['act_end_time']."</a></td>";
+					$msg.="<td align=\"center\" >".$rows['act_req_office']."</a></td></tr>";		
 				}		
 			}
 		}
@@ -46,7 +56,7 @@
 				$msg.="<td align=\"center\" width=600px>發佈單位</a></td></tr>";
 
 			while($row=mysql_fetch_assoc($ret)){
-				$msg.="<td align=\"center\" >".$row['act_id']."</a></td>";
+				$msg.="<tr><td align=\"center\" >".$row['act_id']."</a></td>";
 				$msg.="<td align=\"center\" ><a href=\"pass_view_activity.php?act_id=$row[act_id]\" style=\"color: #0066CC;\">".$row['act_title']."</a></td>";
 				$msg.="<td align=\"center\" >".$row['act_location']."</a></td>";
 				$msg.="<td align=\"center\" >".$row['act_begin_time']."</a></td>";
@@ -115,8 +125,8 @@
 						<table width="700" style="margin-top: 20px; font-size: 14pt;">
 							<tr>
 								<td>
-									<label for="adminID">1. 依<span style="color: #C300FF"> 帳號 </span>查詢：</label>
-									<input id="adminID" style="font-size: 14pt; height: 25px;" name="adminID" type="text" />
+									<label for="ncu_userID">1. 依<span style="color: #C300FF">申請單位帳號 </span>查詢：</label>
+									<input id="ncu_userID" style="font-size: 14pt; height: 25px;" name="ncu_userID" type="text" />
 								</td>
 							</tr>
 							<tr>

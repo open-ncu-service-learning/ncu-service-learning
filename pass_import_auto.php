@@ -1,5 +1,5 @@
 <?php
-	if ($_GET['pw']!=1116) {
+	if ($_GET['pw']!=1916) {
 		exit;
 	}
 	
@@ -225,6 +225,10 @@
 							$type = "人文藝術";
 							$index = 4;
 							break;
+						case 4:
+							$type = "國際視野";
+							$index = 6;
+							break;
 						default:
 							$type = "無";
 					}
@@ -367,6 +371,7 @@
 			$b1=$serviceHour[0];			$a1=$serviceHour[1];
 			$b2=$serviceHour[2];			$a2=$serviceHour[3];
 			$b3=$serviceHour[4];			$a3=$serviceHour[5];
+			$b4=$serviceHour[6];			$a4=$serviceHour[7];
 			
 			if($b1 > 50){
 				$a1 += $b1 - 50;
@@ -379,9 +384,17 @@
 			if($b3 > 20){
 				$a3 += $b3 - 20;
 				$b3 = 20;
-			}		
+			}
+			if($b4 > 5){
+				$a4 += $b4 - 5;
+				$b4 = 5;
+			}
 				
 			$basicHour = $b1 + $b2 +$b3;
+			
+			if($stuid>=106000000 && $stuid<951001029){
+				$basicHour += b4;
+			}
 			//轉時數
 			
 			

@@ -45,7 +45,7 @@
 		$newList = implode(",", $tmp);
 		
 	// 取出認證時數
-	switch($row['act_pass_type'])
+/*	switch($row['act_pass_type'])
 	{
 		case 1:
 			$service_hour = $row['act_service_hour'];	
@@ -109,7 +109,7 @@
 								`user_basicHour` = `user_basicHour`-".$service_hour."
 							WHERE
 								`user_student` = '%s'";*/
-			break;
+/*			break;
 			
 		case 2:
 			$service_hour = $row['act_service_hour'];			
@@ -173,7 +173,7 @@
 								`user_advanHour` = `user_advanHour`-".$service_hour."
 							WHERE
 								`user_student` = '%s'";*/
-			break;
+/*			break;
 			
 		case 3:
 			$service_hour = explode(",", $row['act_service_hour']);
@@ -251,15 +251,15 @@
 								`user_advanHour` = `user_advanHour`-".$service_hour[1]."
 							WHERE
 								`user_student` = '%s'";*/
-			break;
-	}	
+/*			break;
+	}	*/
 
 	$sql = "UPDATE `out_activity` SET act_admit_student = '$newList' WHERE act_id = '$act_id'";
 	$ret = mysql_query($sql, $db) or die(mysql_error());
 	
 	// 修改時數
-	$sql = sprintf($sqlStr, $stu_id);
-	$ret = mysql_query($sql, $db) or die(mysql_error());
+	//$sql = sprintf($sqlStr, $stu_id);
+	//$ret = mysql_query($sql, $db) or die(mysql_error());
 
 	if($ret)
 	{

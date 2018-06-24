@@ -89,11 +89,14 @@
 	
 	$no = "P".sprintf("%03d", $_POST['school_year']).sprintf("%04d", $row[0]);
 	
+	$life_sub=5;
 	$sub="";
 	if($_POST[type] == 1){				//服務學習
 		$sub = $_POST[service_type];
 	}
 	else if($_POST[type] == 2){			//生活知能
+		if($_POST[life_sub_3])
+			$life_sub=3;					//自我探索與生涯規劃
 		$sub = $_POST[life_type];
 	}
 	else if($_POST[type] == 3){			//人文藝術
@@ -140,7 +143,7 @@
 				'$end', 
 				'$_POST[type]',
 				'$sub',
-				'5',
+				'$life_sub',
 				'0',
 				'$hour', 
 				'$_POST[service_hour_type]', 

@@ -45,6 +45,16 @@
 					saveAs(blob, strFile);
 					return false;
 				});
+				$('#xsl1').click(function () {
+					var title = "各院系 學生學習護照平均認證基本時數統計表";
+					var year = "<?=$_GET['semester']?>";
+					var blob = new Blob([document.getElementById('outputData1').innerHTML], {
+						type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+					});
+					var strFile = year+title+".xls";
+					saveAs(blob, strFile);
+					return false;
+				});
 			})
 		</script>
 	</head>
@@ -380,6 +390,8 @@
 	}
 
 	?>
+		<button id="xsl1" disabled>excel</button>
+		<div id="outputData1">
 		<table width="1000" align="center" border="0">
 			<tr align="center">
 				<td><strong style="font-size: 14pt;">國立中央大學<span style="color: red;" id="b"><?echo $semester;?></span>級各院系 學生學習護照平均認證基本時數統計表</strong></td>
@@ -795,6 +807,7 @@
 			
 
 		</table>
+	</div>
 	</div>
 	</body>
 </html>
