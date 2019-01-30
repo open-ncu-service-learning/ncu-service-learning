@@ -32,12 +32,11 @@
 		<script src="js/jquery-1.2.3.min.js" type="text/javascript"></script>
 		<script src="js/jquery.dimensions.min.js" type="text/javascript"></script>		
 		<script src="js/jquery.inputHintBox.js" type="text/javascript"></script>
-		<script src="js/checkForm.js"></script>
+		<script src="js/checkForm.js?008"></script> <!--每更新一次js檔內容請改一次數字，避免chrome一直讀到舊的-->
 		<script src="js/date.js" type="text/javascript" ></script>
 		<script src="js/jquery.datePicker.js" type="text/javascript" ></script>
 		<script src="ckeditor/ckeditor.js" type="text/javascript"></script>
 		<link href="css/bg.css" rel="stylesheet" type="text/css" />
-		<script src="js/TEST.js"></script>
 	</head>
 	<body>
 		<? require_once("logo.php");?>
@@ -60,7 +59,6 @@
 					?>
 					
 					<h3 style="margin-top: 10px;">活動申請(個人)</h3>
-					<?echo "<script>tester();</script>";?>
 					<?if($_SESSION['valid_token'] == "1"){?>
 						<div id="person" style="color: #3F3F3F; margin-top: 20px;">				
 							<ul class="list" style="margin-left: 10px; list-style-type: none;">
@@ -69,11 +67,14 @@
 								<li>系級：<span style="color: #FF00B2;"><?=$dep?></span></li>
 							</ul>
 						</div>
+						<form id="form1" name="form1" action="send_pass_apply_out_activity.php" method="post" enctype="multipart/form-data" onsubmit="return check_pass_apply_out_activityForm(form1, 1)" >
+					<?}
+					else if($_SESSION['valid_token'] == "3"){?>
+						<form id="form1" name="form1" action="send_pass_apply_out_activity.php" method="post" enctype="multipart/form-data" onsubmit="return check_pass_apply_out_activityForm(form1, 3)" >
 					<?}?>
-					<form id="form1" name="form1" action="send_pass_apply_out_activity.php" method="post" enctype="multipart/form-data" onsubmit="return check_pass_apply_out_activityForm(form1)" >
 						<table width="700" style="margin-top: 20px;" border="1" cellspacing="0" cellpadding="1">
 							<tr>
-								<td align="center" width="120"><label for="title" style="color: #AF0000;">活動標題：</label></td>
+								<td align="center"><label for="title" style="color: #AF0000;">活動標題：</label></td>
 								<td><input type="text" size="50" name="title" id="title" style="font-size: 14pt; height: 25px;" class="textstyle titleHintBox" title="請輸入活動標題" /></td>
 							</tr>
 							<tr>
@@ -115,17 +116,11 @@
 									</select> 學期 
 								</td>
 							</tr>		
-<script type="text/javascript" charset="utf-8">
-	Date.firstDayOfWeek = 7;
-	Date.format = 'yyyy-mm-dd';
-	$(function() {
-		$('.date-pick').datePicker({clickInput:true})
-	});
-</script>
 							<tr>
 								<td align="center"><label for="begin_time" style="color: #AF0000;">開始時間：</label></td>
 								<td>
-									<input id="begin_time" name="begin_time" type="text" placeholder="201Y-MM-DD" size="30" style="font-size: 14pt; height: 25px;" class="date-pick" />							
+									<input type="date" id="begin_time" name="begin_time" size="30" style="font-size: 14pt; " placeholder="YYYY-MM-DD" value="<?= isset($_POST['begin_time']) ? $_POST['begin_time'] : ''; ?>">
+									<!--<input id="begin_time" name="begin_time" type="text" placeholder="201Y-MM-DD" size="30" style="font-size: 14pt; height: 25px;" class="date-pick" />	-->						
 									<select name="begin_hour" id="begin_hour" style="font-size: 14pt; height: 25px;">
 										<option value="05">05</option>
 										<option value="06">06</option>
@@ -215,7 +210,8 @@
 							<tr>
 								<td align="center"><label for="end_time" style="color: #AF0000;">結束時間：</label></td>
 								<td>
-									<input id="end_time" name="end_time" type="text" placeholder="201Y-MM-DD" size="30" style="font-size: 14pt; height: 25px;" class="date-pick" />
+									<input type="date" id="end_time" name="end_time" size="30" style="font-size: 14pt; " placeholder="YYYY-MM-DD" value="<?= isset($_POST['end_time']) ? $_POST['end_time'] : ''; ?>">
+									<!--<input id="end_time" name="end_time" type="text" placeholder="201Y-MM-DD" size="30" style="font-size: 14pt; height: 25px;" class="date-pick" />-->
 									<select name="end_hour" id="end_hour" style="font-size: 14pt; height: 25px;">
 										<option value="05">05</option>
 										<option value="06">06</option>
@@ -307,7 +303,8 @@
 								<td>
 									<input type="radio" name="type" id="type1" value="1" checked /> 服務學習
 									<select name="service_type" id="service_type" style="font-size: 14pt; height: 25px;">
-										<option value="愛校服務(校內行政)" selected="selected">愛校服務(校內行政)</option>
+										<option value="0">請選擇子項目</option>
+										<option value="愛校服務(校內行政)">愛校服務(校內行政)</option>
 										<option value="環境清潔或淨灘、淨山">環境清潔或淨灘、淨山</option>
 										<option value="課業輔導">課業輔導</option>
 										<option value="科普相關">科普相關</option>
@@ -319,7 +316,8 @@
 								
 									<br><input type="radio" name="type" id="type2" value="2" /> 生活知能學習
 									<select name="life_type" id="life_type" style="font-size: 14pt; height: 25px;">
-										<option value="社課" selected="selected">社課</option>
+										<option value="0">請選擇子項目</option>
+										<option value="社課">社課</option>
 										<option value="專題講座">專題講座</option>
 										<option value="培訓課程">培訓課程</option>
 										<option value="參訪交流">參訪交流</option>
@@ -330,7 +328,8 @@
 									&nbsp&nbsp&nbsp <input type="checkbox" name="life_sub_3" id="life_sub_3" value="true"/>自我探索與生涯規劃
 									<br><input type="radio" name="type" id="type3" value="3" /> 人文藝術學習
 									<select name="art_type" id="art_type" style="font-size: 14pt; height: 25px;">
-										<option value="社課" selected="selected">社課</option>
+										<option value="0">請選擇子項目</option>
+										<option value="社課">社課</option>
 										<option value="設計講座">設計講座</option>
 										<option value="藝文講座">藝文講座</option>
 										<option value="人文講座">人文講座</option>
@@ -342,7 +341,8 @@
 									</select>
 									<br><input type="radio" name="type" id="type4" value="4" /> 國際視野學習
 									<select name="inter_type" id="inter_type" style="font-size: 14pt; height: 25px;">
-										<option value="國際志工" selected="selected">國際志工</option>
+										<option value="0">請選擇子項目</option>
+										<option value="國際志工">國際志工</option>
 										<option value="國際移地學習">國際移地學習</option>
 										<option value="國際學術交流">國際學術交流</option>
 										<option value="校園國際化活動">校園國際化活動</option>
@@ -381,6 +381,7 @@
 								<td align="center"><label for="phone" style="color: #AF0000;">聯絡電話：</label></td>
 								<td><input type="text" name="phone" id="phone" size="30" style="font-size: 14pt; height: 25px;" class="textstyle titleHintBox" title="請輸入聯絡電話" /></td>
 							</tr>
+							<?if($_SESSION['valid_token'] == "1"){?>
 							<tr>
 								<td width="100" align="center"><label for="ref" style="color: #AF0000;">學習反思<br>(300字以上)：</label></td>
 								<td><textarea name="ref" cols="50" rows="10" id="ref" onkeyup="wordsTotal()"></textarea><br>字數統計：<span id="display">0</span></td>
@@ -400,7 +401,8 @@
 							<tr>
 								<td width="100" align="center"><label for="file1" style="color: #AF0000;">相關證明檔案：</label></td>
 								<td><input type="file" name="file1" size="30" id="file1" /></td>
-							</tr>							
+							</tr>
+							<?	}?>
 						</table>
 						<br />
 						<span style="color: #0F93FF;"></span>

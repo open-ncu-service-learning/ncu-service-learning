@@ -98,17 +98,17 @@
 		
 		// 核可
 		if($row['act_admit'] == 0)
-			$admit = "<a href=\"pass_admit_activity.php?id=$row[act_id]\" style=\"color: #0066CC;\" onClick=\"return confirm('確定核可?');\">核可</a>";			
+			$admit = "未核可";			
 		elseif($row['act_admit'] == 1)
-			$admit = "<img src=\"images/tick.png\" style=\"border: none; width: 15px;\" />";
+			$admit = "<font color=\"green\"><b>已核可</b></font>";
 		elseif($row['act_admit'] == 2)
-			$admit = "<img src=\"images/cross.png\" style=\"border: none; width: 15px;\" />";
+			$admit = "<font color=\"red\"><b>已拒絕</b></font>";
 			
 		// 公告
 		if($row['act_post'] == 0)
-			$post = "<a href=\"pass_post_activity.php?id=$row[act_id]\" style=\"color: #0066CC;\" onClick=\"return confirm('確定公告?');\">公告</a>";			
+			$post = "未公告";			
 		elseif($row['act_post'] == 1)
-			$post = "<img src=\"images/circle.png\" style=\"border: none; width: 15px;\" />";
+			$post = "<font color=\"green\"><b>已公告</b></font>";
 			
 		// 刪除
 		//$delete = "<a href=\"pass_del_activity.php?id=$row[act_id]\" onClick=\"return confirm('確定刪除?');\"><img src=\"images/cross.png\" style=\"border: none;\" /></a>";	
@@ -118,7 +118,7 @@
 							<td height="30"><a href="pass_view_activity.php?act_id=<?=$row['act_id']?>&amp;view=1" style="color: #FF0082;"><?=bite_str($row['act_title'], 0, 34)?></a></td>
 							<td align="center"><?=substr($row['act_begin_time'], 0, 10)?></td>
 							<td align="center"><?=substr($row['act_time'], 0, 10)?></td>
-							<td align="center"><?=$admit?> | <?=$post?> </td>
+							<td align="center"><?=$admit?> ︱ <?=$post?> </td>
 						</tr>
 <?php
 	}

@@ -74,10 +74,11 @@
 				`attach_title`,
 				`attach_filename`,
 				`attach_time`,
-				`attach_postby`
+				`attach_postby`,
+				`semester`
 			)
 			VALUES (
-				'$_POST[type]', '$_POST[title]', '$filename', NOW(), '$postby'
+				'$_POST[type]', '$_POST[title]', '$filename', NOW(), '$postby', '$_POST[semester]'
 			)";
 		
 	

@@ -57,7 +57,9 @@
 	}
 
 // 活動時間
-	$begin = $_POST['begin_time']." ".$_POST['begin_hour'].":".$_POST['begin_minute'].":00";
+	if (isset($_POST['begin_time'])) {
+		$begin = $_POST['begin_time']." ".$_POST['begin_hour'].":".$_POST['begin_minute'].":00";
+	}
 	$end = $_POST['end_time']." ".$_POST['end_hour'].":".$_POST['end_minute'].":00";
 // 認證時數
 	$hour = "0";

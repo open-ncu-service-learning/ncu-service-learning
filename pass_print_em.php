@@ -1,12 +1,11 @@
 <?php
 	session_start();
-	
-	// ȭŀƧĒ
+
 	if($_SESSION['valid_token'] != "3") {
 		header('Location: index.php');
 		exit;
 	}
-	//ԝʷѵǦω̰֡֌ͭŪ
+	
 	set_time_limit(0); 
 	
 	require_once("conn/db.php");
@@ -57,7 +56,6 @@
 	</div>
 	<div id="outputData">			
 <?php
-	require_once("conn/db.php");
 	
 	// 時間
 	$year = date("Y")-1911;
@@ -137,25 +135,14 @@
 		}
 		$i = 0;
 		$length = count($stuid);
-		
-		$q1=50;
-		$q2=30;
-		$q3=20;
-		
-		if($row['user_student']>105000000 && $row['user_student'] <106000000)
-		{
-			$q1=40;
-			$q2=40;
-			$q3=20;
-		}
-		
-		//$length = 1;
 		for($i; $i < $length; $i++)
 		{
 	
 			$sql = "SELECT * FROM `all_user` WHERE user_student = '$stuid[$i]'";
 			$ret = mysql_query($sql) or die(mysql_error());
 			$row = mysql_fetch_assoc($ret);
+
+			list($b1[$i], $b2[$i], $b3[$i], $b4[$i], $q1, $q2, $q3, $q4) = calHours($row);
 			
 			if($row['qualified']==0){
 				$qualified[$i]="未通過";
@@ -163,23 +150,13 @@
 			else{
 				$qualified[$i]="通過";
 			}
-			
-			//轉時數
-			$b1[$i]=$row['basic_service'];			
-			$b2[$i]=$row['basic_life'];				
-			$b3[$i]=$row['basic_art'];				
-			
-			if($b1[$i] > $q1){
-				$b1[$i] = $q1;
+			$basicHour[$i] = $b1[$i] + $b2[$i] + $b3[$i];
+			$cols = 3;
+			if($semester>=106){
+				$basicHour[$i] = $b1[$i] + $b2[$i] + $b3[$i] + $b4[$i];
+				$cols = 4;
 			}
-			if($b2[$i] > $q2){
-				$b2[$i] = $q2;
-			}
-			if($b3[$i] > $q3){
-				$b3[$i] = $q3;
-			}		
-		
-			$basicHour[$i] = $b1[$i] + $b2[$i] +$b3[$i];
+			
 		}
 ?>
 	<table width="1000" align="center" border="0">
@@ -196,14 +173,17 @@
 			<tr align="center">
 				<td width="100" rowspan="2">學號</td>
 				<td width="180" rowspan="2"><p>姓名</p></td>
-				<td width="600" colspan="6">基本</td>
+				<td width="600" colspan="12">基本</td>
 				<td width="120" rowspan="2">基本總時數</td>
 				<td width="180" rowspan="2">狀態</td>
 			</tr>
 			<tr align="center">
-				<td width="220" colspan="2" >服務學習</td>
-				<td width="220" colspan="2" >生活知能</td>
-				<td width="160" colspan="2" >人文藝術</td>
+				<td width="<?echo 600/$cols;?>" colspan="<?echo 12/$cols;?>" >服務學習</td>
+				<td width="<?echo 600/$cols;?>" colspan="<?echo 12/$cols;?>" >生活知能</td>
+				<td width="<?echo 600/$cols;?>" colspan="<?echo 12/$cols;?>" >人文藝術</td>
+			<?if($semester>=106){?>
+				<td width="<?echo 600/$cols;?>" colspan="<?echo 12/$cols;?>" >國際視野</td>
+			<?}?>
 			</tr>
 			
 <?
@@ -219,41 +199,26 @@
 					echo "<a href='personal_activity.php?stuid=$stuid[$i]'  target=_blank>$stuid[$i]</a>";
 					?></td>					
 					<td><?=$name[$i]?></td>
-					<td colspan="2"><?=$b1[$i]?></td>
-					<td colspan="2"><?=$b2[$i]?></td>
-					<td colspan="2"><?=$b3[$i]?></td>
+					<td colspan="<?echo 12/$cols;?>"><?=$b1[$i]?></td>
+					<td colspan="<?echo 12/$cols;?>"><?=$b2[$i]?></td>
+					<td colspan="<?echo 12/$cols;?>"><?=$b3[$i]?></td>
+				<?if($semester>=106){?>
+					<td colspan="<?echo 12/$cols;?>"><?=$b4[$i]?></td>
+				<?}?>
 					<td><?=$basicHour[$i]?></td>
 					<td><?=$qualified[$i]?></td>
 			</tr>
 <?
 		}
 	}
-	/*$i = 0;
-	$ok=0;
-	for($i; $i < $length; $i++)
-	{
-		if($qualified[$i]=="通過"){
-			$ok++;
-?>				
-			<tr align="center">
-					<td><?
-					echo "<a href='personal_activity.php?stuid=$stuid[$i]'>$stuid[$i]</a>";
-					?></td>
-					<td><?=$name[$i]?></td>
-					<td colspan="2"><?=$b1[$i]?></td>
-					<td colspan="2"><?=$b2[$i]?></td>
-					<td colspan="2"><?=$b3[$i]?></td>
-					<td><?=$basicHour[$i]?></td>
-					<td><?=$qualified[$i]?></td>
-			</tr>
-<?
-		}
-	}*/
+
 	
 	echo "</table><br>";
 	$ok=$length-$GG;
 	echo "<div align='center'>總人數：$length ,未通過人數：$GG, 通過人數：$ok";?>
-	(<a href="pass_print_dep.php?semester=<?php echo $_GET['semester']; ?>&dep=<?php echo $ncu[$k]; ?>"  target=_blank>顯示科系詳細資料</a>)
+	（顯示科系詳細資料：
+	<a href="pass_print_dep.php?semester=<?php echo $_GET['semester']; ?>&dep=<?php echo $ncu[$k]; ?>"  target=_blank>所有學生</a>、
+	<a href="pass_print_depNot.php?semester=<?php echo $_GET['semester']; ?>&dep=<?php echo $ncu[$k]; ?>"  target=_blank>未通過學生</a>）
 <?	echo "</div><br><br><br>";
 	
 }
@@ -261,3 +226,5 @@
 	</div>
 	</body>
 </html>
+
+<??>

@@ -568,7 +568,7 @@
 			$newList = $peopleStr;
 			
 		// 更新核可名單	
-		$sql = "UPDATE `activity` SET `act_admit_student` = '$newList' WHERE `act_id` = '".$_POST['act_id']."'";
+		$sql = "UPDATE `activity` SET `act_admit_student` = '$newList' , `act_admiter` = '$valid_admin_account' WHERE `act_id` = '".$_POST['act_id']."'";
 		$ret = mysql_query($sql, $db) or die(mysql_error());
 		
 		// 寫入時數

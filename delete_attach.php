@@ -57,7 +57,7 @@
 		header('Location:meeting_sub.php?name=first');
 	}
 	else if ($_POST['key'] == "meeting2"){
-		header('meeting_sub.php?name=second');
+		header('Location:meeting_sub.php?name=second');
 	}
 	else{
 		header('Location:post_attach.php');

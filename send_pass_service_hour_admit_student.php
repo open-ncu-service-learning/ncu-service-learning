@@ -17,6 +17,7 @@
 	
 	$valid_admin_account=(string)$_SESSION['valid_admin_account'];
 	
+	
 	// 活動id
 	$act_id = $_POST['act_id'];
 	
@@ -76,7 +77,7 @@
 
 
 // 資料更新	
-	$sql = "UPDATE `activity` SET `act_admit_student` = '$newList' WHERE `act_id` = '$act_id'";
+	$sql = "UPDATE `activity` SET `act_admit_student` = '$newList', `act_admiter` = '$valid_admin_account'  WHERE `act_id` = '$act_id'";
 	$ret = mysql_query($sql, $db) or die(mysql_error());
 	
 	$tip = "";

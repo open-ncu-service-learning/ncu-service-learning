@@ -28,7 +28,6 @@
 			<? 
 			require_once("sidebar.php");			
 			require_once("conn/db.php");
-			
 			$sql="SELECT * FROM `pass`.`attach` ORDER BY `attach_id` ASC ";
 			$result=mysql_query($sql, $db) or die(mysql_error());
 			?>
@@ -36,7 +35,9 @@
 <!-- Publish -->
 			<div id="main">
 			<? if ($_GET['name'] == "first"){
-				echo "<h3>服務學習執行小組會議</h3>"?>
+				echo "<h3>服務學習執行小組會議</h3>"
+				
+				?>
 				<table width="600px" style="margin:16px;">
 					
 					<? while($row=mysql_fetch_array($result)){		
@@ -65,32 +66,47 @@
 				</table><?
 			}
 			else if ($_GET['name'] == "second"){
-				echo "<h3>服務學習指導委員會</h3>";?>
-				<table width="600px" style="margin:16px;">
-				<?  while($row=mysql_fetch_array($result)){		
-						if($row['attach_classify'] == 6){		
-					?>	<tr>
-							<td width="75%">
-							<li><? echo $row['attach_title'];?></li>
-							</td>
-							<td>
-								<a href="download/meeting_second/<?php echo $row['attach_filename'];?>"><img align="left" src="images/icon/download.jpg" style="width: 30px; border: none;"></a>
-							</td>
-							<? if($_SESSION['valid_token'] == "3") {?>
-							<td>
-								<form action="delete_attach.php" method="POST" onsubmit="return confirm('確定要刪除檔案?');">
-									<input type="hidden" name="id" value="<?php echo $row['attach_id'];?>" />
-									<input type="hidden" name="filename" value="<?php echo $row['attach_filename'];?>" />
-									<input type="hidden" name="key" value="meeting2">
-									<button type="submit" class="negative"><img src="images/cross.png" alt=""/><font size=3>刪除檔案</font></button>
-								</form>						
-							</td>
-							<? }?>
-						</tr>
-						<?}
-					}?>	
-				</table><?
-			}?> 
+				echo "<h3>服務學習指導委員會</h3>";
+				$year=$_GET['year'];
+				if($year<=107 && $year>=98){?>				
+					<?php echo $year;?>學年度<br>
+					<table width="600px" style="margin:16px;">
+					<?  		
+						$sql="SELECT * FROM `pass`.`attach` WHERE `semester` = $year AND `attach_classify` = 6 ";
+						$result=mysql_query($sql, $db) or die(mysql_error());
+						while($row=mysql_fetch_array($result)){	
+						?>	
+							<tr>
+								<td width="75%">
+								<li><? echo $row['attach_title'];?></li>
+								</td>
+								<td>
+									<a href="download/meeting_second/<?php echo $row['attach_filename'];?>"><img align="left" src="images/icon/download.jpg" style="width: 30px; border: none;"></a>
+								</td>
+								<? if($_SESSION['valid_token'] == "3") {?>
+								<td>
+									<form action="delete_attach.php" method="POST" onsubmit="return confirm('確定要刪除檔案?');">
+										<input type="hidden" name="id" value="<?php echo $row['attach_id'];?>" />
+										<input type="hidden" name="filename" value="<?php echo $row['attach_filename'];?>" />
+										<input type="hidden" name="key" value="meeting2">
+										<button type="submit" class="negative"><img src="images/cross.png" alt=""/><font size=3>刪除檔案</font></button>
+									</form>						
+								</td>
+								<? }?>
+							</tr>
+							<?
+						}?>	
+					</table>
+					<div class="buttons" style="margin: 10px;">
+						<a href="meeting_sub.php?name=second" class="button" id="back">回上頁</a>
+					</div>
+			<?	}
+				else{
+					for($y=98; $y<=107; $y++){?>
+						<a href="meeting_sub.php?name=second&year=<?echo $y;?>"><?echo $y;?>學年度<br></a><?
+					}
+				}?>
+		<?	}?> 
 			</div>
 		</div>
 		

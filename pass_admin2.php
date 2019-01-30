@@ -40,7 +40,7 @@
 <!-- Publish -->
 			<div id="main">
 				<div id="welcome" style="font-size: 20px; color: #1F1F1F; line-height: 1.5;">
-					<h3 style="margin-top: 10px;">工讀生個人檔案</h3>
+					<h3 style="margin-top: 10px;">個人檔案</h3>
 					<form id="form1" name="form1" action="edit_pass_admin.php" method="post" >
 						<table width="700" style="margin-top: 20px;">
 							<tr>
@@ -50,6 +50,18 @@
 							<tr>
 								<td align="right"><label for="account" style="color: #AF0000;">帳號：</label></td>
 								<td align="left"><span style="color: #210B61;"><?=$_SESSION['valid_admin_account']?></span></td>
+							</tr>
+							<?
+								if($_SESSION['valid_admin_permission']==1){
+									$permission = "管理員";
+								}
+								else{
+									$permission = "行政服務志工";
+								}
+							?>
+							<tr>
+								<td align="right"><label for="account" style="color: #AF0000;">身分：</label></td>
+								<td align="left"><span style="color: #210B61;"><?=$permission?></span></td>
 							</tr>
 							<tr>
 								<td width="100" align="right"><label for="pass" style="color: #AF0000;">修改密碼：</label></td>

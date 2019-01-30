@@ -53,6 +53,7 @@
 							<li><a href="pass_print_em.php?semester=104" title="104學年度">104學年度</a></li>
 							<li><a href="pass_print_em.php?semester=105" title="105學年度">105學年度</a></li>
 							<li><a href="pass_print_em.php?semester=106" title="106學年度">106學年度</a></li>
+							<li><a href="pass_print_em.php?semester=107" title="107學年度">107學年度</a></li>
 						<ul>
 					
 				</div>
@@ -69,6 +70,7 @@
 							<li><a href="pass_print.php?semester=104" title="104學年度">104學年度</a></li>
 							<li><a href="pass_print.php?semester=105" title="105學年度">105學年度</a></li>
 							<li><a href="pass_print.php?semester=106" title="106學年度">106學年度</a></li>
+							<li><a href="pass_print.php?semester=107" title="107學年度">107學年度</a></li>
 						<ul>
 					
 				</div>
@@ -85,6 +87,7 @@
 							<li><a href="pass_print_activity.php?semester=104" title="104學年度活動">104學年度</a></li>
 							<li><a href="pass_print_activity.php?semester=105" title="105學年度活動">105學年度</a></li>
 							<li><a href="pass_print_activity.php?semester=106" title="106學年度活動">106學年度</a></li>
+							<li><a href="pass_print_activity.php?semester=107" title="107學年度活動">107學年度</a></li>
 						<ul>
 				</div>
 				<div id="print_out_activity" style="font-size: 20px; color: #1F1F1F; line-height: 1.5;">
@@ -100,19 +103,15 @@
 							<li><a href="pass_print_out_activity.php?semester=104" title="104學年度活動">104學年度</a></li>
 							<li><a href="pass_print_out_activity.php?semester=105" title="105學年度活動">105學年度</a></li>
 							<li><a href="pass_print_out_activity.php?semester=106" title="106學年度活動">106學年度</a></li>
+							<li><a href="pass_print_out_activity.php?semester=107" title="107學年度活動">107學年度</a></li>
 						<ul>
 				</div>
-				<!--<div id="print_onlineApply" style="font-size: 20px; color: #1F1F1F; line-height: 1.5;">
-					<h3 style="margin-top: 10px;">線上申請案件數</h3>
-						<ul style="margin-top: 15px;">
-							<li><a href="pass_print_onlineApply.php?semester=101" title="101學年度活動">101學年度</a></li>
-						<ul>
-				</div>
-				-->
+
 				<div id="print_out_activity" style="font-size: 20px; color: #1F1F1F; line-height: 1.5;">
 					<h3 style="margin-top: 10px;">各系活動統計表</h3>
 						<ul style="margin-top: 15px;">
-							<li>103學年度</li>
+							<li onclick="show('103')">103學年度</li>
+							<div id="dep103" style="display: none;">
 								<a href="pass_print_dep_act.php?semester=103&dep=101" title="103101">中國文學系</a>
 								<a href="pass_print_dep_act.php?semester=103&dep=102" title="103102">英美語文系</a>
 								<a href="pass_print_dep_act.php?semester=103&dep=103" title="103103">法國語文系</a></br>
@@ -136,7 +135,9 @@
 								<a href="pass_print_dep_act.php?semester=103&dep=707" title="103707">客家語文暨社會科學學系</a></br>
 								<a href="pass_print_dep_act.php?semester=103&dep=801" title="103801">生命科學系</a>
 								<a href="pass_print_dep_act.php?semester=103&dep=802" title="103802">生醫科學與工程學系</a></br>
-							<li>104學年度</li>
+							</div>
+							<li onclick="show('104')">104學年度</li>
+							<div id="dep104" style=" display: none;">
 								<a href="pass_print_dep_act.php?semester=104&dep=101" title="104101">中國文學系</a>
 								<a href="pass_print_dep_act.php?semester=104&dep=102" title="104102">英美語文系</a>
 								<a href="pass_print_dep_act.php?semester=104&dep=103" title="104103">法國語文系</a></br>
@@ -160,7 +161,9 @@
 								<a href="pass_print_dep_act.php?semester=104&dep=707" title="104707">客家語文暨社會科學學系</a></br>
 								<a href="pass_print_dep_act.php?semester=104&dep=801" title="104801">生命科學系</a>
 								<a href="pass_print_dep_act.php?semester=104&dep=802" title="104802">生醫科學與工程學系</a></br>
-							<li>105學年度</li>
+							</div>
+							<li onclick="show('105')">105學年度</li>
+							<div id="dep105" style=" display: none;">
 								<a href="pass_print_dep_act.php?semester=105&dep=101" title="105101">中國文學系</a>
 								<a href="pass_print_dep_act.php?semester=105&dep=102" title="105102">英美語文系</a>
 								<a href="pass_print_dep_act.php?semester=105&dep=103" title="105103">法國語文系</a></br>
@@ -184,7 +187,9 @@
 								<a href="pass_print_dep_act.php?semester=105&dep=707" title="105707">客家語文暨社會科學學系</a></br>
 								<a href="pass_print_dep_act.php?semester=105&dep=801" title="105801">生命科學系</a>
 								<a href="pass_print_dep_act.php?semester=105&dep=802" title="105802">生醫科學與工程學系</a></br>
-							<li>106學年度</li>
+							</div>
+							<li onclick="show('106')">106學年度</li>
+							<div id="dep106" style=" display: none;">
 								<a href="pass_print_dep_act.php?semester=106&dep=101" title="106101">中國文學系</a>
 								<a href="pass_print_dep_act.php?semester=106&dep=102" title="106102">英美語文系</a>
 								<a href="pass_print_dep_act.php?semester=106&dep=103" title="106103">法國語文系</a></br>
@@ -208,8 +213,53 @@
 								<a href="pass_print_dep_act.php?semester=106&dep=707" title="106707">客家語文暨社會科學學系</a></br>
 								<a href="pass_print_dep_act.php?semester=106&dep=801" title="106801">生命科學系</a>
 								<a href="pass_print_dep_act.php?semester=106&dep=802" title="106802">生醫科學與工程學系</a></br>
+							</div>
+							<li onclick="show('107')">107學年度</li>
+							<div id="dep107" style=" display: none;">
+								<a href="pass_print_dep_act.php?semester=107&dep=101" title="107101">中國文學系</a>
+								<a href="pass_print_dep_act.php?semester=107&dep=102" title="107102">英美語文系</a>
+								<a href="pass_print_dep_act.php?semester=107&dep=103" title="107103">法國語文系</a></br>
+								<a href="pass_print_dep_act.php?semester=107&dep=202" title="107202">物理學系</a>
+								<a href="pass_print_dep_act.php?semester=107&dep=201" title="107201">數學系</a>
+								<a href="pass_print_dep_act.php?semester=107&dep=203" title="107203">化學系</a>
+								<a href="pass_print_dep_act.php?semester=107&dep=206" title="107206">光電科學與工程學系</a>
+								<a href="pass_print_dep_act.php?semester=107&dep=208" title="107208">理學院學士班</a></br>
+								<a href="pass_print_dep_act.php?semester=107&dep=304" title="107304">化學工程與材料工程學系</a>
+								<a href="pass_print_dep_act.php?semester=107&dep=302" title="107302">土木工程學系</a>
+								<a href="pass_print_dep_act.php?semester=107&dep=303" title="107303">機械工程學系</a></br>
+								<a href="pass_print_dep_act.php?semester=107&dep=401" title="107401">企業管理學系</a>
+								<a href="pass_print_dep_act.php?semester=107&dep=403" title="107403">資訊管理學系</a>
+								<a href="pass_print_dep_act.php?semester=107&dep=408" title="107408">財務金融學系</a>
+								<a href="pass_print_dep_act.php?semester=107&dep=409" title="107409">經濟學系</a></br>
+								<a href="pass_print_dep_act.php?semester=107&dep=501" title="107501">電機工程學系</a>
+								<a href="pass_print_dep_act.php?semester=107&dep=502" title="107502">資訊工程學系</a>
+								<a href="pass_print_dep_act.php?semester=107&dep=503" title="107503">通訊工程學系</a></br>
+								<a href="pass_print_dep_act.php?semester=107&dep=602" title="107602">地球科學學系</a>
+								<a href="pass_print_dep_act.php?semester=107&dep=601" title="107601">大氣科學學系</a></br>
+								<a href="pass_print_dep_act.php?semester=107&dep=707" title="107707">客家語文暨社會科學學系</a></br>
+								<a href="pass_print_dep_act.php?semester=107&dep=801" title="107801">生命科學系</a>
+								<a href="pass_print_dep_act.php?semester=107&dep=802" title="107802">生醫科學與工程學系</a></br>
+							</div>
 						<ul>
 				</div>
+				<script>
+				var element_num = 5;   //新增新學年要加1
+				function show(id) {
+					id = "dep" + id;
+					if(document.getElementById(id).style.display == "none"){
+						closeAll();
+						document.getElementById(id).style.display = "block";
+					}
+					else
+						document.getElementById(id).style.display = "none";
+				}
+				function closeAll(){
+					for(var i=0; i<element_num; i++){
+						var id = "dep" + (i + 103);
+						document.getElementById(id).style.display = "none";
+					}
+				}
+				</script>
 			</div>
 		</div>
 		</div>

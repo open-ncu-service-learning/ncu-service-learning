@@ -12,6 +12,8 @@
 	
 	if(isset($_POST['pass_stuid']))
 		$stuid = trim($_POST['pass_stuid'], " ");
+	
+//	$stuid = '106502035';
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -92,7 +94,7 @@
 	if(isset($stuid) && $stuid != '')
 	{
 		// 取出個人資料
-		$sql = "SELECT * FROM `all_user` WHERE user_student = '$stuid'";
+		$sql = "SELECT * FROM `all_user` WHERE user_student = '$stuid' AND user_del = 0";
 		$ret = mysql_query($sql) or die(mysql_error());
 		$row = mysql_fetch_assoc($ret);
 		
@@ -102,6 +104,7 @@
 		$dep = $row['user_dep'];
 		$ass_fre = $row['assembly_freshman'];
 		$ass_dep = $row['assembly_dep'];
+		$lesson = $row['SL_lesson'];
 		$cpr = $row['cpr'];
 		$career = $row['career'];
 		$qualify = $row['qualified'];
@@ -217,25 +220,25 @@
 		}
 		
 		
-		if($no<104000000 || $no>950000000){
+		if($no<104000000 || $no>950000000){ //103, before
 			rule103($bsc_serv, $bsc_life, $bsc_art,
-					$adv_serv, $adv_life, $adv_art, 
+					$adv_serv, $adv_life, $adv_art, $lesson,
 					$totalHour, $qualify);
 		}
-		if($no>104000000 && $no<105000000){
+		if($no>104000000 && $no<105000000){ //104
 			rule104($bsc_serv, $bsc_life, $bsc_art,
 					$adv_serv, $adv_life, $adv_art,
-					$ass_fre, $ass_dep, $totalHour, $qualify);
+					$ass_fre, $ass_dep, $lesson, $totalHour, $qualify);
 		}
-		if($no>105000000 && $no<106000000){
+		if($no>105000000 && $no<106000000){ //105
 			rule105($bsc_serv, $bsc_life, $bsc_art, $bsc_inter,
 					$adv_serv, $adv_life, $adv_art, $adv_inter,
-					$ass_fre, $ass_dep, $cpr, $career, $totalHour, $qualify);
+					$ass_fre, $ass_dep, $lesson, $cpr, $career, $totalHour, $qualify);
 		}
-		if($no>106000000 && $no<107000000){
+		if($no>106000000 && $no<108000000){ //106, 107
 			rule106($bsc_serv, $bsc_life, $bsc_art, $bsc_inter,
 					$adv_serv, $adv_life, $adv_art, $adv_inter, 
-					$ass_fre, $ass_dep, $cpr, $career, $totalHour, $qualify);
+					$ass_fre, $ass_dep, $lesson, $cpr, $career, $totalHour, $qualify);
 		}
 	
 	}

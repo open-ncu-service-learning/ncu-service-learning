@@ -57,9 +57,23 @@
 								<td align="right"><label>檔案名稱</label></td>
 								<td><input name="title" type="text" size="30" /></td>
 							</tr>
+							<script>
+							$(document).ready(function(){
+								$("#semArea").hide();
+								$('#radioBox').change(function(){
+									selected_value = $("input[name='type']:checked").val();
+									if (selected_value==6){
+										$("#semArea").show();
+									}
+									else{
+										$("#semArea").hide();
+									}
+								});
+							});
+							</script>
 							<tr>
 								<td align="right"><label>檔案類型</label></td>
-								<td>
+								<td id="radioBox">
 								<input type="radio" name="type" value=1 checked>學生學習護照</input>
 								<input type="radio" name="type" value=2>服務學習課程</input>
 								<input type="radio" name="type" value=3>學生自主團隊</input>
@@ -67,6 +81,16 @@
 								<input type="radio" name="type" value=5>服務學習執行小組會議</input>
 								<input type="radio" name="type" value=6>服務學習指導委員會</input>
 								</td>
+							</tr>
+							<tr id="semArea">
+							<td align="right"><label>學期別</label></td>
+							<td>
+							<select name="semester">
+								<?for($i=103;$i<=107;$i++){?>
+								　<option value="<?=$i?>"><?=$i?></option>
+								<?}?>
+							</select>
+							</td>
 							</tr>
 							<tr>
 								<td align="right">檔案來源(來源檔名限英文!!!)</td>

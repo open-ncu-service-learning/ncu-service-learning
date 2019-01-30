@@ -92,12 +92,14 @@
 			$i=0;
 			/*變數count 院週會次數*/
 			$j=0;
+			/*變數count 服務學習課程次數*/
+			$k=0;
 			
 			$career=0;//自我探索
 			$cpr=0;
 			
 			// 取出2016-08-01前的活動資料,在周會判斷上採用名稱
-			if($stuid<106000000 || $stuid>951001029 )
+			if($stuid<107000000 || $stuid>951001029 )
 			{
 			
 				$sql = "SELECT act_id, act_title, act_type, act_begin_time, act_service_hour, act_pass_type FROM `activity` WHERE act_del = '0' AND act_admit_student LIKE '%$stuid%' AND act_begin_time > '2006-08-01 00:00:00' AND act_begin_time < '2016-08-01 00:00:00'
@@ -119,6 +121,11 @@
 					$ss = explode("院週會", $row['act_title']);
 					if (count($ss)>1) {
 						$j++;
+					}
+					/*計算服務學習課程次數*/
+					$ll = explode("服務學習課程", $row['act_title']);
+					if(count($ll)>1 && $row['act_type']==1){
+						$k++;
 					}
 					
 					// 活動型態
@@ -201,6 +208,11 @@
 				
 				while($row_new = mysql_fetch_assoc($ret_new))
 				{				
+					/*計算服務學習課程次數*/
+					$ll2 = explode("服務學習課程", $row_new['act_title']);
+					if(count($ll2)>1 && $row_new['act_type']==1){
+						$k++;
+					}
 					
 					// 活動型態
 					$type = "";
@@ -212,7 +224,7 @@
 						case 2:
 							$type = "生活知能";
 							$index = 2;
-							if($row_new['act_life_sub'] == 4 )//國際視野
+							if($row_new['act_life_sub'] == 4)//國際視野
 							{
 								if($stuid>106000000 && $stuid<951001029)
 								{
@@ -262,7 +274,7 @@
 							$totalHour += $row_new['act_service_hour'];
 							$basicHour += $row_new['act_service_hour'];
 							$serviceHour[$index] += $row_new['act_service_hour'];
-							if($row_new['act_type']==2 )
+							if($row_new['act_type']==2)
 							{
 								if ($row_new['act_life_sub'] == 1)//大一週會
 								{
@@ -339,28 +351,28 @@
 					
 				}
 				
-			if($stuid<103999999 || $stuid>951001029 )
-				{				
-					if(ceil($serviceHour[0])>=50 && ceil($serviceHour[2])>=30 && ceil($serviceHour[4])>=20)
-					$qualified  = 1;
-				}
-			else if ($stuid<104999999)
+			if($stuid<103999999 || $stuid>951001029 )   //before 103
+			{				
+				if(ceil($serviceHour[0])>=50 && ceil($serviceHour[2])>=30 && ceil($serviceHour[4])>=20)
+				$qualified  = 1;
+			}
+			else if ($stuid<104999999)  //104
 			{
 				if($i>=4 && $j>=2 && ceil($serviceHour[0])>=50 && ceil($serviceHour[2])>=30 && ceil($serviceHour[4])>=20)
 					$qualified  = 1;
 			}
-			else if($stuid<105999999)
+			else if($stuid<105999999)  //105
 			{
 				$qualified  = 1;
-				if($i<4 || $j<2 || ceil($serviceHour[4])<20 || ceil($serviceHour[0])<40 || ceil($serviceHour[2])<40 || $career<10 || $cpr<5 || ceil($serviceHour[6])<5) 
+				if($i<4 || $j<2 || $k<2 || ceil($serviceHour[4])<20 || ceil($serviceHour[0])<40 || ceil($serviceHour[2])<40 || $career<10 || $cpr<5 || ceil($serviceHour[6])<5) 
 				{
 					$qualified  = 0;
 				}				
 			}
-			else if($stuid>=106000000 && $stuid<951001029)
+			else if($stuid>=106000000 && $stuid<951001029)  //after 106
 			{
 				$qualified  = 1;
-				if($i<4 || $j<2 || ceil($serviceHour[4])<20 || ceil($serviceHour[0])<40 || ceil($serviceHour[2])<35 || $career<10 || $cpr<5  || ceil($serviceHour[6])<5) 
+				if($i<4 || $j<2 || $k<2 || ceil($serviceHour[4])<20 || ceil($serviceHour[0])<40 || ceil($serviceHour[2])<35 || $career<10 || $cpr<5  || ceil($serviceHour[6])<5) 
 				{
 					$qualified  = 0;
 				}				
@@ -413,6 +425,7 @@
 							`advan_inter`= $serviceHour[7],
 							`assembly_freshman`= '$i',
 							`assembly_dep`= '$j',
+							`SL_lesson`='$k',
 							`career` = '$career',
 							`cpr` = '$cpr',
 							qualified = '$qualified'							

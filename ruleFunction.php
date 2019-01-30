@@ -2,7 +2,7 @@
 	require_once("function_lib.php");
 	
 	function rule103($bsc_serv, $bsc_life, $bsc_art,
-					$adv_serv, $adv_life, $adv_art, 
+					$adv_serv, $adv_life, $adv_art, $lesson,
 					$totalHour, $qualify)
 	{
 		$qual_serv=50;
@@ -77,6 +77,8 @@
 			<td align="center"><?=$adv_art?></td>
 		</tr>
 	</table>
+	<br />
+
 
 <?php		
 	}
@@ -85,7 +87,7 @@
 <?php
 	function rule104($bsc_serv, $bsc_life, $bsc_art,
 					$adv_serv, $adv_life, $adv_art,
-					$ass_fre, $ass_dep, $totalHour, $qualify)
+					$ass_fre, $ass_dep, $lesson, $totalHour, $qualify)
 	{
 		$qual_serv=50;
 		$qual_life=30;
@@ -94,18 +96,22 @@
 		$qual_assFre=4;
 		$qual_assDep=2;
 		
+		$sub_notyet=0;  //未達成的生活知能子項目時數
+		$sub_notyet += max(($qual_assFre - $ass_fre), 0)*2;
+		$sub_notyet += max(($qual_assDep - $ass_dep), 0)*2;
+		
 		if($bsc_serv > $qual_serv){
 			$adv_serv += $bsc_serv - $qual_serv;
 			$bsc_serv = $qual_serv;
 		}
-		if($bsc_life > $qual_life){
-			$adv_life += $bsc_life - $qual_life;
-			$bsc_life = $qual_life;
+		if($bsc_life > $qual_life - $sub_notyet){
+			$adv_life += $bsc_life - ($qual_life - $sub_notyet);
+			$bsc_life = $qual_life - $sub_notyet;
 		}
 		if($bsc_art > $qual_art){
 			$adv_art += $bsc_art - $qual_art;
 			$bsc_art = $qual_art;
-		}		
+		}
 				
 		$basicHour = $bsc_serv + $bsc_life + $bsc_art;
 		$advanHour = $adv_serv + $adv_life + $adv_art;
@@ -165,19 +171,19 @@
 	<br />
 	<table width="700" border="1" cellpadding="0" cellspacing="0">
 		<tr>
-			<td><span style="color: #0F50FF; font-size: 18pt;"></span></td>
+			<td><span style="color: #0F50FF; font-size: 18pt;">生活知能必修時數</span></td>
 			<td aligh="center" style="color: #FF0022;">門檻</td>
 			<td aligh="center">已參加</td>
 		</tr>
 		<tr>
-			<td><span style="color: #0F50FF; font-size: 14pt;">大一週會(次數)</span></td>
-			<td aligh="center" style="color: #FF0022;"><?=$qual_assFre?></td>
-			<td aligh="center"><?=$ass_fre?></td>
+			<td><span style="color: #0F50FF; font-size: 14pt;">大一週會(時數)</span></td>
+			<td aligh="center" style="color: #FF0022;"><?=$qual_assFre*2?></td>
+			<td aligh="center"><?=$ass_fre*2?></td>
 		</tr>
 		<tr>
-			<td><span style="color: #0F50FF; font-size: 14pt;">院週會(次數)</span></td>
-			<td aligh="center" style="color: #FF0022;"><?=$qual_assDep?></td>
-			<td aligh="center"><?=$ass_dep?></td>
+			<td><span style="color: #0F50FF; font-size: 14pt;">院週會(時數)</span></td>
+			<td aligh="center" style="color: #FF0022;"><?=$qual_assDep*2?></td>
+			<td aligh="center"><?=$ass_dep*2?></td>
 		</tr>
 	</table>
 	
@@ -188,7 +194,7 @@
 <?php
 	function rule105($bsc_serv, $bsc_life, $bsc_art, $bsc_inter,
 					$adv_serv, $adv_life, $adv_art, $adv_inter,
-					$ass_fre, $ass_dep, $cpr, $career, $totalHour, $qualify)
+					$ass_fre, $ass_dep, $lesson, $cpr, $career, $totalHour, $qualify)
 	{
 		$qual_serv=40;
 		$qual_life=40;
@@ -197,16 +203,26 @@
 		$qual_inter=5;
 		$qual_assFre=4;
 		$qual_assDep=2;
+		$qual_lesson=2;
 		$qual_cpr=5;
 		$qual_career=10;
+		
+		$sub_notyet=0;  //未達成的生活知能子項目時數
+		$sub_notyet += max(($qual_assFre - $ass_fre), 0)*2;
+		$sub_notyet += max(($qual_assDep - $ass_dep), 0)*2;
+		$sub_notyet += max(($qual_cpr - $cpr), 0);
+		$sub_notyet += max(($qual_career - $career), 0);
+		$interTotal = $bsc_inter + $adv_inter;
+		$sub_notyet += max(($qual_inter - $interTotal), 0);
+		
 		
 		if($bsc_serv > $qual_serv){
 			$adv_serv += $bsc_serv - $qual_serv;
 			$bsc_serv = $qual_serv;
 		}
-		if($bsc_life > $qual_life){
-			$adv_life += $bsc_life - $qual_life;
-			$bsc_life = $qual_life;
+		if($bsc_life > $qual_life - $sub_notyet){
+			$adv_life += $bsc_life - ($qual_life - $sub_notyet);
+			$bsc_life = $qual_life - $sub_notyet;
 		}
 		if($bsc_art > $qual_art){
 			$adv_art += $bsc_art - $qual_art;
@@ -216,7 +232,7 @@
 		$basicHour = $bsc_serv + $bsc_life + $bsc_art;
 		$advanHour = $adv_serv + $adv_life + $adv_art;
 		$serviceHour = array($adv_serv, $adv_life, $adv_art);
-		$interTotal = $bsc_inter + $adv_inter;
+		
 		$passportType = judgePassport_3row($qualify, $serviceHour);
 			
 		$string = "";
@@ -271,19 +287,24 @@
 	<br />
 	<table width="700" border="1" cellpadding="0" cellspacing="0">
 		<tr>
-			<td><span style="color: #0F50FF; font-size: 18pt;"></span></td>
+			<td><span style="color: #0F50FF; font-size: 18pt;">生活知能必修時數</span></td>
 			<td aligh="center" style="color: #FF0022;">門檻</td>
 			<td aligh="center">已參加</td>
 		</tr>
 		<tr>
-			<td><span style="color: #0F50FF; font-size: 14pt;">大一週會(次數)</span></td>
-			<td aligh="center" style="color: #FF0022;"><?=$qual_assFre?></td>
-			<td aligh="center"><?=$ass_fre?></td>
+			<td><span style="color: #0F50FF; font-size: 14pt;">服務學習課程(學期數)</span></td>
+			<td aligh="center" style="color: #FF0022;"><?=$qual_lesson?></td>
+			<td aligh="center"><?=$lesson?></td>
 		</tr>
 		<tr>
-			<td><span style="color: #0F50FF; font-size: 14pt;">院週會(次數)</span></td>
-			<td aligh="center" style="color: #FF0022;"><?=$qual_assDep?></td>
-			<td aligh="center"><?=$ass_dep?></td>
+			<td><span style="color: #0F50FF; font-size: 14pt;">大一週會(時數)</span></td>
+			<td aligh="center" style="color: #FF0022;"><?=$qual_assFre*2?></td>
+			<td aligh="center"><?=$ass_fre*2?></td>
+		</tr>
+		<tr>
+			<td><span style="color: #0F50FF; font-size: 14pt;">院週會(時數)</span></td>
+			<td aligh="center" style="color: #FF0022;"><?=$qual_assDep*2?></td>
+			<td aligh="center"><?=$ass_dep*2?></td>
 		</tr>
 		<tr>
 			<td><span style="color: #0F50FF; font-size: 14pt;">大一CPR(時數)</span></td>
@@ -308,7 +329,7 @@
 <?php
 	function rule106($bsc_serv, $bsc_life, $bsc_art, $bsc_inter,
 					$adv_serv, $adv_life, $adv_art, $adv_inter, 
-					$ass_fre, $ass_dep, $cpr, $career, $totalHour, $qualify)
+					$ass_fre, $ass_dep, $lesson, $cpr, $career, $totalHour, $qualify)
 	{
 		$qual_serv=40;
 		$qual_life=35;
@@ -317,21 +338,28 @@
 		
 		$qual_assFre=4;
 		$qual_assDep=2;
+		$qual_lesson=2;
 		$qual_cpr=5;
 		$qual_career=10;
+			
+		$sub_notyet=0;  //未達成的生活知能子項目時數
+		$sub_notyet += max(($qual_assFre - $ass_fre), 0)*2;
+		$sub_notyet += max(($qual_assDep - $ass_dep), 0)*2;
+		$sub_notyet += max(($qual_cpr - $cpr), 0);
+		$sub_notyet += max(($qual_career - $career), 0);
 		
 		if($bsc_serv > $qual_serv){
 			$adv_serv += $bsc_serv - $qual_serv;
 			$bsc_serv = $qual_serv;
 		}
-		if($bsc_life > $qual_life){
-			$adv_life += $bsc_life - $qual_life;
-			$bsc_life = $qual_life;
+		if($bsc_life > $qual_life - $sub_notyet){
+			$adv_life += $bsc_life - ($qual_life - $sub_notyet);
+			$bsc_life = $qual_life - $sub_notyet;
 		}
 		if($bsc_art > $qual_art){
 			$adv_art += $bsc_art - $qual_art;
 			$bsc_art = $qual_art;
-		}
+		}	
 		if($bsc_inter > $qual_inter){
 			$adv_inter += $bsc_inter - $qual_inter;
 			$bsc_inter = $qual_inter;
@@ -399,19 +427,24 @@
 	<br />
 	<table width="700" border="1" cellpadding="0" cellspacing="0">
 		<tr>
-			<td><span style="color: #0F50FF; font-size: 18pt;"></span></td>
+			<td><span style="color: #0F50FF; font-size: 18pt;">生活知能必修時數</span></td>
 			<td aligh="center" style="color: #FF0022;">門檻</td>
 			<td aligh="center">已參加</td>
 		</tr>
 		<tr>
-			<td><span style="color: #0F50FF; font-size: 14pt;">大一週會(次數)</span></td>
-			<td aligh="center" style="color: #FF0022;"><?=$qual_assFre?></td>
-			<td aligh="center"><?=$ass_fre?></td>
+			<td><span style="color: #0F50FF; font-size: 14pt;">服務學習課程(學期數)</span></td>
+			<td aligh="center" style="color: #FF0022;"><?=$qual_lesson?></td>
+			<td aligh="center"><?=$lesson?></td>
 		</tr>
 		<tr>
-			<td><span style="color: #0F50FF; font-size: 14pt;">院週會(次數)</span></td>
-			<td aligh="center" style="color: #FF0022;"><?=$qual_assDep?></td>
-			<td aligh="center"><?=$ass_dep?></td>
+			<td><span style="color: #0F50FF; font-size: 14pt;">大一週會(時數)</span></td>
+			<td aligh="center" style="color: #FF0022;"><?=$qual_assFre*2?></td>
+			<td aligh="center"><?=$ass_fre*2?></td>
+		</tr>
+		<tr>
+			<td><span style="color: #0F50FF; font-size: 14pt;">院週會(時數)</span></td>
+			<td aligh="center" style="color: #FF0022;"><?=$qual_assDep*2?></td>
+			<td aligh="center"><?=$ass_dep*2?></td>
 		</tr>
 		<tr>
 			<td><span style="color: #0F50FF; font-size: 14pt;">大一CPR(時數)</span></td>

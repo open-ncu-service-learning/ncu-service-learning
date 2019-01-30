@@ -88,18 +88,21 @@
 			</tr>
 <?	
 	//活動
-	$sql = "SELECT act_id,act_title,act_begin_time,act_end_time,act_type,act_service_hour,act_pass_type,act_admit_student,act_req_office FROM `activity` WHERE `act_begin_time` between '$ADsemester-08-01 00:00:00' and '$ADsemester_1-07-31 00:00:00' AND `act_admit` = 1 AND `act_del` = 0 ORDER BY act_req_office,act_type,act_begin_time DESC";
+	$sql = "SELECT act_id,act_title,act_begin_time,act_end_time,act_type,act_life_sub,act_service_hour,act_pass_type,act_admit_student,act_req_office FROM activity WHERE `act_begin_time` between '$ADsemester-08-01 00:00:00' and '$ADsemester_1-07-31 00:00:00' AND `act_admit` = 1 AND `act_del` = 0 ORDER BY act_req_office,act_type,act_begin_time DESC";
 	$ret = mysql_query($sql) or die(mysql_error());
 	$actNumber = mysql_num_rows($ret);
 	$l_s=0;
 	$l_l=0;
 	$l_h=0;
+	$l_i=0;
 	$hour_s=0;
 	$hour_l=0;
 	$hour_h=0;
+	$hour_i=0;
 	$lh_s=0;
 	$lh_l=0;
 	$lh_h=0;
+	$lh_i=0;
 	
 	if($actNumber > 0)
 	{
@@ -108,7 +111,6 @@
 			//活動單位
 			if($dep_temp == $row['act_req_office'])
 			{
-				//$actOffice = "&nbsp";
 				$num = "&nbsp";
 			}
 			else
@@ -123,29 +125,29 @@
 			
 			
 			//活動類別
-			if($type_temp == $row['act_type'] && $dep_temp == $row['act_req_office'])
+
+			switch($row['act_type'])
 			{
-				//$type = "&nbsp";
+				case 1:
+					$type = "服務學習";
+					break;
+				case 2:
+					$type = "生活知能";
+					if($row['act_life_sub']==4 && $semester>=107){
+						$type = "國際視野";
+					}
+					break;
+				case 3:
+					$type = "人文藝術";
+					break;
+				case 4:
+					$type = "國際視野";
+					break;
+				default:
+					$type = "";
 			}
-			else
-			{
-				switch($row['act_type'])
-				{
-					case 1:
-						$type = "服務學習";
-						break;
-					case 2:
-						$type = "生活知能";
-						break;
-					case 3:
-						$type = "人文藝術";
-						break;
-					default:
-						$type = "";
-				}
-			}
+
 			$dep_temp = $row['act_req_office'];
-			$type_temp = $row['act_type'];
 			
 			//活動日期
 			$begin_time = substr($row['act_begin_time'],0,10);
@@ -229,14 +231,26 @@
 						$lh_s += $length*(round($basic)+round($high));
 						break;
 					case 2:
-						$l_l += $length;
-						$hour_l += round($basic)+round($high);
-						$lh_l += $length*(round($basic)+round($high));
+						if($row['act_life_sub'] == 4 && $semester>=107){
+							$l_i += $length;
+							$hour_i += round($basic)+round($high);
+							$lh_i += $length*(round($basic)+round($high));
+						}
+						else{
+							$l_l += $length;
+							$hour_l += round($basic)+round($high);
+							$lh_l += $length*(round($basic)+round($high));
+						}
 						break;
 					case 3:
 						$l_h += $length;
 						$hour_h += round($basic)+round($high);
 						$lh_h += $length*(round($basic)+round($high));
+						break;
+					case 4:
+						$l_i += $length;
+						$hour_i += round($basic)+round($high);
+						$lh_i += $length*(round($basic)+round($high));
 						break;
 					default:
 						$type = "";
@@ -255,6 +269,12 @@
 				FROM activity
 				WHERE  `act_type` = 2
 				AND  `act_begin_time` between '$ADsemester-08-01 00:00:00' and '$ADsemester_1-07-31 00:00:00' AND `act_admit` = 1 AND `act_del` = 0";
+		if($semester>=107){
+			$sqll = "SELECT COUNT( act_id ) AS num
+				FROM activity
+				WHERE  `act_type` = 2 AND `act_life_sub` != 4
+				AND  `act_begin_time` between '$ADsemester-08-01 00:00:00' and '$ADsemester_1-07-31 00:00:00' AND `act_admit` = 1 AND `act_del` = 0";
+		}
 		$retl = mysql_query($sqll) or die(mysql_error());
 		$rowl = mysql_fetch_assoc($retl);
 		$num_l= $rowl['num'];
@@ -266,6 +286,14 @@
 		$rets = mysql_query($sqls) or die(mysql_error());
 		$rows = mysql_fetch_assoc($rets);
 		$num_s= $rows['num'];
+		/*國際*/
+		$sqli = "SELECT COUNT( act_id ) AS num
+				FROM activity
+				WHERE ((`act_type` = 2 AND `act_life_sub` = 4) OR `act_type` = 4)
+				AND  `act_begin_time` between '$ADsemester-08-01 00:00:00' and '$ADsemester_1-07-31 00:00:00' AND `act_admit` = 1 AND `act_del` = 0";
+		$reti = mysql_query($sqli) or die(mysql_error());
+		$rowi = mysql_fetch_assoc($reti);
+		$num_i= $rowi['num'];
 		}
 	}
 ?>
@@ -308,6 +336,15 @@
 					<td width="150" ><?=$hour_s?></td>
 					<td width="150" ><?=$lh_s?></td>
 				</tr>
+				<?if($semester>=107){?>
+				<tr align="center">
+					<td width="100" >國際視野</td>
+					<td width="200" ><?=$num_i?></td>
+					<td width="150" ><?=$l_i?></td>
+					<td width="150" ><?=$hour_i?></td>
+					<td width="150" ><?=$lh_i?></td>
+				</tr>
+				<?}?>
 			</table>
 		</div>
 	</body>

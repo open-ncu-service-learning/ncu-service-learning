@@ -99,7 +99,8 @@
 							<tr>
 								<td align="right"><label for="begin_time" style="color: #AF0000;">開始時間：</label></td>
 								<td>
-									<input id="begin_time" name="begin_time" type="text" size="30" style="font-size: 14pt; height: 25px;" class="date-pick" value="<? echo substr($row['act_begin_time'], 0, 10); ?>" />
+									<input type="date" id="begin_time" name="begin_time" size="30" style="font-size: 14pt; " placeholder="YYYY-MM-DD" value="<?= isset($_POST['begin_time']) ? $_POST['begin_time'] : substr($row['act_begin_time'], 0, 10); ?>">
+									<!--<input id="begin_time" name="begin_time" type="text" size="30" style="font-size: 14pt; height: 25px;" class="date-pick" value="<? //echo substr($row['act_begin_time'], 0, 10); ?>" />-->
 									<select name="begin_hour" id="begin_hour" style="font-size: 14pt; height: 25px;">
 										<option value="05" <?if(substr($row['act_begin_time'], 11, -6) == "05") echo "selected=\"selected\"";?> >05</option>
 										<option value="06" <?if(substr($row['act_begin_time'], 11, -6) == "06") echo "selected=\"selected\"";?> >06</option>
@@ -189,7 +190,8 @@
 							<tr>
 								<td align="right"><label for="end_time" style="color: #AF0000;">結束時間：</label></td>
 								<td>
-									<input id="end_time" name="end_time" type="text" size="30" style="font-size: 14pt; height: 25px;" class="date-pick" value="<? echo substr($row['act_end_time'], 0, 10); ?>" />
+									<input type="date" id="end_time" name="end_time" size="30" style="font-size: 14pt; " placeholder="YYYY-MM-DD" value="<?= isset($_POST['end_time']) ? $_POST['end_time'] : substr($row['act_end_time'], 0, 10); ?>">
+									<!--<input id="end_time" name="end_time" type="text" size="30" style="font-size: 14pt; height: 25px;" class="date-pick" value="<? //echo substr($row['act_end_time'], 0, 10); ?>" />-->
 									<select name="end_hour" id="end_hour" style="font-size: 14pt; height: 25px;">
 										<option value="05" <?if(substr($row['act_end_time'], 11, -6) == "05") echo "selected=\"selected\"";?> >05</option>
 										<option value="06" <?if(substr($row['act_end_time'], 11, -6) == "06") echo "selected=\"selected\"";?> >06</option>

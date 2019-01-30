@@ -304,12 +304,19 @@
 			$post = "<a href=\"pass_post_activity.php?id=$id&amp;view=1\" style=\"color: #0066CC;\" onClick=\"return confirm('確定公告?');\"><img src=\"images/icon/publish.png\" style=\"border: none; width: 150px;\" alt=\"公告\"/></a>";			
 		elseif($row['act_post'] == 1)
 			$post = "<img src=\"images/icon/published.png\" style=\"border: none; width: 150px;\" alt=\"已公告\" >";
+		
+		//收件
+		if($row['act_accept'] == 0)
+			$accept = "<!--<a href=\"#\" style=\"color: #0066CC;\" onClick=\"return confirm('輸入送件人');\">--><img src=\"images/icon/accept.png\" style=\"border: none; width: 150px;\" alt=\"收件\"><!--</a>-->";
+		elseif($row['act_accept'] == 1)
+			$accept = "<img src=\"images/icon/accepted.png\" style=\"border: none; width: 150px;\" alt=\"已收件\">";
 ?>
-				<table width="540" style="margin-top: 20px;" border="0" cellspacing="0" cellpadding="0">
+				<table width="640" style="margin-top: 20px;" border="0" cellspacing="0" cellpadding="0">
 					<tr>
-						<td width="180"><?=$admit?></td>
-						<td width="180"><?=$reject?></td>
-						<td width="180"><?=$post?></td>
+						<td width="160"><?=$admit?></td>
+						<td width="160"><?=$reject?></td>
+						<td width="160"><?=$post?></td>
+						<td width="160"><?=$accept?></td>
 					</tr>
 				</table>
 	            <div class="buttons" style="margin: 10px;">

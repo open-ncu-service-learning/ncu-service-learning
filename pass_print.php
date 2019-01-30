@@ -66,7 +66,6 @@
 	</div>
 	<div id="outputData">			
 <?php
-	require_once("conn/db.php");
 	
 	// 時間
 	$year = date("Y")-1911;
@@ -88,13 +87,8 @@
 					  "7007", 
 				      "8001", "8002");	
 					  
-	//$ncu = array( "4001", "4003", "4008" ,"2004");
-	/*$ncu = array( "1001", "1002", "1003", "2002", "2001", "2003", "8001", 
-				  "2006", "2008", "3004", "3002", "3003", "4001", "4003", 
-				  "4008", "4009", "5001", "5002", "5003", "6002", "6001" );	*/
 	$k = 0;
 	$len = count($ncu);
-	//len = 2;
 	for($k; $k < $len; $k++)
 	{
 		unset($stuid);
@@ -126,9 +120,32 @@
 		}
 		$i = 0;
 		$length = count($stuid);
-		//$length = 1;
+		
 		for($i; $i < $length; $i++)
 		{
+			$sql = "SELECT * FROM `all_user` WHERE user_student = '$stuid[$i]'";
+			$ret = mysql_query($sql) or die(mysql_error());
+			$row = mysql_fetch_assoc($ret);
+			
+			list($b1[$i], $b2[$i], $b3[$i], $b4[$i], $q1, $q2, $q3, $q4) = calHours($row);
+			
+			$qlesson = 40;
+			if($semester>=105)
+				$qlesson = 30;
+			
+			$serGoal[0] = $qlesson;
+			$serGoal[1] = $q1-$qlesson;
+			$serGoal[2] = $q2;
+			$serGoal[3] = $q3;
+			$serGoal[4] = $q4;
+			
+			$serviceHour[$i][0] = $row['SL_lesson']*($qlesson/2);
+			$serviceHour[$i][1] = $b1[$i] - $serviceHour[$i][0];
+			$serviceHour[$i][2] = $b2[$i];
+			$serviceHour[$i][3] = $b3[$i];
+			$serviceHour[$i][4] = $b4[$i];
+			
+			/*
 			// 取出活動資料
 			$sql = "SELECT `act_id`, `act_title`, `act_type`, `act_begin_time`, `act_service_hour`, `act_pass_type` FROM `activity` WHERE `act_del` = '0' AND `act_admit_student` LIKE '%$stuid[$i]%' UNION
 				SELECT `act_id`, `act_title`, `act_type`, `act_begin_time`, `act_service_hour`, `act_pass_type` FROM `out_activity` WHERE `act_del` = '0' AND `act_admit_student` LIKE '%$stuid[$i]%'
@@ -267,10 +284,15 @@
 				$serGoal[3] = 20;
 				$serGoal[4] = 5;
 			}
-			
-
+			*/
+			$totalHour[$i] = $serviceHour[$i][0]+$serviceHour[$i][1]+$serviceHour[$i][2]+$serviceHour[$i][3];
+			$cols = 3;
+			if($semester>=106){
+				$totalHour[$i] = $serviceHour[$i][0]+$serviceHour[$i][1]+$serviceHour[$i][2]+$serviceHour[$i][3]+$serviceHour[$i][4];
+				$cols = 4;
+			}
 			// 總時數
-			$totalHour[$i] = $serviceHour[$i][0]+$serviceHour[$i][1]+$serviceHour[$i][2]+$serviceHour[$i][3]+$serviceHour[$i][4];
+			
 		}
 ?>
 		<table width="1000" align="center" border="0">
@@ -285,41 +307,31 @@
 			<tr align="center">
 				<td width="100" rowspan="4">學號</td>
 				<td width="180" rowspan="4"><p>姓名/應完成時數</p></td>
-				<?if($semester>=106){ ?>
-					<td width="600" colspan="8">基本</td>
-				<? }
-				else{ ?>
-					<td width="600" colspan="6">基本</td>
-				<?}?>
-				
+				<td width="600" colspan="24">基本</td>
 				<td width="120" rowspan="3">基本總時數</td>
 			</tr>
 			<tr align="center">
-				<td width="240" colspan="2">服務學習</td>
-				
+				<td width="<?echo 600/$cols;?>" colspan="<?echo 24/$cols;?>">服務學習</td>
+				<td width="<?echo 600/$cols;?>" colspan="<?echo 24/$cols;?>" rowspan="2">生活知能</td>
+				<td width="<?echo 600/$cols;?>" colspan="<?echo 24/$cols;?>" rowspan="2">人文藝術</td>
 				<?if($semester>=106){ ?>
-					<td width="120" colspan="2" rowspan="2">生活知能</td>
-					<td width="120" colspan="2" rowspan="2">人文藝術</td>
-					<td width="120" colspan="2" rowspan="2">國際視野</td>
-				<? }
-				else{ ?>
-					<td width="180" colspan="2" rowspan="2">生活知能</td>
-					<td width="180" colspan="2" rowspan="2">人文藝術</td>
-				<?}?>
+					<td width="<?echo 600/$cols;?>" colspan="<?echo 24/$cols;?>" rowspan="2">國際視野</td>
+				<? }?>
 			</tr>
 			<tr align="center">
-				<td width="120">課程</td>
-				<td width="120">校外服務</td>
+				<td colspan="<?echo 12/$cols;?>">課程</td>
+				<td colspan="<?echo 12/$cols;?>">校外服務</td>
 			</tr>
 			<tr align="center">
-				<td><?=$serGoal[0]?></td>
-				<td><?=$serGoal[1]?></td>
-				<td colspan="2"><?=$serGoal[2]?></td>
-				<td colspan="2"><?=$serGoal[3]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$serGoal[0]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$serGoal[1]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$serGoal[2]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$serGoal[3]?></td>
 				<?if($semester>=106){ ?>
-					<td colspan="2"><?=$serGoal[4]?></td>
+					<td colspan="<?echo 24/$cols;?>"><?=$serGoal[4]?></td>
 				<? }?>
 				<td>100</td>
+			</tr>
 <?
 		$i = 0;
 		$t_ser1 = 0;
@@ -334,15 +346,15 @@
 			<tr align="center">
 				<td><?=$stuid[$i]?></td>
 				<td><?=$name[$i]?></td>
-				<td><?=$serviceHour[$i][0]?></td>
-				<td><?=$serviceHour[$i][1]?></td>
-				<td colspan="2"><?=$serviceHour[$i][2]?></td>
-				<td colspan="2"><?=$serviceHour[$i][3]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$serviceHour[$i][0]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$serviceHour[$i][1]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$serviceHour[$i][2]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$serviceHour[$i][3]?></td>
 				<?if($semester>=106){ ?>
-					<td colspan="2"><?=$serviceHour[$i][4]?></td>
+					<td colspan="<?echo 24/$cols;?>"><?=$serviceHour[$i][4]?></td>
 				<? }?>
 				<td><?=$totalHour[$i]?></td>
-			</tr>-
+			</tr>
 <?
 			$t_ser1 += $serviceHour[$i][0];
 			$t_ser2 += $serviceHour[$i][1];
@@ -375,17 +387,17 @@
 ?>
 			<tr align="center">
 				<td colspan="2">平均</td>
-				<td><?=round($avg_ser1, 1)?></td>
-				<td><?=round($avg_ser2, 1)?></td>
-				<td colspan="2"><?=round($avg_life,1)?></td>
-				<td colspan="2"><?=round($avg_art, 1)?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=round($avg_ser1, 1)?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=round($avg_ser2, 1)?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=round($avg_life,1)?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=round($avg_art, 1)?></td>
 				<?if($semester>=106){ ?>
-					<td colspan="2"><?=round($avg_inter, 1)?></td>
+					<td colspan="<?echo 24/$cols;?>"><?=round($avg_inter, 1)?></td>
 				<? }?>
 				<td><?=round($avg_sum, 1)?></td>
 			</tr>
 		</table>
-		<P style='page-break-after:always'></P>
+		<p style='page-break-after:always'></p>
 	<?php
 	}
 
@@ -405,59 +417,45 @@
 				<td width="100" rowspan="4">院別</td>
 				<td width="200" rowspan="4">系別</td>
 				<td width="150" rowspan="4">級別/畢業應達時數</td>
-				<?if($semester>=106){ ?>
-					<td width="440" colspan="5">基本時數</td>
-				<? }
-				else{ ?>
-					<td width="440" colspan="4">基本時數</td>
-				<?} ?>
-				
+				<td width="600" colspan="24">基本時數</td>
 				<td width="100" rowspan="3">合計</td>
 			</tr>
 			<tr align="center">
-				<td colspan="2" width="140">服務學習</td>
-
+				<td width="<?echo 600/$cols;?>" colspan="<?echo 24/$cols;?>">服務學習</td>
+				<td width="<?echo 600/$cols;?>" colspan="<?echo 24/$cols;?>" rowspan="2">生活知能</td>
+				<td width="<?echo 600/$cols;?>" colspan="<?echo 24/$cols;?>" rowspan="2">人文藝術</td>
 				<?if($semester>=106){ ?>
-					<td rowspan="2" width="100">生活知能</td>
-					<td rowspan="2" width="100">人文藝術</td>
-					<td rowspan="2" width="100">國際視野</td>
-				<? }
-				else{?>
-					<td rowspan="2" width="150">生活知能</td>
-					<td rowspan="2" width="150">人文藝術</td>
+					<td width="<?echo 600/$cols;?>" colspan="<?echo 24/$cols;?>" rowspan="2">國際視野</td>
 				<? }?>
 			</tr>
 			<tr align="center">
-				<td width="70">課程</td>
-				<td width="70">校外服務</td>
+				<td colspan="<?echo 12/$cols;?>">課程</td>
+				<td colspan="<?echo 12/$cols;?>">校外服務</td>
 			</tr>
-				<tr align="center">
-				<td><?=$serGoal[0]?></td>
-				<td><?=$serGoal[1]?></td>
-				
+			<tr align="center">
+				<td colspan="<?echo 12/$cols;?>"><?=$serGoal[0]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$serGoal[1]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$serGoal[2]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$serGoal[3]?></td>
 				<?if($semester>=106){ ?>
-					<td><?=$serGoal[2]?></td>
-					<td><?=$serGoal[3]?></td>
-					<td><?=$serGoal[4]?></td>
-				<? }
-				else{ ?>
-					<td><?=$serGoal[2]?></td>
-					<td><?=$serGoal[3]?></td>
-				<?} ?>
+					<td colspan="<?echo 24/$cols;?>"><?=$serGoal[4]?></td>
+				<? }?>
 				<td>100</td>
 			</tr>
+			
+			
 			<? $j=0; ?>
 			
 			<tr align="center">
 				<td rowspan="3">文學院</td>
 				<td>中國文學系</td>
 				<td><?=$semester?></td>
-				<td><?=$chart[$j+0]?></td>
-				<td><?=$chart[$j+1]?></td>
-				<td><?=$chart[$j+2]?></td>
-				<td><?=$chart[$j+3]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$chart[$j+0]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$chart[$j+1]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+2]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+3]?></td>
 				<?if($semester>=106){ ?>
-					<td><?=$chart[$j+4]?></td>
+					<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+4]?></td>
 				<? }?>
 				<td><?=$chart[$j+5]?></td>
 				<? $j+=6; ?>
@@ -465,12 +463,12 @@
 			<tr align="center">
 				<td>英美語文系</td>
 				<td><?=$semester?></td>
-				<td><?=$chart[$j+0]?></td>
-				<td><?=$chart[$j+1]?></td>
-				<td><?=$chart[$j+2]?></td>
-				<td><?=$chart[$j+3]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$chart[$j+0]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$chart[$j+1]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+2]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+3]?></td>
 				<?if($semester>=106){ ?>
-					<td><?=$chart[$j+4]?></td>
+					<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+4]?></td>
 				<? }?>
 				<td><?=$chart[$j+5]?></td>
 				<? $j+=6; ?>
@@ -479,12 +477,12 @@
 			<tr align="center">
 				<td>法國語文系</td>
 				<td><?=$semester?></td>
-				<td><?=$chart[$j+0]?></td>
-				<td><?=$chart[$j+1]?></td>
-				<td><?=$chart[$j+2]?></td>
-				<td><?=$chart[$j+3]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$chart[$j+0]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$chart[$j+1]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+2]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+3]?></td>
 				<?if($semester>=106){ ?>
-					<td><?=$chart[$j+4]?></td>
+					<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+4]?></td>
 				<? }?>
 				<td><?=$chart[$j+5]?></td>
 				<? $j+=6; ?>
@@ -494,12 +492,12 @@
 				<td rowspan="5">理學院</td>
 				<td>物理學系</td>
 				<td><?=$semester?></td>
-				<<td><?=$chart[$j+0]?></td>
-				<td><?=$chart[$j+1]?></td>
-				<td><?=$chart[$j+2]?></td>
-				<td><?=$chart[$j+3]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$chart[$j+0]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$chart[$j+1]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+2]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+3]?></td>
 				<?if($semester>=106){ ?>
-					<td><?=$chart[$j+4]?></td>
+					<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+4]?></td>
 				<? }?>
 				<td><?=$chart[$j+5]?></td>
 				<? $j+=6; ?>
@@ -508,12 +506,12 @@
 			<tr align="center">
 				<td>數學系</td>
 				<td><?=$semester?></td>
-				<td><?=$chart[$j+0]?></td>
-				<td><?=$chart[$j+1]?></td>
-				<td><?=$chart[$j+2]?></td>
-				<td><?=$chart[$j+3]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$chart[$j+0]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$chart[$j+1]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+2]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+3]?></td>
 				<?if($semester>=106){ ?>
-					<td><?=$chart[$j+4]?></td>
+					<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+4]?></td>
 				<? }?>
 				<td><?=$chart[$j+5]?></td>
 				<? $j+=6; ?>
@@ -522,12 +520,12 @@
 			<tr align="center">
 				<td>化學系</td>
 				<td><?=$semester?></td>
-				<td><?=$chart[$j+0]?></td>
-				<td><?=$chart[$j+1]?></td>
-				<td><?=$chart[$j+2]?></td>
-				<td><?=$chart[$j+3]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$chart[$j+0]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$chart[$j+1]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+2]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+3]?></td>
 				<?if($semester>=106){ ?>
-					<td><?=$chart[$j+4]?></td>
+					<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+4]?></td>
 				<? }?>
 				<td><?=$chart[$j+5]?></td>
 				<? $j+=6; ?>
@@ -536,12 +534,12 @@
 			<tr align="center">
 				<td>光電科學與工程學系</td>
 				<td><?=$semester?></td>
-				<td><?=$chart[$j+0]?></td>
-				<td><?=$chart[$j+1]?></td>
-				<td><?=$chart[$j+2]?></td>
-				<td><?=$chart[$j+3]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$chart[$j+0]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$chart[$j+1]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+2]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+3]?></td>
 				<?if($semester>=106){ ?>
-					<td><?=$chart[$j+4]?></td>
+					<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+4]?></td>
 				<? }?>
 				<td><?=$chart[$j+5]?></td>
 				<? $j+=6; ?>
@@ -550,12 +548,12 @@
 			<tr align="center">
 				<td>理學院學士班</td>
 				<td><?=$semester?></td>
-				<td><?=$chart[$j+0]?></td>
-				<td><?=$chart[$j+1]?></td>
-				<td><?=$chart[$j+2]?></td>
-				<td><?=$chart[$j+3]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$chart[$j+0]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$chart[$j+1]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+2]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+3]?></td>
 				<?if($semester>=106){ ?>
-					<td><?=$chart[$j+4]?></td>
+					<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+4]?></td>
 				<? }?>
 				<td><?=$chart[$j+5]?></td>
 				<? $j+=6; ?>
@@ -564,12 +562,12 @@
 				<td rowspan="3">工學院</td>
 				<td>化學工程與材料工程學系</td>
 				<td><?=$semester?></td>
-				<td><?=$chart[$j+0]?></td>
-				<td><?=$chart[$j+1]?></td>
-				<td><?=$chart[$j+2]?></td>
-				<td><?=$chart[$j+3]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$chart[$j+0]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$chart[$j+1]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+2]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+3]?></td>
 				<?if($semester>=106){ ?>
-					<td><?=$chart[$j+4]?></td>
+					<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+4]?></td>
 				<? }?>
 				<td><?=$chart[$j+5]?></td>
 				<? $j+=6; ?>
@@ -578,12 +576,12 @@
 			<tr align="center">
 				<td>土木工程學系</td>
 				<td><?=$semester?></td>
-				<td><?=$chart[$j+0]?></td>
-				<td><?=$chart[$j+1]?></td>
-				<td><?=$chart[$j+2]?></td>
-				<td><?=$chart[$j+3]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$chart[$j+0]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$chart[$j+1]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+2]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+3]?></td>
 				<?if($semester>=106){ ?>
-					<td><?=$chart[$j+4]?></td>
+					<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+4]?></td>
 				<? }?>
 				<td><?=$chart[$j+5]?></td>
 				<? $j+=6; ?>
@@ -591,12 +589,12 @@
 			<tr align="center">
 				<td>機械工程學系</td>
 				<td><?=$semester?></td>
-				<td><?=$chart[$j+0]?></td>
-				<td><?=$chart[$j+1]?></td>
-				<td><?=$chart[$j+2]?></td>
-				<td><?=$chart[$j+3]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$chart[$j+0]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$chart[$j+1]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+2]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+3]?></td>
 				<?if($semester>=106){ ?>
-					<td><?=$chart[$j+4]?></td>
+					<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+4]?></td>
 				<? }?>
 				<td><?=$chart[$j+5]?></td>
 				<? $j+=6; ?>
@@ -606,12 +604,12 @@
 				<td rowspan="4">管理學院</td>
 				<td>企業管理學系</td>
 				<td><?=$semester?></td>
-				<td><?=$chart[$j+0]?></td>
-				<td><?=$chart[$j+1]?></td>
-				<td><?=$chart[$j+2]?></td>
-				<td><?=$chart[$j+3]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$chart[$j+0]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$chart[$j+1]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+2]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+3]?></td>
 				<?if($semester>=106){ ?>
-					<td><?=$chart[$j+4]?></td>
+					<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+4]?></td>
 				<? }?>
 				<td><?=$chart[$j+5]?></td>
 				<? $j+=6; ?>
@@ -620,12 +618,12 @@
 			<tr align="center">
 				<td>資訊管理學系</td>
 				<td><?=$semester?></td>
-				<td><?=$chart[$j+0]?></td>
-				<td><?=$chart[$j+1]?></td>
-				<td><?=$chart[$j+2]?></td>
-				<td><?=$chart[$j+3]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$chart[$j+0]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$chart[$j+1]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+2]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+3]?></td>
 				<?if($semester>=106){ ?>
-					<td><?=$chart[$j+4]?></td>
+					<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+4]?></td>
 				<? }?>
 				<td><?=$chart[$j+5]?></td>
 				<? $j+=6; ?>
@@ -634,12 +632,12 @@
 			<tr align="center">
 				<td>財務金融學系</td>
 				<td><?=$semester?></td>
-				<td><?=$chart[$j+0]?></td>
-				<td><?=$chart[$j+1]?></td>
-				<td><?=$chart[$j+2]?></td>
-				<td><?=$chart[$j+3]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$chart[$j+0]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$chart[$j+1]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+2]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+3]?></td>
 				<?if($semester>=106){ ?>
-					<td><?=$chart[$j+4]?></td>
+					<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+4]?></td>
 				<? }?>
 				<td><?=$chart[$j+5]?></td>
 				<? $j+=6; ?>
@@ -648,12 +646,12 @@
 			<tr align="center">
 				<td>經濟學系</td>
 				<td><?=$semester?></td>
-				<td><?=$chart[$j+0]?></td>
-				<td><?=$chart[$j+1]?></td>
-				<td><?=$chart[$j+2]?></td>
-				<td><?=$chart[$j+3]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$chart[$j+0]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$chart[$j+1]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+2]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+3]?></td>
 				<?if($semester>=106){ ?>
-					<td><?=$chart[$j+4]?></td>
+					<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+4]?></td>
 				<? }?>
 				<td><?=$chart[$j+5]?></td>
 				<? $j+=6; ?>
@@ -664,12 +662,12 @@
 				<td rowspan="3">資電學院</td>
 				<td>電機工程學系</td>
 				<td><?=$semester?></td>
-				<td><?=$chart[$j+0]?></td>
-				<td><?=$chart[$j+1]?></td>
-				<td><?=$chart[$j+2]?></td>
-				<td><?=$chart[$j+3]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$chart[$j+0]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$chart[$j+1]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+2]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+3]?></td>
 				<?if($semester>=106){ ?>
-					<td><?=$chart[$j+4]?></td>
+					<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+4]?></td>
 				<? }?>
 				<td><?=$chart[$j+5]?></td>
 				<? $j+=6; ?>
@@ -678,12 +676,12 @@
 			<tr align="center">
 				<td>資訊工程學系</td>
 				<td><?=$semester?></td>
-				<td><?=$chart[$j+0]?></td>
-				<td><?=$chart[$j+1]?></td>
-				<td><?=$chart[$j+2]?></td>
-				<td><?=$chart[$j+3]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$chart[$j+0]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$chart[$j+1]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+2]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+3]?></td>
 				<?if($semester>=106){ ?>
-					<td><?=$chart[$j+4]?></td>
+					<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+4]?></td>
 				<? }?>
 				<td><?=$chart[$j+5]?></td>
 				<? $j+=6; ?>
@@ -692,12 +690,12 @@
 			<tr align="center">
 				<td>通訊工程學系</td>
 				<td><?=$semester?></td>
-				<td><?=$chart[$j+0]?></td>
-				<td><?=$chart[$j+1]?></td>
-				<td><?=$chart[$j+2]?></td>
-				<td><?=$chart[$j+3]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$chart[$j+0]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$chart[$j+1]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+2]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+3]?></td>
 				<?if($semester>=106){ ?>
-					<td><?=$chart[$j+4]?></td>
+					<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+4]?></td>
 				<? }?>
 				<td><?=$chart[$j+5]?></td>
 				<? $j+=6; ?>
@@ -707,12 +705,12 @@
 				<td rowspan="2">地科學院</td>
 				<td>地球科學學系</td>
 				<td><?=$semester?></td>
-				<td><?=$chart[$j+0]?></td>
-				<td><?=$chart[$j+1]?></td>
-				<td><?=$chart[$j+2]?></td>
-				<td><?=$chart[$j+3]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$chart[$j+0]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$chart[$j+1]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+2]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+3]?></td>
 				<?if($semester>=106){ ?>
-					<td><?=$chart[$j+4]?></td>
+					<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+4]?></td>
 				<? }?>
 				<td><?=$chart[$j+5]?></td>
 				<? $j+=6; ?>
@@ -720,12 +718,12 @@
 			<tr align="center">
 				<td>大氣科學學系</td>
 				<td><?=$semester?></td>
-				<td><?=$chart[$j+0]?></td>
-				<td><?=$chart[$j+1]?></td>
-				<td><?=$chart[$j+2]?></td>
-				<td><?=$chart[$j+3]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$chart[$j+0]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$chart[$j+1]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+2]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+3]?></td>
 				<?if($semester>=106){ ?>
-					<td><?=$chart[$j+4]?></td>
+					<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+4]?></td>
 				<? }?>
 				<td><?=$chart[$j+5]?></td>
 				<? $j+=6; ?>
@@ -734,12 +732,12 @@
 				<td rowspan="1">客家學院</td>
 				<td>客家語文暨社會科學學系</td>
 				<td><?=$semester?></td>
-				<td><?=$chart[$j+0]?></td>
-				<td><?=$chart[$j+1]?></td>
-				<td><?=$chart[$j+2]?></td>
-				<td><?=$chart[$j+3]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$chart[$j+0]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$chart[$j+1]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+2]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+3]?></td>
 				<?if($semester>=106){ ?>
-					<td><?=$chart[$j+4]?></td>
+					<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+4]?></td>
 				<? }?>
 				<td><?=$chart[$j+5]?></td>
 				<? $j+=6; ?>
@@ -748,12 +746,12 @@
 				<td rowspan="2">生醫理工學院</td>
 				<td>生命科學系</td>
 				<td><?=$semester?></td>
-				<td><?=$chart[$j+0]?></td>
-				<td><?=$chart[$j+1]?></td>
-				<td><?=$chart[$j+2]?></td>
-				<td><?=$chart[$j+3]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$chart[$j+0]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$chart[$j+1]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+2]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+3]?></td>
 				<?if($semester>=106){ ?>
-					<td><?=$chart[$j+4]?></td>
+					<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+4]?></td>
 				<? }?>
 				<td><?=$chart[$j+5]?></td>
 				<? $j+=6; ?>
@@ -761,12 +759,12 @@
 			<tr align="center">
 				<td>生醫科學與工程學系</td>
 				<td><?=$semester?></td>
-				<td><?=$chart[$j+0]?></td>
-				<td><?=$chart[$j+1]?></td>
-				<td><?=$chart[$j+2]?></td>
-				<td><?=$chart[$j+3]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$chart[$j+0]?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=$chart[$j+1]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+2]?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+3]?></td>
 				<?if($semester>=106){ ?>
-					<td><?=$chart[$j+4]?></td>
+					<td colspan="<?echo 24/$cols;?>"><?=$chart[$j+4]?></td>
 				<? }?>
 				<td><?=$chart[$j+5]?></td>
 				<? $j+=6; ?>
@@ -792,15 +790,14 @@
 	}
 ?>
 			<tr align="center">
-				<td></td>
-				<td>平均</td>
+				<td colspan="2">平均</td>
 				<td><?=$semester?></td>
-				<td><?=round($a/$len, 1)?></td>
-				<td><?=round($b/$len, 1)?></td>
-				<td><?=round($c/$len, 1)?></td>
-				<td><?=round($d/$len, 1)?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=round($a/$len, 1)?></td>
+				<td colspan="<?echo 12/$cols;?>"><?=round($b/$len, 1)?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=round($c/$len, 1)?></td>
+				<td colspan="<?echo 24/$cols;?>"><?=round($d/$len, 1)?></td>
 				<?if($semester>=106){ ?>
-					<td><?=round($e/$len, 1)?></td>
+					<td colspan="<?echo 24/$cols;?>"><?=round($e/$len, 1)?></td>
 				<? }?>
 				<td><?=round($f/$len, 1)?></td>
 			</tr>

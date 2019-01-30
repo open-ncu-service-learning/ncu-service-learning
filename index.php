@@ -25,11 +25,16 @@
 	<body>
 	
 	<div>
+		<? //require_once("cover.php");?>
+		<? //require_once("menuN.php");?>
+		<? //require_once("logoN.php");?>
 		<? require_once("logo.php");?>
-		<? require_once("menu.php");?>	
+		<? require_once("menu.php");?>
+			
+		
 	</div>
 
-</div>
+
 <?php
 $load_count = file_get_contents("counts.txt"); 
 if(empty($_COOKIE["counts"])){
@@ -40,9 +45,12 @@ if(empty($_COOKIE["counts"])){
 
 ?>	
 <h1 align="right"><font face="Arial" color="#0431B4" size="4" ><PRE><b>瀏覽人次：<?=$load_count?>人&#9&#9&#9&#9</b></PRE></h1>
-
+<style>
+.max{right:50%;width:150%;height:150%;}
+.min{right:0%;width:100%;height:100%;}
+</style>
 <!--圖片放大-->
-<script>
+<!--<script>
 
 $(document).ready(function() {
     $('#pi').mouseenter(function(){
@@ -67,7 +75,21 @@ $(document).ready(function() {
 }); 
 
 </script>
-
+-->
+<script>
+	$(function(){
+		$('#pi').click(function(){
+			$(this).toggleClass('min');
+			$(this).toggleClass('max');
+		});
+	});
+	$(function(){
+		$('#pi2').click(function(){
+			$(this).toggleClass('min');
+			$(this).toggleClass('max');
+		});
+	});
+</script>
 <!--右側浮動廣告-->
 <script type="text/javascript">      
 	 // 右側浮動廣告寬度  
@@ -143,9 +165,6 @@ $(document).ready(function() {
 			
 <!-- News -->
 			<div id="main">
-
-			
-			
 
 				<div class="post">
 				
@@ -399,15 +418,15 @@ $(document).ready(function() {
 
 <div class="imag"><!--類別分層-->   
 	<div class="item-wrap">
-		<img id="pi" width="100%" style="padding:20px 0px; position: relative; " src="images/graduate.png">
+		<img id="pi" width="100%" style="padding:20px 0px; position: relative; " class="min" src="images/graduate.png">
+		<!--<img id="pi2" width="100%" style="padding:20px 0px; position: relative; " class="min" src="images/advertise.jpg">-->
 	</div>	
 </div>
 
 <!-- 20150326 更換成影片清單 -->
-		<div class="video_class"><!--類別分層-->   
+		<div class="video_class">   
 					<div class="item-wrap">
-					<iframe title="YouTube video player" width="700" height="400" style="padding:20px 0px;" src="//www.youtube.com/embed/WqTEmA2bMI0" frameborder="0" allowfullscreen></iframe>
-					<!--影片說明在這裡-->
+					<iframe width="560" height="315" src="https://www.youtube.com/embed/AP-jV_0B0mQ?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 					</div>	
 		</div>	
 

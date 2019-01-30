@@ -197,6 +197,8 @@
 						<li>活動型態：<?=$type.$life_sub?></li>
 						<li>護照型態：<?=$pass?></li>
 						<li>認證時數：依個人服務時數核可</li>
+						<br>
+						<li>核可人：<?=$row['act_admiter']?></li  
 					</ul>
 					<h3>搜尋名單</h3>
 					<form id="form1" name="form1" action="pass_service_hour_admit_student.php?id=<?=$act_id?>" method="post">
@@ -241,6 +243,8 @@
 										<option value="理學院學士班">理學院學士班</option>
 										<option value="客家語文暨社會科學學系">客家語文暨社會科學學系</option>
 										<option value="生醫科學與工程學系">生醫科學與工程學系</option>
+										<option value="資訊電機學院學士班">資訊電機學院學士班</option>
+										<option value="工學院學士班">工學院學士班</option>
 									</select>
 								<!--
 									<select id="class" name="class" style="font-size: 14pt; height: 25px;">

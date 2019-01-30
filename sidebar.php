@@ -17,7 +17,7 @@ $(document).ready(function(){
 				<div id="banner" style="margin-top: 15px;">
 
 					<a href="http://140.115.185.138/weeklylearning/Learning/Learning_index.php" title="大一週會報名區"><img src="images/banner/ncu_banner3.png" alt="大一週會報名區" width="160" height="50px" /><br><!--</a>大一週會報名區<br> <font color="#ff0000" size="2">請於101年9月21日前完成報名</font></a>-->
-					<a href="https://goo.gl/forms/RzpC5Q3tIaWfUnC52" title="東南亞國際志工團隊報名">東南亞國際志工團隊報名<br></a>
+					<a href="https://drive.google.com/open?id=1HCMk8daVPTrRCLREezTEJgEKzAIoQ12B" title="東南亞國際志工團隊報名"><img src="images/banner/viet_banner2.jpg" alt="東南亞國際志工團隊報名" width="160" /><br></a>
 					<a href="https://www.facebook.com/NCU.servicelearing/" title="NCU 學務處服務學習辦公室"><img src="images/banner/fb_ser.jpg" alt="NCU 學務處服務學習辦公室" width="160" /></a>
 				</div>
 <?php
@@ -48,8 +48,10 @@ $(document).ready(function(){
 	elseif($_SESSION['valid_token'] == "3") {
 ?>
 				<ul style="margin-top: 15px;">
-
-					<li><a href="pass_admin.php" title="網站管理員">網站管理員</a></li>
+					<?if($_SESSION['valid_admin_permission'] =="1"){?>
+					<li><a href="pass_admin.php" title="新增/刪除管理員">新增/刪除管理員</a></li>
+					<?}?>
+					<li><a href="pass_admin2.php" title="修改密碼">修改密碼</a></li>
 					<li><a href="pass_post_news.php" title="新增公告">新增公告</a></li>
 					<li><a href="pass_approver.php" title="工作查詢">工作查詢</a></li>
 					<li><a href="pass_apply_activities.php" title="活動申請">活動申請 (團體)</a></li>

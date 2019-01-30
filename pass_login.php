@@ -19,8 +19,8 @@
 		
 		$sql = sprintf("SELECT * FROM `admin` WHERE ad_account='%s' AND ad_password='%s' AND ad_del='0'", mysql_real_escape_string($u), mysql_real_escape_string($p)); 
 		$ret = mysql_query($sql, $db) or die(mysql_error());
-		
-		if($row = mysql_fetch_assoc($ret))
+		$row = mysql_fetch_assoc($ret);
+		if($row)
 		{
 			// 記錄session
 			$_SESSION['valid_token']				= "3";						// token

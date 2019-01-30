@@ -16,13 +16,15 @@
 					[null,	'服務學習實施細則',		'pass_rule2.php',	'_self',	'服務學習實施細則'],					
 					[null,	'三大學習領域認證時數分配表(104學年度入學適用)',		'download/pass_files_new/three.pdf',	'_self',	'三大學習領域認證時數分配表'],
 					[null,	'三大學習領域認證時數分配表(105學年度入學適用)',		'download/pass_files_new/three_105.pdf',	'_self',	'三大學習領域認證時數分配表'],
-					[null,	'三大學習領域認證時數分配表(106學年度入學適用)',		'download/pass_files_new/three_106.pdf',	'_self',	'三大學習領域認證時數分配表'],
+					[null,	'三大學習領域認證時數分配表(106學年度後入學適用)',		'download/pass_files_new/three_106.pdf',	'_self',	'三大學習領域認證時數分配表'],
 					[null,	'認證時數細目表',		'download/pass_files_new/itemTable.pdf',	'_self',	'認證時數細目表'],
 					[null,	'畢業審查作業要點',		'download/pass_files_new/100hours_point.pdf',	'_self',	'畢業審查作業要點'],
 					[null,	'學生學習護照實施流程',		'download/pass_files_new/process.pdf',	'_self',	'實施流程'],
 					[null,	'國際服務學習獎學金辦法',		'download/pass_files_new/internal.pdf',	'_self',	'國際服務學習獎學金辦法'],	
 					[null,	'服務學習績優獎學金實施辦法',		'download/pass_files_new/ziyo.pdf',	'_self',	'服務學習績優獎學金實施辦法'],	
-					[null,	'服務學習學生自主團隊補助計畫',		'download/pass_files_new/TEAM.pdf',	'_self',	'中央大學服務學習學生自主團隊補助計畫'],										
+					[null,	'服務學習學生自主團隊補助計畫',		'download/pass_files_new/TEAM.pdf',	'_self',	'中央大學服務學習學生自主團隊補助計畫'],
+					[null,	'服務學習課程免修申請提案控管流程',		'download/pass_files_new/new_process.pdf',	'_self',	'服務學習課程免修申請提案控管流程'],
+					[null,	'精緻化服務學習課程提案控管流程',		'download/pass_files_new/精緻化服務學習課程提案控管流程.pdf',	'_self',	'精緻化服務學習課程提案控管流程'],
 				],	
 				[null,	' | 最新消息',		'pass_new_news.php',		'_self',	'最新訊息',
 					[null,	'校內公告',		'pass_new_news_type.php?type=1',	'_self',	'校內公告'],
@@ -31,7 +33,15 @@
 				
 								
 				[null,	' | 最新認證活動',	'pass_new_activity.php',	'_self',	'最新活動'],
-				[null,	' | 海外志工',		'oversea.php',		'_self',		'海外志工'],
+				
+				[null,	' | 海外志工',		'index.php',		'_self',		'海外志工',
+					[null,	'團隊事紀',	'oversea_GroupInfo.php',	'_self',	'團隊事紀'],
+					[null,	'招募活動',			'oversea.php',	'_self',	'招募活動'],
+					[null,	'計畫內容',			'oversea_ProjectInfo.php',	'_self',	'計畫內容'],
+					[null,	'培訓課程',			'oversea_lesson.php',	'_self',	'培訓課程'],
+					[null,	'歷年服務成果及影片','oversea_outcomeNvideo.php',	'_self',	'歷年服務成果及影片'],
+					[null,	'新聞報導',			'oversea_news.php',	'_self',	'新聞報導'],
+				],
 				[null,	' | 表單下載',		'post_attach.php',		'_self',		'下載專區'],
 				/*[null,	' | 互動分享區',	'interactive.php',		'_self',		'互動分享區',
 					
@@ -56,7 +66,7 @@
 				],
 				[null,	' | Q&A',		'index.php',		'_self',		'Q&A',
 					[null,	'Q&A',		'download/pass_files/Q&A.pdf',	'_self',	'Q&A'],
-					[null,	'服務學習課程選課說明',		'download/pass_files/選課說明_for教務處選課系統_服務學習改.rtf',	'_self',	'服務學習課程選課說明'],
+					[null,	'服務學習課程選課說明',		'download/pass_files/directions.pdf',	'_self',	'服務學習課程選課說明'],
 					
 			]	];
 		</script>

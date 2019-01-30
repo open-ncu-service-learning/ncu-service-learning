@@ -7,9 +7,9 @@
 		exit;
 	}
 	if($_SESSION['valid_admin_permission'] !="1"){
-		header('Location: pass_admin2.php');
-exit;
-}
+		header('Location: index.php');
+		exit;
+	}
 
 	require_once("conn/db.php");
 ?>

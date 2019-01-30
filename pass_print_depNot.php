@@ -1,6 +1,7 @@
-<?php
+﻿<?php
 	session_start();
 	
+
 	if($_SESSION['valid_token'] != "3") {
 		header('Location: index.php');
 		exit;
@@ -43,13 +44,12 @@
 		$str = 3;
 	else
 		$str = 2;
-
+	
 	$len = count($ncu);
 
 	unset($stuid);
 	unset($name);
 	unset($arr);
-	
 	
 	$sql = "SELECT user_dep FROM all_user WHERE user_dep_id = '$_GET[dep]' LIMIT 1,1";
 	$ret = mysql_query($sql);
@@ -72,7 +72,7 @@
 	}
 	$i = 0;
 	$length = count($stuid);
-
+	
 	for($i; $i < $length; $i++)
 	{
 
@@ -110,55 +110,44 @@
 		<tr align="center">
 			<td width="100" rowspan="2">學號</td>
 			<td width="180" rowspan="2"><p>姓名</p></td>
-			<td width="600" colspan="12">基本</td>
+			<td width="600" colspan="6">基本</td>
 			<td width="120" rowspan="2">基本總時數</td>
 			<td width="180" rowspan="2">狀態</td>
 		</tr>
 		<tr align="center">
-			<td width="<?echo 600/$cols;?>" colspan="<?echo 12/$cols;?>" >服務學習</td>
-			<td width="<?echo 600/$cols;?>" colspan="<?echo 12/$cols;?>" >生活知能</td>
-			<td width="<?echo 600/$cols;?>" colspan="<?echo 12/$cols;?>" >人文藝術</td>
-		<?if($semester>=106){?>
-			<td width="<?echo 600/$cols;?>" colspan="<?echo 12/$cols;?>" >國際視野</td>
-		<?}?>
+			<td width="220" colspan="2" >服務學習</td>
+			<td width="220" colspan="2" >生活知能</td>
+			<td width="160" colspan="2" >人文藝術</td>
 		</tr>
 <?
 	$i = 0;
 	$GG=0;
-	$ok=0;
 	
 	for($i; $i < $length; $i++)
 	{
 		if($qualified[$i]=="未通過"){
 			$GG++;
-		}
-		elseif($qualified[$i]=="通過"){
-			$ok++;
-		}
+		
 ?>		
 		<tr align="center">
-			<td><?
-			echo "<a href='personal_activity.php?stuid=$stuid[$i]'  target=_blank>$stuid[$i]</a>";
-			?></td>					
-			<td><?=$name[$i]?></td>
-			<td colspan="<?echo 12/$cols;?>"><?=$b1[$i]?></td>
-			<td colspan="<?echo 12/$cols;?>"><?=$b2[$i]?></td>
-			<td colspan="<?echo 12/$cols;?>"><?=$b3[$i]?></td>
-		<?if($semester>=106){?>
-			<td colspan="<?echo 12/$cols;?>"><?=$b4[$i]?></td>
-		<?}?>
-			<td><?=$basicHour[$i]?></td>
-			<td><?=$qualified[$i]?></td>
+				<td>
+					<?echo "<a href='personal_activity.php?stuid=$stuid[$i]'  target=_blank>$stuid[$i]</a>";?>
+				</td>
+				<td><?=$name[$i]?></td>
+				<td colspan="2"><?=$b1[$i]?></td>
+				<td colspan="2"><?=$b2[$i]?></td>
+				<td colspan="2"><?=$b3[$i]?></td>
+				<td><?=$basicHour[$i]?></td>
+				<td><?=$qualified[$i]?></td>
 		</tr>
-<?	
+		<?		}
 	}
 	echo "</table><br>";
 	echo "<div align='center'>";
-	echo "總人數：$length ,未通過人數：$GG, 通過人數：$ok<br>";
+	echo "總人數：$length ,未通過人數：$GG<br>";
 	echo "</div>";
 	echo "<br>";
 
 ?>
-
 	</body>
 </html>

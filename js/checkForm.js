@@ -101,6 +101,9 @@
 		if (emptyString.test(form1.end_time.value)) {
 			message+="請輸入結束活動日期\n"; 
 		}
+		if (form1.begin_time.value>form1.end_time.value){
+			message+="活動結束時間早於開始時間\n";
+		}
 		if (emptyString.test(form1.type.value)) {
 			message+="請選擇活動類別\n"; 
 		}	
@@ -143,7 +146,7 @@
 	}
 	
 	// 活動申請(校外)
-	function check_pass_apply_out_activityForm(form1) {
+	function check_pass_apply_out_activityForm(form1, id) {
 		var message="";
 		if (emptyString.test(form1.title.value)) {
 			message+="請輸入活動標題\n"; 
@@ -157,11 +160,23 @@
 		if (emptyString.test(form1.end_time.value)) {
 			message+="請輸入結束活動日期\n"; 
 		}
+		if (form1.begin_time.value>form1.end_time.value){
+			message+="活動結束時間早於開始時間\n";
+		}
 		if (emptyString.test(form1.type.value)) {
 			message+="請選擇活動類別\n"; 
 		}
-		if (emptyString.test(form1.des.value)) {
-			message+="請輸入活動描述\n"; 
+		if (form1.type.value == "1" && form1.service_type.value == "0") {
+			message+="請選擇服務學習子類別\n"; 
+		}
+		if (form1.type.value == "2" && form1.life_type.value == "0") {
+			message+="請選擇生活知能子類別\n"; 
+		}
+		if (form1.type.value == "3" && form1.art_type.value == "0") {
+			message+="請選擇人文藝術子類別\n"; 
+		}
+		if (form1.type.value == "4" && form1.inter_type.value == "0") {
+			message+="請選擇國際視野子類別\n"; 
 		}
 		var   r   =  /^[0-9]*$/;
 		if(
@@ -184,12 +199,15 @@
 		if (emptyString.test(form1.phone.value)) {
 			message+="請輸入聯絡電話\n"; 
 		}
-		if (emptyString.test(form1.ref.value)) {
-			message+="請輸入反思(300字以上)\n"; 
+		if(id == "1") {
+			if (emptyString.test(form1.ref.value)) {
+				message+="請輸入反思(300字以上)\n"; 
+			}
+			if (emptyString.test(form1.file1.value)) {
+				message+="請上傳證明檔案\n"; 
+			}
 		}
-		if (emptyString.test(form1.file1.value)) {
-			message+="請上傳證明檔案\n"; 
-		}
+		
 		if(message==""){
 			return true;
 		}

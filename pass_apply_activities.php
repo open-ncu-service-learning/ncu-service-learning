@@ -26,12 +26,11 @@
 		<script src="js/jquery-1.2.3.min.js" type="text/javascript"></script>
 		<script src="js/jquery.dimensions.min.js" type="text/javascript"></script>		
 		<script src="js/jquery.inputHintBox.js" type="text/javascript"></script>
-		<script src="js/checkForm.js"></script>
+		<script src="js/checkForm.js?002"></script>
 		<script src="js/date.js" type="text/javascript" ></script>
 		<script src="js/jquery.datePicker.js" type="text/javascript" ></script>
 		<script src="ckeditor/ckeditor.js" type="text/javascript"></script>
 		<link href="css/bg.css" rel="stylesheet" type="text/css" />
-		<!--<script src="js/TEST.js"></script>-->
 	</head>
 	<body>
 		<? require_once("logo.php");?>
@@ -45,7 +44,6 @@
 			<div id="main">
 				<div id="welcome" style="font-size: 20px; color: #1F1F1F; line-height: 1.5;">
 					<h3 style="margin-top: 10px;">活動申請(校內)</h3>
-					<?//echo "<script>tester();</script>";?>
 					<form id="form1" name="form1" action="send_pass_apply_activities.php" method="post" enctype="multipart/form-data" onsubmit="return check_pass_apply_activitiesForm(form1)">
 						<table width="700" style="margin-top: 20px;" border="1" cellspacing="0" cellpadding="1">
 							<tr>
@@ -92,17 +90,12 @@
 									</select> 學期 
 								</td>
 							</tr>		
-<script type="text/javascript" charset="utf-8">
-	Date.firstDayOfWeek = 7;
-	Date.format = 'yyyy-mm-dd';
-	$(function() {
-		$('.date-pick').datePicker({clickInput:true})
-	});
-</script>
 							<tr>
 								<td align="center"><label for="begin_time" style="color: #AF0000;">開始時間：</label></td>
 								<td>
-									<input id="begin_time" name="begin_time" type="text" placeholder="201Y-MM-DD" size="30" style="font-size: 14pt; height: 25px;" class="date-pick" />							
+									
+									<!--<input id="begin_time" name="begin_time" type="text" placeholder="201Y-MM-DD" size="30" style="font-size: 14pt; height: 25px;" class="date-pick" />	-->
+									<input type="date" id="begin_time" name="begin_time" size="30" style="font-size: 14pt; " placeholder="YYYY-MM-DD" value="<?= isset($_POST['begin_time']) ? $_POST['begin_time'] : ''; ?>">
 									<select name="begin_hour" id="begin_hour" style="font-size: 14pt; height: 25px;">
 																				
 										<option value="05">00</option>
@@ -198,7 +191,8 @@
 							<tr>
 								<td align="center"><label for="end_time" style="color: #AF0000;">結束時間：</label></td>
 								<td>
-									<input id="end_time" name="end_time" type="text" placeholder="201Y-MM-DD" size="30" style="font-size: 14pt; height: 25px;" class="date-pick" />
+									<input type="date" id="end_time" name="end_time" size="30" style="font-size: 14pt; " placeholder="YYYY-MM-DD" value="<?= isset($_POST['end_time']) ? $_POST['end_time'] : ''; ?>">
+									<!--<input id="end_time" name="end_time" type="text" placeholder="201Y-MM-DD" size="30" style="font-size: 14pt; height: 25px;" class="date-pick" />-->
 									<select name="end_hour" id="end_hour" style="font-size: 14pt; height: 25px;">
 																				
 										<option value="05">00</option>

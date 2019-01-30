@@ -76,8 +76,6 @@
 	//$des = transtr(nl2br($_POST['des']));
 	$ref = transtr(nl2br($_POST['ref']));
 
-	echo $file1;
-
 // 學期
 	$semester = $_POST['school_year'].$_POST['term'];
 	$year = $_POST['school_year'] + 1911;
@@ -166,13 +164,30 @@
 
 	if($ret)
 	{
-		echo
-		"
-			<script>
-				alert(\"新增活動成功\");
-				self.location.href='index.php';
-			</script>
-		";
+		if($_SESSION['valid_token'] == "1"){
+
+			echo $sql = "SELECT MAX(`act_id`) AS id From `out_activity` WHERE `act_title` = '$title'";
+			$ret = mysql_query($sql) or die(mysql_error());
+			$row = mysql_fetch_assoc($ret);
+			$print_id = $row['id'];
+			echo
+			"
+				<script>
+					alert(\"新增活動成功\");
+					self.location.href='pass_apply_print_out.php?id=$print_id';
+				</script>
+				
+			";
+		}
+		else if($_SESSION['valid_token'] == "3"){
+			echo
+			"
+				<script>
+					alert(\"新增活動成功\");
+					self.location.href='index.php';
+				</script>
+			";
+		}
 	}
 	else
 	{

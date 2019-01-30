@@ -150,5 +150,69 @@
 	function admit_hour_to_student($student,$in_or_out,$act_id){
 
 	}
+	
+	//計算學生時數
+	function calHours($row)
+	{
+		$sub_notyet = 0;
+		
+		if($row['user_student']>950000000)
+			$semester = floor($row['user_student']/10000000);
+		else
+			$semester = floor($row['user_student']/1000000);
+		
+		if($semester<=104){  //104 & before
+			$q1=50;
+			$q2=30;
+			$q3=20;
+			if($semester==104){
+				$sub_notyet += max(4-$row['assembly_freshman'], 0)*2;
+				$sub_notyet += max(2-$row['assembly_dep'], 0)*2;
+			}
+
+		}
+		if($semester==105)  //105
+		{
+			$q1=40;
+			$q2=40;
+			$q3=20;
+			$sub_notyet += max(4-$row['assembly_freshman'], 0)*2;
+			$sub_notyet += max(2-$row['assembly_dep'], 0)*2;
+			$sub_notyet += max(10-$row['career'], 0);
+			$sub_notyet += max(5-$row['cpr'], 0);
+			$sub_notyet += max(5-($row['basic_inter']+$row['advan_inter']), 0);
+		}
+		if($semester>=106)  //106 & after
+		{
+			$q1 = 40;
+			$q2 = 35;
+			$q3 = 20;
+			$q4 = 5;
+			$sub_notyet += max(4-$row['assembly_freshman'], 0)*2;
+			$sub_notyet += max(2-$row['assembly_dep'], 0)*2;
+			$sub_notyet += max(10-$row['career'], 0);
+			$sub_notyet += max(5-$row['cpr'], 0);
+		}
+
+		//轉時數
+		$b1=$row['basic_service'];		
+		$b2=$row['basic_life'];				
+		$b3=$row['basic_art'];	
+		$b4=$row['basic_inter'];
+		
+		if($b1 > $q1){
+			$b1 = $q1;
+		}
+		if($b2 > $q2 - $sub_notyet){
+			$b2 = $q2 - $sub_notyet;
+		}
+		if($b3 > $q3){
+			$b3 = $q3;
+		}
+		if($semester>=106 && $b4 > $q4){
+			$b4 = $q4;
+		}
+		return array($b1, $b2, $b3, $b4, $q1, $q2, $q3, $q4);
+	}
 ?>
 

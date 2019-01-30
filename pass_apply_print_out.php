@@ -2,7 +2,7 @@
 	session_start();
 	
 	// 身分驗證
-	if($_SESSION['valid_token'] != "2") {
+	if($_SESSION['valid_token'] != "1") {
 		header('Location: index.php');
 		exit;
 	}
@@ -29,14 +29,11 @@ font-size-adjust:inherit;
 </head>
 
 <body onload="focus();print();">
-<script language="javascript">
-alert("1.請於活動至少五個工作天前交件。\n2.遲交被記點三次則本學期不予核准活動時數申請。")
-</script>
 <div id ="printbutton" class="noprint"  printalign="right"><input type="button" onclick="focus();print();" value="列印本申請表" /></div>
 <?
 	require_once("conn/db.php");
 	$id = (int)$_GET['id'];
-	$sql = "SELECT * From `activity` WHERE `act_id` = $id";
+	$sql = "SELECT * From `out_activity` WHERE `act_id` = $id";
 	$ret = mysql_query($sql, $db) or die(mysql_error());
 	$row = mysql_fetch_assoc($ret);
 	
@@ -74,7 +71,7 @@ alert("1.請於活動至少五個工作天前交件。\n2.遲交被記點三次�
 		default:
 			$type = "無";
 	}
-	
+
 	
 	//認證要求
 	if($row['act_report'])
@@ -105,6 +102,7 @@ echo <<<EOD
   	<td valign="top"><div align="center"><strong>學生學習護照活動認證申請單</strong></div></td>
 
   </tr>
+
   <tr>
     <td valign="top">1.活動辦理單位 :<u>    $row[act_req_office]    </u>     活動地點：<u>    $row[act_location]    </u> </td>
   </tr>
@@ -189,10 +187,9 @@ echo <<<EOD
     <td valign="top">8.<strong>活動認證編號:_________號</strong></td>
   </tr>
   
-    <td valign="top"><p><font class=ps2 size=2>註:&nbsp;&nbsp;<br>1.請於活動至少五個工作天前交件。<br>
-2.遲交被記點三次則本學期不予核准活動時數申請。<br>
-3.活動結束五個工作天內，請將簽到單（於服務學習網下載表格）正本擲回服務學習辦公室，以登錄時數。<br>
-4.本表單蒐集之個人資料，僅限於個人資料申請認證時數使用，保存期限五年。非經當事人同意，絕不轉做其他用途，僅限活動聯繫使用，並遵循本校個人資料保護管理制度資料保存與安全控管辦理。 <br /></font></p>
+    <td valign="top"><p><font class=ps2 size=2>註:&nbsp;&nbsp;<br>1.請於活動至少五個工作天前申請。<br>
+2.活動結束五個工作天內，請將簽到單（於服務學習網下載表格）正本擲回服務學習辦公室，以登錄時數。<br>
+3.本表單蒐集之個人資料，僅限於個人資料申請認證時數使用，保存期限五年。非經當事人同意，絕不轉做其他用途，僅限活動聯繫使用，並遵循本校個人資料保護管理制度資料保存與安全控管辦理。 <br /></font></p>
 </td>
   </tr>
    <tr>

@@ -1,4 +1,4 @@
 function tester(){
-	alert('al');
+	alert('al78');
 	//return "hi_al";
 }

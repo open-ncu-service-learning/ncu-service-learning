@@ -39,16 +39,52 @@ echo "<h2>費時 $timediff 秒</h2>";
 function send_to_all_recipient($db,$mail,$subject,$recipient,$content,$record){
 	// 取出資料
 	$year = date("Y");
+	$month = date("m");
+	$ncu = array(
+		'1001',
+		'1002',
+		'1003',
+		'2001',
+		'2002',
+		'2003',
+		'2006',
+		'2008',
+		'3002',
+		'3003',
+		'3004',
+		'4001',
+		'4003',
+		'4008',
+		'4009',
+		'5001',
+		'5002',
+		'5003',
+		'6001',
+		'6002',
+		'7007',
+		'8001',
+		'8002'
+		);
+	///////////////////////
+	$k = 22;	
+	///////////////////////
+	if($month>8)
+		$grade_3_IDhead = $year-1913;   // grade 3 year
+	else
+		$grade_3_IDhead = $year-1914;
+	$grade_4_IDhead = $grade_3_IDhead-1; // grade 4 year
+	
 	if (in_array("grade_3_warning", $recipient)) {
 		echo "grade_3_warning";
 		$sql = 
 			"SELECT user_student,user_name,user_dep,user_email ".
 			"FROM `all_user` ".
 			"WHERE ".
-				"`user_student` LIKE ".($year-1914)."'%' AND ".
+				"`user_student` LIKE '".$grade_3_IDhead."%' AND ".
 				"`qualified` = 0 AND ".
 				"`user_del` = 0 ".
-			"ORDER BY `user_dep_id` DESC ";
+				"AND `user_dep_id` = $ncu[$k]";
+			//"ORDER BY `user_dep_id` DESC ";
 		$ret = mysql_query($sql, $db) or die(mysql_error());
 		$count = mysql_num_rows($ret);
 		echo $count;
@@ -64,10 +100,11 @@ function send_to_all_recipient($db,$mail,$subject,$recipient,$content,$record){
 			"SELECT user_student,user_name,user_dep,user_email ".
 			"FROM `all_user` ".
 			"WHERE ".
-				"`user_student` LIKE ".($year-1915)."'%' AND ".
+				"`user_student` LIKE '".$grade_4_IDhead."%' AND ".
 				"`qualified` = 0 AND ".
 				"`user_del` = 0 ".
-			"ORDER BY `user_dep_id` DESC ";
+				"AND `user_dep_id` = $ncu[$k]";
+			//"ORDER BY `user_dep_id` DESC ";
 		$ret = mysql_query($sql, $db) or die(mysql_error());
 		$count = mysql_num_rows($ret);
 		echo $count;
@@ -78,7 +115,7 @@ function send_to_all_recipient($db,$mail,$subject,$recipient,$content,$record){
 		}
 	}
 }
-
+/*
 function alertlist_to_dep(){
 	$sql_grade3 = 
 			"SELECT user_student,user_name,user_dep,user_email ".
@@ -97,15 +134,35 @@ function alertlist_to_dep(){
 				"`user_del` = 0 ".
 			"ORDER BY `user_dep_id` DESC ";
 }
+*/
 
 function mail_handler($db,$mail,$subject,$recipient,$content,$record,$row){
 	$record["count"]++;
-	$mail->AddAddress($row["user_email"], $row["user_name"]); //設定收件者郵件及名稱	
+	$mail->AddAddress($row["user_email"], $row["user_name"]); //設定收件者郵件及名稱
+	if(get_backup_email($row["user_student"])==null)
+		$mail->AddAddress(get_backup_email($row["user_student"]), $row["user_name"]); //多寄一封到備用信箱
 	echo $row["user_dep"]." ".$row["user_student"]." ".$row["user_name"];
 	send_mail($db,$mail,$subject,$recipient,$content,$record,$row);
 	$mail->ClearAllRecipients( ); // clear all
 	if($record["count"]%10==0){
 		sleep(10);
+	}
+}
+
+function get_backup_email($studentID){
+	$emailList = file("backup_email.csv");//read CSV
+	$emails = array();
+	foreach($emailList as $eitem){
+		$item = split(",",$eitem);
+		$emails[$item[0]] = $item[1];//index = studentID
+	}
+	$result = $emails[$studentID];//result = email
+	if(isset($result)){
+		//echo $result; //found
+		return $result;
+	}else{
+		//echo "email not found"; //not found
+		return null;
 	}
 }
 
@@ -123,7 +180,7 @@ function send_mail($db,$mail,$subject,$recipient,$content,$record,$row){
 
 function send_record($db,$mail,$subject,$recipient,$content,$record){
 	sleep(30);
-	$mail->AddAddress("sg123411@gmail.com", "網管"); //設定收件者郵件及名稱
+	$mail->AddAddress("neeralin@gmail.com", "網管"); //設定收件者郵件及名稱
 	$mail->Subject ="發信紀錄-".$subject;
 	
 	$msg="<div style='border-style: dashed;'>".$content."</div>".

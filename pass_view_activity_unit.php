@@ -15,7 +15,7 @@
 	$id = (int)$_GET['id'];
 	
 	require_once("conn/db.php");
-	$sql = "SELECT * FROM `activity` LEFT JOIN `news_activity` ON activity.act_title=news_activity.news_title WHERE `act_del` = '0' AND `act_id` = '$id'";
+	$sql = "SELECT * FROM `activity` LEFT JOIN `news_activity` ON activity.act_title=news_activity.news_title WHERE `act_del` = '0' AND `act_id` = '$id' AND news_activity.news_no LIKE '%$id%'";
 	$ret = mysql_query($sql) or die(mysql_error());
 	$row = mysql_fetch_assoc($ret);
 ?>
