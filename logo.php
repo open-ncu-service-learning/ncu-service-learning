@@ -12,6 +12,7 @@
 		}
 		?>
 		<a href="index.php" title=首頁 style=\"color:#ffffff;\"><img class="mySlides" src="./images/cover.jpg" style="width:100%"></a>
+		<a href="http://service-learning.ncu.edu.tw/pass_news_content.php?news_id=1082" title=尼泊爾國際志工 style=\"color:#ffffff;\"><img class="mySlides" src="./images/nepal.png" style="width:100%"></a>
 		<!--<a href="http://service-learning.ncu.edu.tw/pass_news_content.php?news_id=1044" title=服務學習績優 style=\"color:#ffffff;\"><img class="mySlides" src="./images/servicelearn.jpg" style="width:100%"></a>-->
 	  <!--	<a href="#" title=服務學習成果發表 style=\"color:#ffffff;\"><img class="mySlides" src="./images/perform.png" style="width:100%"></a>-->
 		<!--<a href="#" title=東南亞國際志工 style=\"color:#ffffff;\"><img class="mySlides" src="./images/vietnam.jpg" style="width:100%"></a>
@@ -22,8 +23,8 @@
 			<div class="w3-left w3-padding-left w3-hover-text-khaki" onclick="plusDivs(-1)">&#10094;</div>
 			<div class="w3-right w3-padding-right w3-hover-text-khaki" onclick="plusDivs(1)">&#10095;</div>
 			<span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(1)"></span>
-			<!--<span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(2)"></span>
-			<span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></span> 小圈圈-->
+			<span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(2)"></span>
+			<!--<span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></span> 小圈圈-->
 		</div>			
 	</div>
 	<style>

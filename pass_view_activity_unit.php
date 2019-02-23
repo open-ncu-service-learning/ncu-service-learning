@@ -15,7 +15,8 @@
 	$id = (int)$_GET['id'];
 	
 	require_once("conn/db.php");
-	$sql = "SELECT * FROM `activity` LEFT JOIN `news_activity` ON activity.act_title=news_activity.news_title WHERE `act_del` = '0' AND `act_id` = '$id' AND news_activity.news_no LIKE '%$id%'";
+	$sql = "SELECT * FROM `activity` WHERE `act_del` = '0' AND `act_id` = '$id'";
+	//$sql = "SELECT * FROM `activity` LEFT JOIN `news_activity` ON activity.act_title=news_activity.news_title WHERE `act_del` = '0' AND `act_id` = '$id' AND news_activity.news_no LIKE '%$id%'";
 	$ret = mysql_query($sql) or die(mysql_error());
 	$row = mysql_fetch_assoc($ret);
 ?>
@@ -112,7 +113,8 @@
 						<table style="table-layout:fixed" width="600" style="margin-top: 20px;" border="1" cellspacing="0" cellpadding="1">
 							<tr>
 								<td width="120"><span class="highlight">活動編號</span></td>
-								<td width="480"><?=$row['news_no']?></td>
+								<!--<td width="480"><?=$row['news_no']?></td>-->
+								<td width="480"><?=$row['act_id']?></td>
 							</tr>
 							<tr>
 								<td><span class="highlight">活動名稱</span></td>

@@ -66,9 +66,9 @@
 		</tr>
 		<tr>
 			<td align="center">基本時數</td>
-			<td align="center"><?=$bsc_serv?><font color="red"> / <?=$qual_serv?></font></td>
-			<td align="center"><?=$bsc_life?><font color="red"> / <?=$qual_life?></font></td>
-			<td align="center"><?=$bsc_art?><font color="red"> / <?=$qual_art?></font></td>
+			<td align="center"><?=$bsc_serv?></td>
+			<td align="center"><?=$bsc_life?></td>
+			<td align="center"><?=$bsc_art?></td>
 		</tr>
 		<tr>
 			<td align="center">高階時數</td>
@@ -157,9 +157,9 @@
 		</tr>
 		<tr>
 			<td align="center">基本時數</td>
-			<td align="center"><?=$bsc_serv?><font color="red"> / <?=$qual_serv?></font></td>
-			<td align="center"><?=$bsc_life?><font color="red"> / <?=$qual_life?></font></td>
-			<td align="center"><?=$bsc_art?><font color="red"> / <?=$qual_art?></font></td>
+			<td align="center"><?=$bsc_serv?></td>
+			<td align="center"><?=$bsc_life?></td>
+			<td align="center"><?=$bsc_art?></td>
 		</tr>
 		<tr>
 			<td align="center">高階時數</td>
@@ -273,9 +273,9 @@
 		</tr>
 		<tr>
 			<td align="center">基本時數</td>
-			<td align="center"><?=$bsc_serv?><font color="red"> / <?=$qual_serv?></font></td>
-			<td align="center"><?=$bsc_life?><font color="red"> / <?=$qual_life?></font></td>
-			<td align="center"><?=$bsc_art?><font color="red"> / <?=$qual_art?></font></td>
+			<td align="center"><?=$bsc_serv?></td>
+			<td align="center"><?=$bsc_life?></td>
+			<td align="center"><?=$bsc_art?></td>
 		</tr>
 		<tr>
 			<td align="center">高階時數</td>
@@ -411,10 +411,10 @@
 		</tr>
 		<tr>
 			<td align="center">基本時數</td>
-			<td align="center"><?=$bsc_serv?><font color="red"> / <?=$qual_serv?></font></td>
-			<td align="center"><?=$bsc_life?><font color="red"> / <?=$qual_life?></font></td>
-			<td align="center"><?=$bsc_art?><font color="red"> / <?=$qual_art?></font></td>
-			<td align="center"><?=$bsc_inter?><font color="red"> / <?=$qual_inter?></font></td>
+			<td align="center"><?=$bsc_serv?></td>
+			<td align="center"><?=$bsc_life?></td>
+			<td align="center"><?=$bsc_art?></td>
+			<td align="center"><?=$bsc_inter?></td>
 		</tr>
 		<tr>
 			<td align="center">高階時數</td>

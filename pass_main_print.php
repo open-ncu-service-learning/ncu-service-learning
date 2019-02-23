@@ -110,7 +110,12 @@
 				<div id="print_out_activity" style="font-size: 20px; color: #1F1F1F; line-height: 1.5;">
 					<h3 style="margin-top: 10px;">各系活動統計表</h3>
 						<ul style="margin-top: 15px;">
-							<li onclick="show('103')">103學年度</li>
+							<a href="103DepartmentActivity.php">103學年度</a><br>
+							<a href="104DepartmentActivity.php">104學年度</a><br>
+							<a href="105DepartmentActivity.php">105學年度</a><br>
+							<a href="106DepartmentActivity.php">106學年度</a><br>
+							<a href="107DepartmentActivity.php">107學年度</a><br>
+							<!--<li onclick="show('103')">103學年度</li>
 							<div id="dep103" style="display: none;">
 								<a href="pass_print_dep_act.php?semester=103&dep=101" title="103101">中國文學系</a>
 								<a href="pass_print_dep_act.php?semester=103&dep=102" title="103102">英美語文系</a>
@@ -239,7 +244,7 @@
 								<a href="pass_print_dep_act.php?semester=107&dep=707" title="107707">客家語文暨社會科學學系</a></br>
 								<a href="pass_print_dep_act.php?semester=107&dep=801" title="107801">生命科學系</a>
 								<a href="pass_print_dep_act.php?semester=107&dep=802" title="107802">生醫科學與工程學系</a></br>
-							</div>
+							</div>-->
 						<ul>
 				</div>
 				<script>

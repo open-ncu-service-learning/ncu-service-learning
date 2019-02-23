@@ -25,6 +25,7 @@
 					[null,	'服務學習學生自主團隊補助計畫',		'download/pass_files_new/TEAM.pdf',	'_self',	'中央大學服務學習學生自主團隊補助計畫'],
 					[null,	'服務學習課程免修申請提案控管流程',		'download/pass_files_new/new_process.pdf',	'_self',	'服務學習課程免修申請提案控管流程'],
 					[null,	'精緻化服務學習課程提案控管流程',		'download/pass_files_new/精緻化服務學習課程提案控管流程.pdf',	'_self',	'精緻化服務學習課程提案控管流程'],
+					[null,	'安心就學支持計畫補助暨獎勵辦法',		'download/pass_files_new/安心就學支持計畫補助暨獎勵辦法.pdf',	'_self',	'安心就學支持計畫補助暨獎勵辦法'],
 				],	
 				[null,	' | 最新消息',		'pass_new_news.php',		'_self',	'最新訊息',
 					[null,	'校內公告',		'pass_new_news_type.php?type=1',	'_self',	'校內公告'],
